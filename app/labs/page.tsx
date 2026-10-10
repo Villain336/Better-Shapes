@@ -4,6 +4,7 @@ import { GlassCard } from "@/components/GlassCard";
 import { WaitlistForm } from "@/components/Forms";
 import { Button } from "@/components/Button";
 import { Chip } from "@/components/Chip";
+import { ProductMark } from "@/components/ProductMark";
 import { Reveal, RevealItem, Stagger } from "@/components/Reveal";
 import { Blobs, SectionHeading } from "@/components/Sections";
 import { toneColor } from "@/components/Shapes";
@@ -62,7 +63,14 @@ export default function LabsPage() {
             eyebrow="What we’re exploring"
             title="Four questions"
             accent="we can’t stop asking."
-            side={<Chip tone="red">Nothing released yet</Chip>}
+            side={
+              <div className="flex items-center gap-3">
+                <span className="grid size-12 place-items-center rounded-[14px] bg-tint-red">
+                  <ProductMark slug="field" size={32} />
+                </span>
+                <Chip tone="red">Nothing released yet</Chip>
+              </div>
+            }
           />
           <Stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {questions.map((q) => (

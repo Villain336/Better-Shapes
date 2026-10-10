@@ -25,11 +25,16 @@ export type Product = {
   license: string;
   /** Only set once the repository is public. */
   repo?: string;
+  /** Brand tint behind the product mark, and what the mark means (Figma "Product Brands" page). */
+  tint: string;
+  meaning: string;
 };
 
 export const products: Product[] = [
   {
     slug: "shapesos",
+    tint: "#e6e2d9",
+    meaning: "Every shape of the business in one window.",
     name: "ShapesOS",
     glyph: "Tech",
     lane: "Agentic business OS",
@@ -50,6 +55,8 @@ export const products: Product[] = [
   },
   {
     slug: "leash",
+    tint: "#dee5fb",
+    meaning: "An agent, tethered to an approval.",
     name: "Leash",
     glyph: "Tech",
     lane: "Agent infrastructure",
@@ -69,6 +76,8 @@ export const products: Product[] = [
   },
   {
     slug: "shapes-ui",
+    tint: "#ece6fa",
+    meaning: "Layered glass, one calm system.",
     name: "Shapes UI",
     glyph: "Design",
     lane: "Design system",
@@ -88,6 +97,8 @@ export const products: Product[] = [
   },
   {
     slug: "beacon",
+    tint: "#fdf5d3",
+    meaning: "A light that shows where you’re seen.",
     name: "Beacon",
     glyph: "Marketing",
     lane: "AI visibility",
@@ -107,6 +118,8 @@ export const products: Product[] = [
   },
   {
     slug: "concierge",
+    tint: "#fbe3de",
+    meaning: "A conversation that gets things done.",
     name: "Concierge",
     glyph: "Tech",
     lane: "AI customer agent",
@@ -126,6 +139,8 @@ export const products: Product[] = [
   },
   {
     slug: "prism",
+    tint: "#dee5fb",
+    meaning: "One input, split into every insight.",
     name: "Prism",
     glyph: "Marketing",
     lane: "GTM data & research",
@@ -145,6 +160,8 @@ export const products: Product[] = [
   },
   {
     slug: "echo",
+    tint: "#ddf2e5",
+    meaning: "Every call, heard again and understood.",
     name: "Echo",
     glyph: "Marketing",
     lane: "Revenue intelligence",
@@ -164,6 +181,8 @@ export const products: Product[] = [
   },
   {
     slug: "recall",
+    tint: "#dee5fb",
+    meaning: "Find what your company already knows.",
     name: "Recall",
     glyph: "Tech",
     lane: "Company search",
@@ -183,6 +202,8 @@ export const products: Product[] = [
   },
   {
     slug: "orbit",
+    tint: "#ddf2e5",
+    meaning: "Ads that circle back to what works.",
     name: "Orbit",
     glyph: "Marketing",
     lane: "Automated ads",
@@ -202,6 +223,8 @@ export const products: Product[] = [
   },
   {
     slug: "forge",
+    tint: "#e6e2d9",
+    meaning: "Code, with a spark of help.",
     name: "Forge",
     glyph: "Tech",
     lane: "AI code editor",
@@ -221,6 +244,8 @@ export const products: Product[] = [
   },
   {
     slug: "frame",
+    tint: "#fbe3de",
+    meaning: "Crop marks around an idea.",
     name: "Frame",
     glyph: "Design",
     lane: "Interface design",
@@ -240,6 +265,8 @@ export const products: Product[] = [
   },
   {
     slug: "collage",
+    tint: "#fdf5d3",
+    meaning: "Shapes layered into something new.",
     name: "Collage",
     glyph: "Design",
     lane: "Everyday design",
@@ -259,6 +286,8 @@ export const products: Product[] = [
   },
   {
     slug: "atelier",
+    tint: "#ece6fa",
+    meaning: "A single drop of paint.",
     name: "Atelier",
     glyph: "Design",
     lane: "Creative studio",
@@ -278,6 +307,8 @@ export const products: Product[] = [
   },
   {
     slug: "snip",
+    tint: "#fbe3de",
+    meaning: "The play button, cut to the best part.",
     name: "Snip",
     glyph: "Marketing",
     lane: "Video repurposing",
@@ -297,6 +328,8 @@ export const products: Product[] = [
   },
   {
     slug: "fab",
+    tint: "#ddf2e5",
+    meaning: "Three faces of a part you can make.",
     name: "Fab",
     glyph: "Robotics",
     lane: "AI-native CAD",

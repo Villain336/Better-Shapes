@@ -1,9 +1,9 @@
 import Link from "next/link";
-import { toneFor } from "@/lib/content";
 import { statusMeta, type Product } from "@/lib/products";
 import { GlassCard } from "./GlassCard";
 import { Chip } from "./Chip";
-import { ArrowUpRight, CapabilityGlyph, toneTint } from "./Shapes";
+import { ArrowUpRight } from "./Shapes";
+import { ProductMark } from "./ProductMark";
 
 export function StatusChip({ status }: { status: Product["status"] }) {
   const s = statusMeta[status];
@@ -12,16 +12,15 @@ export function StatusChip({ status }: { status: Product["status"] }) {
 
 /** Glass product tile: shape glyph, status, name, tagline and what it replaces. */
 export function ProductCard({ product }: { product: Product }) {
-  const tone = toneFor[product.glyph];
   return (
     <Link href={`/products/${product.slug}`} className="block h-full">
       <GlassCard className="flex h-full flex-col gap-5 rounded-[32px] p-6 transition-transform duration-700 ease-[var(--ease-out)] hover:-translate-y-1.5">
         <div className="flex items-start justify-between gap-3">
           <span
             className="grid size-14 shrink-0 place-items-center rounded-[18px] transition-transform duration-700 ease-[var(--ease-out)] group-hover/card:rotate-[12deg]"
-            style={{ background: toneTint[tone] }}
+            style={{ background: product.tint }}
           >
-            <CapabilityGlyph name={product.glyph} size={28} />
+            <ProductMark slug={product.slug} size={34} />
           </span>
           <StatusChip status={product.status} />
         </div>

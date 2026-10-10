@@ -7,8 +7,9 @@ import { WaitlistForm } from "@/components/Forms";
 import { Button } from "@/components/Button";
 import { Reveal, RevealItem, Stagger } from "@/components/Reveal";
 import { SectionHeading } from "@/components/Sections";
-import { CapabilityGlyph, toneColor, toneTint } from "@/components/Shapes";
-import { art, toneFor } from "@/lib/content";
+import { toneColor } from "@/components/Shapes";
+import { ProductMark } from "@/components/ProductMark";
+import { art } from "@/lib/content";
 import { productBySlug, products, statusMeta } from "@/lib/products";
 
 type Params = { params: Promise<{ slug: string }> };
@@ -27,7 +28,6 @@ const dots = ["blue", "red", "yellow", "green", "blue"] as const;
 export default async function ProductPage({ params }: Params) {
   const p = productBySlug((await params).slug);
   if (!p) notFound();
-  const tone = toneFor[p.glyph];
   const more = products.filter((x) => x.slug !== p.slug && x.status !== "early-access").slice(0, 3);
   const heroArt = [art.products, art.home, art.work, art.pricing, art.blog, art.about];
 
@@ -66,10 +66,18 @@ export default async function ProductPage({ params }: Params) {
         </Reveal>
         <Reveal delay={0.1}>
           <GlassCard className="flex h-full flex-col gap-5 rounded-[32px] p-8">
-            <span className="grid size-16 place-items-center rounded-[20px]" style={{ background: toneTint[tone] }}>
-              <CapabilityGlyph name={p.glyph} />
-            </span>
-            <StatusChip status={p.status} />
+            <div className="flex items-center gap-4">
+              <span className="grid size-20 shrink-0 place-items-center rounded-[22px]" style={{ background: p.tint }}>
+                <ProductMark slug={p.slug} size={52} />
+              </span>
+              <p className="text-[14px] leading-[1.45] text-ink-2">
+                <span className="caption block text-ink-3">The mark</span>
+                {p.meaning}
+              </p>
+            </div>
+            <div>
+              <StatusChip status={p.status} />
+            </div>
             <dl className="flex flex-col gap-4 text-[15px]">
               <div>
                 <dt className="caption text-ink-3">For</dt>
