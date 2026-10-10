@@ -18,7 +18,7 @@ export default function BlogPage() {
         alt="Rolling bands of tulips beside a lake under cumulus clouds"
         eyebrow="Field notes"
         title="Notes from"
-        serif="the meadow."
+        accent="the meadow."
         sub="Essays on design, engineering, robotics and growth — written by the people doing the work."
       />
 

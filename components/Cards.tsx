@@ -127,8 +127,8 @@ export function PricingCard({
         {featured && <Chip tone="yellow">Most popular</Chip>}
       </div>
       <div className="flex items-baseline gap-1.5">
-        <span className="text-[56px] font-medium leading-none tracking-[-0.06em]">{price}</span>
-        <span className="serif text-[28px] opacity-70">/month</span>
+        <span className="font-display text-[56px] font-semibold leading-none tracking-[-0.06em]">{price}</span>
+        <span className="text-[18px] font-medium opacity-60">/month</span>
       </div>
       <p className={`text-[16px] leading-[1.55] ${featured ? "text-white/75" : "text-ink-2"}`}>{description}</p>
       <ul className={`flex flex-col gap-3 border-t pt-6 ${featured ? "border-white/15" : "border-line"}`}>
@@ -183,7 +183,7 @@ export function PostCard({ post }: { post: Post }) {
 export function TestimonialCard({ quote, name, role, image }: { quote: string; name: string; role: string; image: string }) {
   return (
     <GlassCard className="flex flex-col gap-7 rounded-[32px] p-8">
-      <blockquote className="serif text-[28px] leading-[1.12] text-ink md:text-[32px]">“{quote}”</blockquote>
+      <blockquote className="text-[24px] font-medium leading-[1.25] tracking-[-0.035em] text-ink md:text-[28px]">“{quote}”</blockquote>
       <div className="flex items-center gap-3">
         <span className="relative size-11 overflow-hidden rounded-full">
           <Image src={image} alt="" fill sizes="44px" className="object-cover" />
@@ -200,7 +200,7 @@ export function TestimonialCard({ quote, name, role, image }: { quote: string; n
 export function StatCard({ value, label, className = "" }: { value: string; label: string; className?: string }) {
   return (
     <GlassCard className={`flex flex-col gap-1 rounded-[24px] px-6 pb-[22px] pt-5 ${className}`}>
-      <span className="text-[48px] font-medium leading-none tracking-[-0.06em] md:text-[56px]">{value}</span>
+      <span className="font-display text-[48px] font-semibold leading-none tracking-[-0.06em] md:text-[56px]">{value}</span>
       <span className="text-[14px] text-ink-2">{label}</span>
     </GlassCard>
   );

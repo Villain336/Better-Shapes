@@ -39,8 +39,8 @@
   --color-tint-yellow: #fdf5d3;
   --color-tint-green: #ddf2e5;
 
-  --font-sans: var(--font-dm-sans), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-instrument), ui-serif, Georgia, serif;
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
   --radius-card: 32px;
@@ -59,6 +59,13 @@ body {
   background: var(--color-bg-canvas);
   font-family: var(--font-sans);
   overflow-x: clip;
+}
+
+h1,
+h2,
+h3,
+blockquote {
+  font-family: var(--font-display);
 }
 
 ::selection {
@@ -138,15 +145,10 @@ html.lenis body {
     text-transform: uppercase;
   }
   .display {
-    font-weight: 500;
-    letter-spacing: -0.05em;
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.055em;
     line-height: 0.92;
-  }
-  .serif {
-    font-family: var(--font-serif);
-    font-style: italic;
-    font-weight: 400;
-    letter-spacing: -0.015em;
   }
   .container-x {
     width: 100%;

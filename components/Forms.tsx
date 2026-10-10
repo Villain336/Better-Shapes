@@ -61,7 +61,7 @@ export function NewsletterForm() {
       }}
       className="glass flex flex-col items-stretch justify-between gap-4 rounded-[32px] p-4 md:flex-row md:items-center md:rounded-full md:py-4 md:pl-10 md:pr-4"
     >
-      <span className="text-[22px] font-medium tracking-[-0.04em] md:text-[24px]">Get one calm, useful email a month.</span>
+      <span className="font-display text-[22px] font-semibold tracking-[-0.045em] md:text-[24px]">Get one calm, useful email a month.</span>
       {sent ? (
         <Sent>You’re on the list. See you in the meadow.</Sent>
       ) : (

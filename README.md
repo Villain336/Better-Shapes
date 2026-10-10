@@ -20,6 +20,7 @@ npm run typecheck
 
 - `app/globals.css` — design tokens (mirror the Figma variables) and the `glass`, `glass-ink`, `rim-gradient` surfaces
 - `lib/content.ts` — all copy: services, projects, pricing, FAQs, posts, team (edit here)
+- Type: Manrope (headlines) + Plus Jakarta Sans (body) + Geist Mono (small labels). The word "shape" is drawn letter by letter in red, blue, yellow, green and lavender (`components/Accent.tsx`).
 - `components/` — `Nav`, `Button`, `GlassCard` (pointer spotlight), `Cards`, `PageHero` (parallax art + word reveal), `Reveal`, `Sections`, `Forms`
 - `public/art/` — AI-generated flower/sky paintings, one per page
 

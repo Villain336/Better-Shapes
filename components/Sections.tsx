@@ -6,24 +6,25 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Reveal } from "./Reveal";
 import { Button } from "./Button";
 import { GlassCard } from "./GlassCard";
+import { Accent } from "./Accent";
 
 export function SectionHeading({
   eyebrow,
   title,
-  serif,
+  accent,
   side,
 }: {
   eyebrow?: string;
   title: string;
-  serif: string;
+  accent: string;
   side?: React.ReactNode;
 }) {
   return (
     <Reveal className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
       <div className="flex flex-col gap-4">
         {eyebrow && <span className="eyebrow text-ink-3">{eyebrow}</span>}
-        <h2 className="text-[40px] font-medium leading-[1] tracking-[-0.06em] md:text-[56px]">
-          {title} <span className="serif text-[1.14em] tracking-[-0.02em]">{serif}</span>
+        <h2 className="text-[40px] font-semibold leading-[1.02] tracking-[-0.055em] md:text-[56px]">
+          {title} <Accent text={accent} />
         </h2>
       </div>
       {side}
@@ -49,7 +50,7 @@ export function Marquee({ items }: { items: string[] }) {
     <div className="relative overflow-hidden [mask-image:linear-gradient(90deg,transparent,black_12%,black_88%,transparent)]">
       <div className="animate-marquee flex w-max gap-16 pr-16">
         {row.map((c, i) => (
-          <span key={i} className="whitespace-nowrap text-[24px] font-medium tracking-[-0.04em] text-ink-3/60">
+          <span key={i} className="whitespace-nowrap font-display text-[24px] font-semibold tracking-[-0.045em] text-ink-3/60">
             {c}
           </span>
         ))}
@@ -124,10 +125,10 @@ export function CtaBand({ image }: { image: string }) {
         <Image src={image} alt="" fill sizes="100vw" className="-z-20 object-cover" />
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(250,248,244,0.85),rgba(250,248,244,0.3))] md:bg-[linear-gradient(90deg,rgba(250,248,244,0.88)_0%,rgba(250,248,244,0)_62%)]" />
         <div className="flex min-h-[460px] flex-col justify-center gap-7 p-8 md:min-h-[520px] md:p-16">
-          <h2 className="text-[44px] font-medium leading-[1] tracking-[-0.06em] md:text-[64px]">
+          <h2 className="text-[44px] font-semibold leading-[1.02] tracking-[-0.055em] md:text-[64px]">
             Let’s give your idea
             <br />
-            <span className="serif text-[1.12em] text-brand-blue">a better shape.</span>
+            <Accent text="a better shape." />
           </h2>
           <p className="max-w-[480px] text-[18px] leading-[1.5] text-ink-2 md:text-[20px]">
             Book a free 30-minute shaping session. Leave with a clear plan — whether or not we work together.

@@ -21,7 +21,7 @@ export default function AboutPage() {
         alt="A sunlit hillside of pink peonies above a winding river valley"
         eyebrow="About the studio"
         title="Small team."
-        serif="Big calm."
+        accent="Big calm."
         sub="Better Shapes is an independent studio of designers, engineers and roboticists. We believe good ideas deserve a shape people can trust."
       />
 
@@ -59,7 +59,7 @@ export default function AboutPage() {
       <section className="relative isolate py-16 md:py-20">
         <Blobs className="opacity-70" />
         <div className="container-x flex flex-col gap-10">
-          <SectionHeading eyebrow="Values" title="What we" serif="believe." />
+          <SectionHeading eyebrow="Values" title="What we" accent="believe." />
           <Stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {values.map((v) => (
               <RevealItem key={v.title} className="h-full">
@@ -76,7 +76,7 @@ export default function AboutPage() {
 
       {/* Team */}
       <section className="container-x flex flex-col gap-10 py-16">
-        <SectionHeading eyebrow="Team" title="The people" serif="behind the shapes." />
+        <SectionHeading eyebrow="Team" title="The people" accent="behind the shapes." />
         <Stagger className="grid grid-cols-2 gap-5 lg:grid-cols-4">
           {team.map((m) => (
             <RevealItem key={m.name}>
@@ -109,8 +109,8 @@ export default function AboutPage() {
             </a>
           </div>
           <div className="glass flex flex-col gap-5 rounded-[32px] p-6 md:p-10">
-            <h2 className="text-[40px] font-medium leading-none tracking-[-0.05em]">
-              Let’s <span className="serif text-[1.1em] text-brand-blue">talk.</span>
+            <h2 className="text-[40px] font-semibold leading-none tracking-[-0.055em]">
+              Let’s <span className="text-ink-3">talk.</span>
             </h2>
             <p className="text-[16px] leading-[1.55] text-ink-2">
               Tell us what you’re shaping. We reply within one business day — usually with a few ideas.

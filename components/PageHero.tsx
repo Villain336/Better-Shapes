@@ -4,6 +4,7 @@ import Image from "next/image";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { LogoMark } from "./Logo";
+import { Accent } from "./Accent";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -12,7 +13,7 @@ type Props = {
   alt: string;
   eyebrow: string;
   title: string;
-  serif: string;
+  accent: string;
   sub: string;
   children?: React.ReactNode;
   aside?: React.ReactNode;
@@ -20,8 +21,8 @@ type Props = {
   priority?: boolean;
 };
 
-/** Full-bleed painted landscape with parallax + slow drift, headline with an italic serif accent. */
-export function PageHero({ image, alt, eyebrow, title, serif, sub, children, aside, tall = false }: Props) {
+/** Full-bleed painted landscape with parallax + slow drift, headline with a soft accent line ("shape" in brand colors). */
+export function PageHero({ image, alt, eyebrow, title, accent, sub, children, aside, tall = false }: Props) {
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
@@ -83,12 +84,12 @@ export function PageHero({ image, alt, eyebrow, title, serif, sub, children, asi
               </span>
               <span className="block overflow-hidden pb-[0.1em]">
                 <motion.span
-                  className="serif inline-block text-[1.08em] leading-[0.9] text-brand-blue"
-                  initial={{ y: "110%", rotate: 4 }}
-                  animate={{ y: 0, rotate: 0 }}
+                  className="inline-block"
+                  initial={{ y: "110%" }}
+                  animate={{ y: 0 }}
                   transition={{ duration: 1.1, ease, delay: 0.25 + words.length * 0.08 }}
                 >
-                  {serif}
+                  <Accent text={accent} />
                 </motion.span>
               </span>
             </h1>

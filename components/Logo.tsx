@@ -41,7 +41,7 @@ export function Logo({ inverse = false }: { inverse?: boolean }) {
   return (
     <Link
       href="/"
-      className={`group flex items-center gap-2.5 text-[20px] font-medium tracking-[-0.04em] md:text-[22px] ${
+      className={`group flex items-center gap-2.5 font-display text-[20px] font-semibold tracking-[-0.045em] md:text-[22px] ${
         inverse ? "text-white" : "text-ink"
       }`}
       aria-label="Better Shapes home"

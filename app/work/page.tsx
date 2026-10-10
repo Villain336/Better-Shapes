@@ -16,7 +16,7 @@ export default function WorkPage() {
         alt="Rows of lavender at golden hour beneath tall clouds"
         eyebrow="Selected work"
         title="Work that"
-        serif="feels right."
+        accent="feels right."
         sub="A few of the products, brands and machines we’ve helped shape — for startups, labs and teams who care about the details."
       />
 
@@ -27,7 +27,7 @@ export default function WorkPage() {
       <section className="relative isolate py-16 md:py-24">
         <Blobs />
         <div className="container-x flex flex-col gap-12">
-          <SectionHeading eyebrow="Capabilities" title="Everything it takes," serif="in one place." />
+          <SectionHeading eyebrow="Capabilities" title="Everything it takes," accent="in one place." />
           <Stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {capabilities.map((c, i) => (
               <RevealItem key={c.name} className="h-full">

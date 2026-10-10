@@ -1,17 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { DM_Sans, Geist_Mono, Instrument_Serif } from "next/font/google";
+import { Geist_Mono, Manrope, Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { SmoothScroll } from "@/components/SmoothScroll";
 
-const dmSans = DM_Sans({ subsets: ["latin"], variable: "--font-dm-sans", weight: ["400", "500", "600"] });
-const instrument = Instrument_Serif({
-  subsets: ["latin"],
-  variable: "--font-instrument",
-  weight: "400",
-  style: ["italic", "normal"],
-});
+const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", weight: ["400", "500", "600", "700"] });
+const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-jakarta", weight: ["400", "500", "600"] });
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono", weight: ["500"] });
 
 export const metadata: Metadata = {
@@ -28,7 +23,7 @@ export const viewport: Viewport = { themeColor: "#f1efea" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${dmSans.variable} ${instrument.variable} ${geistMono.variable}`}>
+    <html lang="en" className={`${manrope.variable} ${jakarta.variable} ${geistMono.variable}`}>
       <body>
         <SmoothScroll />
         <Nav />

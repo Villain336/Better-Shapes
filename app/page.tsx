@@ -19,7 +19,7 @@ export default function Home() {
         alt="A field of blue poppies under a bright sky with a soft rainbow"
         eyebrow="Independent design & technology studio"
         title="Good ideas."
-        serif="Better shape."
+        accent="Better shape."
         sub="We connect brand, design, robotics and growth to turn your next chapter into something people feel — and trust."
         aside={<HeroStack />}
       >
@@ -55,7 +55,7 @@ export default function Home() {
           <SectionHeading
             eyebrow="What we do"
             title="Four disciplines."
-            serif="One calm team."
+            accent="One calm team."
             side={
               <p className="max-w-[340px] text-[16px] leading-[1.55] text-ink-2">
                 Strategy, craft and engineering under one roof — so nothing gets lost in the handoff.
@@ -104,7 +104,7 @@ export default function Home() {
         <SectionHeading
           eyebrow="Selected work"
           title="Shaped"
-          serif="with care."
+          accent="with care."
           side={
             <Button href="/work" variant="ghost">
               View all work

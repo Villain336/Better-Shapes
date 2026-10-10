@@ -37,7 +37,7 @@ export function HeroStack() {
     <div className="relative hidden h-[520px] lg:block" aria-hidden>
       <motion.div style={far} className="absolute right-0 top-0">
         <motion.div {...enter(0.6, 4)} className="glass animate-float w-[230px] rounded-[24px] px-6 pb-[22px] pt-5">
-          <div className="text-[56px] font-medium leading-none tracking-[-0.06em]">120+</div>
+          <div className="font-display text-[56px] font-semibold leading-none tracking-[-0.06em]">120+</div>
           <div className="text-[14px] text-ink-2">Products shipped</div>
         </motion.div>
       </motion.div>
@@ -54,7 +54,7 @@ export function HeroStack() {
             </span>
             Now building
           </div>
-          <div className="text-[18px] font-semibold leading-[1.25] tracking-[-0.02em]">Autonomous greenhouse rover</div>
+          <div className="font-display text-[18px] font-semibold leading-[1.25] tracking-[-0.02em]">Autonomous greenhouse rover</div>
           <div className="h-1.5 w-full overflow-hidden rounded-full bg-ink/10">
             <motion.div
               className="h-full rounded-full bg-gradient-to-r from-brand-blue to-brand-green"
@@ -75,7 +75,7 @@ export function HeroStack() {
           {...enter(1, -2)}
           className="glass animate-float w-[240px] rounded-[24px] px-6 pb-[22px] pt-5 [animation-delay:-5s]"
         >
-          <div className="text-[56px] font-medium leading-none tracking-[-0.06em]">48h</div>
+          <div className="font-display text-[56px] font-semibold leading-none tracking-[-0.06em]">48h</div>
           <div className="text-[14px] text-ink-2">Average first delivery</div>
         </motion.div>
       </motion.div>

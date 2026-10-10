@@ -37,7 +37,7 @@ export function Footer() {
       <div className="container-x flex flex-col gap-16 pb-10 pt-[72px]">
         <div className="flex flex-col justify-between gap-12 md:flex-row">
           <div className="flex flex-col gap-5">
-            <Link href="/" className="flex items-center gap-2.5 text-[22px] font-medium tracking-[-0.04em]">
+            <Link href="/" className="flex items-center gap-2.5 font-display text-[22px] font-semibold tracking-[-0.045em]">
               <LogoMark />
               Better Shapes
             </Link>
@@ -60,7 +60,7 @@ export function Footer() {
         </div>
         <div
           aria-hidden
-          className="select-none whitespace-nowrap text-[clamp(64px,15.5vw,220px)] font-medium leading-[0.85] tracking-[-0.07em] text-white/[0.08]"
+          className="select-none whitespace-nowrap font-display text-[clamp(60px,14.5vw,210px)] font-semibold leading-[0.85] tracking-[-0.07em] text-white/[0.08]"
         >
           Better Shapes
         </div>

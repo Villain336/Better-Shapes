@@ -19,7 +19,7 @@ export default function PricingPage() {
         alt="A meadow of pink and white cosmos flowers under fluffy clouds"
         eyebrow="Memberships"
         title="One subscription."
-        serif="Endless shapes."
+        accent="Endless shapes."
         sub="Pause or cancel anytime. A senior team for design, technology, robotics and growth — for one flat monthly fee."
       />
 
@@ -33,7 +33,7 @@ export default function PricingPage() {
           <RevealItem className="h-full">
             <GlassCard className="flex h-full flex-col gap-5 rounded-[32px] p-8 transition-transform duration-700 ease-[var(--ease-out)] hover:-translate-y-1.5">
               <h3 className="text-[18px] font-semibold tracking-[-0.02em]">Labs &amp; Robotics</h3>
-              <span className="text-[56px] font-medium leading-none tracking-[-0.06em]">Custom</span>
+              <span className="font-display text-[56px] font-semibold leading-none tracking-[-0.06em]">Custom</span>
               <p className="text-[16px] leading-[1.55] text-ink-2">
                 Fixed-scope builds for hardware, R&amp;D and platform launches. Scoped in one call, priced up front.
               </p>
@@ -51,7 +51,7 @@ export default function PricingPage() {
       <section className="relative isolate py-16">
         <Blobs className="opacity-70" />
         <div className="container-x flex flex-col gap-10">
-          <SectionHeading eyebrow="Why members stay" title="Membership" serif="benefits." />
+          <SectionHeading eyebrow="Why members stay" title="Membership" accent="benefits." />
           <Stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {benefits.map((b) => (
               <RevealItem key={b.title}>
@@ -67,7 +67,7 @@ export default function PricingPage() {
       </section>
 
       <section className="container-x flex flex-col gap-10 py-16 md:py-24">
-        <SectionHeading eyebrow="FAQ" title="Questions," serif="answered." />
+        <SectionHeading eyebrow="FAQ" title="Questions," accent="answered." />
         <Reveal>
           <Faq items={faqs} />
         </Reveal>
