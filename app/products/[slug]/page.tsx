@@ -9,6 +9,7 @@ import { Reveal, RevealItem, Stagger } from "@/components/Reveal";
 import { SectionHeading } from "@/components/Sections";
 import { toneColor } from "@/components/Shapes";
 import { ProductRender } from "@/components/ProductRender";
+import { DaydreamExtras } from "@/components/DaydreamExtras";
 import { art } from "@/lib/content";
 import { productBySlug, products, statusMeta } from "@/lib/products";
 
@@ -77,7 +78,7 @@ export default async function ProductPage({ params }: Params) {
               </div>
               {p.alternativeTo && (
                 <div>
-                  <dt className="caption text-ink-3">Open-source alternative to</dt>
+                  <dt className="caption text-ink-3">{p.openSource === false ? "Compare with" : "Open-source alternative to"}</dt>
                   <dd className="mt-1 text-ink">{p.alternativeTo}</dd>
                 </div>
               )}
@@ -89,6 +90,8 @@ export default async function ProductPage({ params }: Params) {
           </GlassCard>
         </Reveal>
       </section>
+
+      {p.slug === "daydream" && <DaydreamExtras />}
 
       <section id="waitlist" className="container-x scroll-mt-28 pb-16">
         <Reveal>

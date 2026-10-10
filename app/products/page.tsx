@@ -97,8 +97,8 @@ export default function ProductsPage() {
             accent="yours to keep."
             side={
               <p className="max-w-[380px] text-[16px] leading-[1.55] text-ink-2">
-                Open-source versions of the apps people use every day. Your files, music, movies, photos, calls and
-                passwords, on hardware you control.
+                Open-source versions of the apps people use every day, on hardware you control. Plus Daydream, our
+                own streaming service for AI-made movies and series.
               </p>
             }
           />

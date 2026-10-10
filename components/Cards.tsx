@@ -117,6 +117,8 @@ export function PricingCard({
   features,
   cta,
   featured,
+  href = "/about#contact",
+  period = "/month",
 }: {
   name: string;
   price: string;
@@ -124,6 +126,8 @@ export function PricingCard({
   features: string[];
   cta: string;
   featured: boolean;
+  href?: string;
+  period?: string;
 }) {
   const dots: Tone[] = ["blue", "red", "yellow", "green", "blue"];
   const body = (
@@ -134,7 +138,7 @@ export function PricingCard({
       </div>
       <div className="flex items-baseline gap-1.5">
         <span className="font-display text-[56px] font-semibold leading-none tracking-[-0.06em]">{price}</span>
-        <span className="text-[18px] font-medium opacity-60">/month</span>
+        <span className="text-[18px] font-medium opacity-60">{period}</span>
       </div>
       <p className={`text-[16px] leading-[1.55] ${featured ? "text-white/75" : "text-ink-2"}`}>{description}</p>
       <ul className={`flex flex-col gap-3 border-t pt-6 ${featured ? "border-white/15" : "border-line"}`}>
@@ -145,7 +149,7 @@ export function PricingCard({
           </li>
         ))}
       </ul>
-      <Button href="/about#contact" variant={featured ? "glass" : "ink"} className="mt-auto w-full">
+      <Button href={href} variant={featured ? "glass" : "ink"} className="mt-auto w-full">
         {cta}
       </Button>
     </>

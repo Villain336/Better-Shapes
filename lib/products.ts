@@ -29,6 +29,8 @@ export type Product = {
   meaning: string;
   /** Consumer tools for everyone, shown in their own section. */
   everyday?: boolean;
+  /** Set false for commercial services (everything else is open source). */
+  openSource?: boolean;
 };
 
 export const products: Product[] = [
@@ -460,6 +462,28 @@ export const products: Product[] = [
       "Autofill in every browser and phone",
     ],
     license: "AGPL-3.0",
+  },
+  {
+    slug: "daydream",
+    meaning: "A projector whose beam turns into clouds: stories, dreamed up.",
+    name: "Daydream",
+    glyph: "Design",
+    lane: "AI movies & series",
+    status: "planned",
+    everyday: true,
+    openSource: false,
+    tagline: "Movies and series made with AI, free to watch.",
+    description:
+      "A streaming service of AI-made movies and series, free with ads. Plus adds ad-free viewing and minutes of episodes generated just for you. Creators can apply to publish their own series, and we launch with three originals.",
+    audience: "Viewers who want something new, and creators making AI series",
+    features: [
+      "Free catalog of originals and creator series, with ads",
+      "Plus: ad-free, plus personalized episodes on demand",
+      "Creator program with revenue share by watch time",
+      "Every title labeled AI-made, with content credentials",
+      "Three Better Shapes originals from day one",
+    ],
+    license: "Commercial service (creator tools open source)",
   },
 ];
 
