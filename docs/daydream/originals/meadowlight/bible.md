@@ -26,7 +26,7 @@ As a reference for feel only (nothing is borrowed): the pastoral patience of Stu
 
 1. **The Asking.** Anyone standing on the Asking Stone on Weather Hill may ask the sky one question aloud, once per day, between sunrise and the noon bell.
 2. **The Answer.** By dusk the clouds gather into words, a few at a time and in the order the questions were asked. The words are soft, rounded letters made of cumulus, lit apricot from below. Each answer holds for about a minute, then drifts apart.
-3. **Always true, never long.** An answer is always true, and never longer than five words. The sky cannot lie, but it can be brief to the point of mischief.
+3. **Always true, rarely long.** An answer is always true. These days it is never longer than five words, though the oldest volumes of the log record answers of whole sentences. The sky cannot lie, but it can be brief to the point of mischief.
 4. **The present, not the future.** The sky answers what is true *now*. About the future it says NOT YET or ASK AGAIN. It will sometimes answer the question behind a question.
 5. **The Keeper.** One person, the Keeper, logs every question and answer in the question log (31 volumes since 1891). By custom the Keeper keeps and does not ask.
 6. **The Accord.** Since a hard autumn forty years ago, the town has agreed never to ask about "the ones who've gone." No one says that rule out loud; everyone knows it.
@@ -131,6 +131,7 @@ Wren breaks the Accord and asks where her father is. The answer, ABOVE THE WEATH
 **Fixed descriptor phrases** (paste verbatim into every prompt):
 
 - **Wren:** "Wren Calder, a tall 24-year-old woman with a loose low copper-auburn braid over her left shoulder, light freckles, mustard-yellow oilskin raincoat worn open over an oatmeal cable-knit sweater, olive corduroy trousers, tan lace-up boots, small brass pocket barometer on a leather cord, pencil behind her left ear"
+- **Young Wren (flashbacks):** "Wren Calder at 10, a skinny girl with a copper-auburn braid over her left shoulder, light freckles, an oversized mustard-yellow child's raincoat, olive corduroy dungarees, scabbed knees"
 - **Abel:** "Abel Calder, a broad, slightly stooped 56-year-old man with a close-cropped silver beard and deep smile lines, navy fisherman's rib-knit sweater with a frayed left cuff, charcoal wool flat cap, canvas satchel of notebooks"
 - **Hattie:** "Hattie Ames, a small upright 71-year-old woman with a white chin-length bob, round tortoiseshell glasses on a beaded chain, plum wool cardigan over a high-necked cream blouse, gray tweed skirt"
 - **Silas:** "Silas Moreno, a 26-year-old man with sun-browned skin and short-sided dark curly hair, untucked white linen shirt with rolled sleeves, faded sage waxed-canvas apron, wide-brimmed beekeeper's hat with veil pushed back"
