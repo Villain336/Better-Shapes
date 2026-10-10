@@ -36,6 +36,7 @@ Consumer tools for everyone. Strong open-source projects already exist in each o
 | [Matinee](./matinee.md) | Kodi, Plex, Netflix-style apps | AGPL-3.0 | An AI-native media center for films you own or have rights to, with watchlist import and a curated, signed add-on catalog. |
 | [Keepsake](./keepsake.md) | Google Photos, iCloud Photos | AGPL-3.0 | Photo backup to storage you control, with local search by description and consent-first face grouping. |
 | [Huddle](./huddle.md) | Zoom | AGPL-3.0 | Browser video calls on a LiveKit SFU, with consent-first recording and AI notes run locally or on your own key. |
+| [Daydream](./daydream.md) | Tubi, Netflix | Proprietary (creator tools may be open source) | A commercial, ad-supported streaming service of AI-generated series, with paid personalized episodes and a creator revenue share; not open source. |
 | [Keyring](./keyring.md) | 1Password | AGPL-3.0 | A zero-knowledge vault for passwords and passkeys on audited crypto libraries, launched only after an independent audit. |
 
 ## Recommended build order
