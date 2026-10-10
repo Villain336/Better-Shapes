@@ -1,14 +1,19 @@
 export type Tone = "red" | "blue" | "yellow" | "green";
 export type Capability = "Tech" | "Design" | "Robotics" | "Marketing";
 
+/** Prefix for static files when the site is served from a sub-path (GitHub Pages). */
+export const asset = (path: string) => `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${path}`;
+
 export const art = {
-  home: "/art/home-poppies.webp",
-  work: "/art/work-lavender.webp",
-  pricing: "/art/pricing-cosmos.webp",
-  blog: "/art/blog-tulips.webp",
-  about: "/art/about-peonies.webp",
-  sign: "/brand/sign.webp",
-} as const;
+  home: asset("/art/home-poppies.webp"),
+  work: asset("/art/work-lavender.webp"),
+  pricing: asset("/art/pricing-cosmos.webp"),
+  blog: asset("/art/blog-tulips.webp"),
+  about: asset("/art/about-peonies.webp"),
+  products: asset("/art/products-ranunculus.webp"),
+  labs: asset("/art/labs-anemones.webp"),
+  sign: asset("/brand/sign.webp"),
+};
 
 export const toneFor: Record<Capability, Tone> = {
   Tech: "blue",
@@ -20,16 +25,17 @@ export const toneFor: Record<Capability, Tone> = {
 export const nav = [
   { label: "Home", href: "/" },
   { label: "Work", href: "/work" },
+  { label: "Products", href: "/products" },
   { label: "Pricing", href: "/pricing" },
   { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
 ];
 
-export const capabilities: { name: Capability; blurb: string; points: string[] }[] = [
+export const capabilities: { name: Capability; blurb: string; points: string[]; exploring?: boolean }[] = [
   {
     name: "Tech",
     blurb: "Web apps, platforms & AI integrations engineered to scale.",
-    points: ["Next.js & native apps", "AI copilots & automation", "Cloud & data platforms"],
+    points: ["Next.js & native apps", "AI agents & automation", "Cloud & data platforms"],
   },
   {
     name: "Design",
@@ -38,8 +44,9 @@ export const capabilities: { name: Capability; blurb: string; points: string[] }
   },
   {
     name: "Robotics",
-    blurb: "Prototyping, embedded systems and automation that move the real world.",
-    points: ["Rapid prototyping", "Embedded & firmware", "Fleet dashboards"],
+    blurb: "Physical automation and intelligence. A venture we’re exploring in Labs; nothing released yet.",
+    points: ["Research in Labs", "Physical AI", "Join the interest list"],
+    exploring: true,
   },
   {
     name: "Marketing",
@@ -58,7 +65,7 @@ export const steps = [
   {
     n: "02",
     title: "Request",
-    body: "Add anything to your board — a brand, an app, a robot, a launch.",
+    body: "Add anything to your board — a brand, an app, an AI agent, a launch.",
     tone: "red" as Tone,
   },
   {
@@ -79,10 +86,10 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    title: "Bloom Robotics",
-    subtitle: "Identity, site & fleet dashboard",
+    title: "Bloom Labs",
+    subtitle: "Identity, site & analytics dashboard",
     image: art.work,
-    tags: ["Robotics", "Design"],
+    tags: ["Design", "Tech"],
     year: "2026",
   },
   {
@@ -114,11 +121,11 @@ export const projects: Project[] = [
     year: "2025",
   },
   {
-    title: "Fieldwork Rover",
-    subtitle: "Autonomous greenhouse robot",
+    title: "ShapesOS",
+    subtitle: "Our agentic business OS, early access 2027",
     image: art.sign,
-    tags: ["Robotics", "Tech"],
-    year: "2024",
+    tags: ["Tech", "Design"],
+    year: "2027",
   },
 ];
 
@@ -127,7 +134,7 @@ export const testimonials = [
     quote:
       "They took a messy idea and gave it a shape our whole team believes in. Calm, sharp, fast.",
     name: "Maya Chen",
-    role: "COO, Northfield Robotics",
+    role: "COO, Northfield",
   },
   {
     quote:
@@ -136,16 +143,16 @@ export const testimonials = [
     role: "Founder, Skyline AI",
   },
   {
-    quote: "Our rover went from sketch to field test in eleven weeks. I still don’t know how.",
+    quote: "Our product went from sketch to launch in eleven weeks. I still don’t know how.",
     name: "Priya Raman",
-    role: "Head of R&D, Fieldwork",
+    role: "Head of Product, Fieldwork",
   },
 ];
 
 export const stats = [
   { value: "98%", label: "Clients who renew after month one" },
   { value: "4.9/5", label: "Average satisfaction score" },
-  { value: "12", label: "Robotics prototypes in the field" },
+  { value: "2027", label: "ShapesOS early access opens" },
 ];
 
 export const plans = [
@@ -166,11 +173,11 @@ export const plans = [
   {
     name: "Pro Membership",
     price: "$7,495",
-    description: "Double the output. Design, tech, robotics & growth in one team.",
+    description: "Double the output. Design, tech, AI & growth in one team.",
     features: [
       "Two requests at a time",
       "Avg. 48-hour delivery",
-      "Robotics & hardware prototyping",
+      "AI agents & automations",
       "Growth marketing sprints",
       "Dedicated Slack channel",
     ],
@@ -183,9 +190,9 @@ export const benefits: { title: string; body: string; tone: Tone }[] = [
   { title: "Request board", body: "Add as many requests as you like. We work through them in order.", tone: "blue" },
   { title: "Fixed monthly rate", body: "No surprises, no hourly billing. Pay the same every month.", tone: "red" },
   { title: "Fast delivery", body: "Most requests land in 2–3 business days.", tone: "yellow" },
-  { title: "Top-tier talent", body: "Senior designers, engineers and roboticists only.", tone: "green" },
+  { title: "Top-tier talent", body: "Senior designers, engineers and AI specialists only.", tone: "green" },
   { title: "Flexible & scalable", body: "Scale up, down, or pause whenever your roadmap shifts.", tone: "blue" },
-  { title: "Yours, forever", body: "Every file, repo and CAD model is 100% yours.", tone: "red" },
+  { title: "Yours, forever", body: "Every file, repo and design file is 100% yours.", tone: "red" },
 ];
 
 export const faqs = [
@@ -195,15 +202,15 @@ export const faqs = [
   },
   {
     q: "Why not just hire full-time?",
-    a: "A senior designer, engineer and marketer cost well over $400k a year combined. With Better Shapes you get all three disciplines — plus robotics — for a flat monthly fee, and you only pay while you need us.",
+    a: "A senior designer, engineer and marketer cost well over $400k a year combined. With Better Shapes you get all three disciplines — plus AI agents — for a flat monthly fee, and you only pay while you need us.",
   },
   {
     q: "What if I don’t like the work?",
     a: "We keep revising until you love it. Most requests take one or two rounds; nothing is ‘done’ until it feels right to you.",
   },
   {
-    q: "Do you really build robots?",
-    a: "Yes. We prototype mechanical systems, write embedded firmware and build the dashboards that run them. Larger hardware programs are scoped as Labs engagements.",
+    q: "Do you build robots?",
+    a: "Not yet. Robotics and physical AI are a venture we’re exploring in Labs, and we haven’t released anything. Join the interest list on the Labs page to hear first.",
   },
   {
     q: "How fast will I receive my work?",
@@ -234,9 +241,9 @@ export const featuredPost: Post = {
 
 export const posts: Post[] = [
   {
-    slug: "robots-people-trust",
-    title: "Designing robots people actually trust",
-    excerpt: "What a decade of interface design taught us about building machines that feel calm.",
+    slug: "calm-machines",
+    title: "What calm design could mean for machines",
+    excerpt: "Notes from Labs: the interface lessons we’d bring to robots in homes and workplaces.",
     category: "Robotics",
     date: "Sep 2026",
     read: "6 min read",
@@ -280,7 +287,7 @@ export const posts: Post[] = [
   },
   {
     slug: "one-calm-team",
-    title: "Why we put design, code and hardware in one room",
+    title: "Why we put design, code and AI in one room",
     excerpt: "Handoffs are where good ideas go to die. Here’s how we work without them.",
     category: "Tech",
     date: "Apr 2026",
@@ -299,8 +306,8 @@ export const values: { title: string; body: string; tone: Tone }[] = [
 export const team = [
   { name: "Jordan Hale", role: "Founder & Creative Director", tone: "blue" as Tone },
   { name: "Ava Lindqvist", role: "Head of Design", tone: "red" as Tone },
-  { name: "Marcus Bell", role: "Lead Robotics Engineer", tone: "yellow" as Tone },
+  { name: "Marcus Bell", role: "Labs Lead, Physical AI", tone: "yellow" as Tone },
   { name: "Sofia Reyes", role: "Growth Lead", tone: "green" as Tone },
 ];
 
-export const clients = ["Northfield", "Lumen Labs", "Orbit/AI", "Fieldwork", "Kinetic", "Pollen", "Meadow", "Arc & Co"];
+export const clients = ["Northfield", "Lumen Labs", "Halo AI", "Fieldwork", "Kinetic", "Pollen", "Meadow", "Arc & Co"];

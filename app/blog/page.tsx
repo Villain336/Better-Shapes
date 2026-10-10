@@ -19,7 +19,7 @@ export default function BlogPage() {
         eyebrow="Field notes"
         title="Notes from"
         accent="the meadow."
-        sub="Essays on design, engineering, robotics and growth — written by the people doing the work."
+        sub="Essays on design, engineering, AI and growth — written by the people doing the work."
       />
 
       <section className="container-x flex flex-col gap-8 pb-24">

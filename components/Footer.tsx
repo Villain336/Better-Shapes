@@ -6,6 +6,7 @@ const cols = [
     title: "Studio",
     links: [
       ["Work", "/work"],
+      ["Products", "/products"],
       ["Pricing", "/pricing"],
       ["About", "/about"],
       ["Blog", "/blog"],
@@ -16,7 +17,7 @@ const cols = [
     links: [
       ["Tech", "/work"],
       ["Design", "/work"],
-      ["Robotics", "/work"],
+      ["Labs", "/labs"],
       ["Marketing", "/work"],
     ],
   },
@@ -42,7 +43,7 @@ export function Footer() {
               Better Shapes
             </Link>
             <p className="max-w-[360px] text-[16px] leading-[1.55] text-white/65">
-              Design, technology, robotics &amp; growth — shaped by one calm team.
+              Design, technology, AI &amp; growth — shaped by one calm team.
             </p>
           </div>
           <div className="grid grid-cols-2 gap-10 sm:grid-cols-3 md:gap-24">

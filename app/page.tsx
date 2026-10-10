@@ -8,6 +8,9 @@ import { CapabilityCard, ProjectCard, StatCard, TestimonialCard } from "@/compon
 import { GlassCard } from "@/components/GlassCard";
 import { LogoMark } from "@/components/Logo";
 import { toneColor } from "@/components/Shapes";
+import { ProductCard } from "@/components/ProductCard";
+import { ShapesOSFeature } from "@/components/ShapesOSFeature";
+import { products } from "@/lib/products";
 import { art, capabilities, clients, projects, stats, steps, testimonials } from "@/lib/content";
 
 export default function Home() {
@@ -20,7 +23,7 @@ export default function Home() {
         eyebrow="Independent design & technology studio"
         title="Good ideas."
         accent="Better shape."
-        sub="We connect brand, design, robotics and growth to turn your next chapter into something people feel — and trust."
+        sub="We connect brand, design, AI and growth to turn your next chapter into something people feel — and trust."
         aside={<HeroStack />}
       >
         <Button href="/about#contact">Start a conversation</Button>
@@ -65,7 +68,7 @@ export default function Home() {
           <Stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {capabilities.map((c, i) => (
               <RevealItem key={c.name} className="h-full">
-                <CapabilityCard name={c.name} blurb={c.blurb} index={i} />
+                <CapabilityCard name={c.name} blurb={c.blurb} index={i} exploring={c.exploring} />
               </RevealItem>
             ))}
           </Stagger>
@@ -74,6 +77,30 @@ export default function Home() {
             Every engagement starts with a free 30-minute shaping session.
           </Reveal>
         </div>
+      </section>
+
+      {/* Products */}
+      <section className="container-x flex flex-col gap-10 py-12 md:py-16">
+        <SectionHeading
+          eyebrow="Products"
+          title="We build our own"
+          accent="tools too."
+          side={
+            <Button href="/products" variant="ghost">
+              All products
+            </Button>
+          }
+        />
+        <ShapesOSFeature />
+        <Stagger className="grid gap-5 md:grid-cols-3">
+          {products
+            .filter((p) => p.status === "in-development")
+            .map((p) => (
+              <RevealItem key={p.slug} className="h-full">
+                <ProductCard product={p} />
+              </RevealItem>
+            ))}
+        </Stagger>
       </section>
 
       {/* How it works */}

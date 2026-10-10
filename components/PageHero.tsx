@@ -19,10 +19,12 @@ type Props = {
   aside?: React.ReactNode;
   tall?: boolean;
   priority?: boolean;
+  /** Use for sentence-length accents (product taglines): smaller, wrapping second line. */
+  smallAccent?: boolean;
 };
 
 /** Full-bleed painted landscape with parallax + slow drift, headline with a soft accent line ("shape" in brand colors). */
-export function PageHero({ image, alt, eyebrow, title, accent, sub, children, aside, tall = false }: Props) {
+export function PageHero({ image, alt, eyebrow, title, accent, sub, children, aside, tall = false, smallAccent = false }: Props) {
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
@@ -82,7 +84,7 @@ export function PageHero({ image, alt, eyebrow, title, accent, sub, children, as
                   </span>
                 ))}
               </span>
-              <span className="block overflow-hidden pb-[0.1em]">
+              <span className={`block overflow-hidden pb-[0.1em] ${smallAccent ? "mt-3 max-w-[640px] text-[0.4em] leading-[1.05] tracking-[-0.045em]" : ""}`}>
                 <motion.span
                   className="inline-block"
                   initial={{ y: "110%" }}

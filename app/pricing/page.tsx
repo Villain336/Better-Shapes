@@ -20,7 +20,7 @@ export default function PricingPage() {
         eyebrow="Memberships"
         title="One subscription."
         accent="Endless shapes."
-        sub="Pause or cancel anytime. A senior team for design, technology, robotics and growth — for one flat monthly fee."
+        sub="Pause or cancel anytime. A senior team for design, technology, AI and growth — for one flat monthly fee."
       />
 
       <section className="container-x -mt-10 pb-20">
@@ -32,16 +32,16 @@ export default function PricingPage() {
           ))}
           <RevealItem className="h-full">
             <GlassCard className="flex h-full flex-col gap-5 rounded-[32px] p-8 transition-transform duration-700 ease-[var(--ease-out)] hover:-translate-y-1.5">
-              <h3 className="text-[18px] font-semibold tracking-[-0.02em]">Labs &amp; Robotics</h3>
-              <span className="font-display text-[56px] font-semibold leading-none tracking-[-0.06em]">Custom</span>
+              <h3 className="text-[18px] font-semibold tracking-[-0.02em]">Products &amp; Labs</h3>
+              <span className="font-display text-[56px] font-semibold leading-none tracking-[-0.06em]">Soon</span>
               <p className="text-[16px] leading-[1.55] text-ink-2">
-                Fixed-scope builds for hardware, R&amp;D and platform launches. Scoped in one call, priced up front.
+                Our own software: ShapesOS (early access 2027) and a suite of open-source tools. Members get early access.
               </p>
               <div className="relative min-h-[160px] flex-1 overflow-hidden rounded-[24px]">
-                <Image src={art.sign} alt="" fill sizes="400px" className="object-cover" />
+                <Image src={art.products} alt="" fill sizes="400px" className="object-cover" />
               </div>
-              <Button href="/about#contact" variant="ghost" className="self-start">
-                Book a scoping call
+              <Button href="/products" variant="ghost" className="self-start">
+                See products
               </Button>
             </GlassCard>
           </RevealItem>

@@ -54,7 +54,7 @@ export function HeroStack() {
             </span>
             Now building
           </div>
-          <div className="font-display text-[18px] font-semibold leading-[1.25] tracking-[-0.02em]">Autonomous greenhouse rover</div>
+          <div className="font-display text-[18px] font-semibold leading-[1.25] tracking-[-0.02em]">ShapesOS: the agentic business OS</div>
           <div className="h-1.5 w-full overflow-hidden rounded-full bg-ink/10">
             <motion.div
               className="h-full rounded-full bg-gradient-to-r from-brand-blue to-brand-green"
@@ -64,8 +64,7 @@ export function HeroStack() {
             />
           </div>
           <div className="flex gap-1.5">
-            <Chip tone="yellow">Robotics</Chip>
-            <Chip tone="blue">Tech</Chip>
+            <Chip tone="blue">Early access 2027</Chip>
           </div>
         </motion.div>
       </motion.div>

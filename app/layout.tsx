@@ -4,6 +4,7 @@ import "./globals.css";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { asset } from "@/lib/content";
 
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", weight: ["400", "500", "600", "700"] });
 const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-jakarta", weight: ["400", "500", "600"] });
@@ -15,8 +16,8 @@ export const metadata: Metadata = {
     template: "%s · Better Shapes",
   },
   description:
-    "Better Shapes is an independent studio for design, technology, robotics and marketing — one calm team that turns good ideas into products people trust.",
-  icons: { icon: "/favicon.svg" },
+    "Better Shapes is an independent studio for design, technology, AI and marketing, with Labs exploring physical automation. One calm team that turns good ideas into products people trust.",
+  icons: { icon: asset("/favicon.svg") },
 };
 
 export const viewport: Viewport = { themeColor: "#f1efea" };

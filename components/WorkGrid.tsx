@@ -6,7 +6,7 @@ import type { Capability } from "@/lib/content";
 import { projects } from "@/lib/content";
 import { ProjectCard } from "./Cards";
 
-const filters: ("All" | Capability)[] = ["All", "Tech", "Design", "Robotics", "Marketing"];
+const filters: ("All" | Capability)[] = ["All", "Tech", "Design", "Marketing"];
 
 export function WorkGrid() {
   const [active, setActive] = useState<(typeof filters)[number]>("All");

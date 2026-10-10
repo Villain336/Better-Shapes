@@ -31,7 +31,7 @@ export default function WorkPage() {
           <Stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {capabilities.map((c, i) => (
               <RevealItem key={c.name} className="h-full">
-                <CapabilityCard name={c.name} blurb={c.blurb} index={i} points={c.points} />
+                <CapabilityCard name={c.name} blurb={c.blurb} index={i} points={c.points} exploring={c.exploring} />
               </RevealItem>
             ))}
           </Stagger>

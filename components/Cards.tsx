@@ -27,11 +27,13 @@ export function CapabilityCard({
   blurb,
   index,
   points,
+  exploring = false,
 }: {
   name: Capability;
   blurb: string;
   index: number;
   points?: string[];
+  exploring?: boolean;
 }) {
   const tone = toneFor[name];
   return (
@@ -43,7 +45,11 @@ export function CapabilityCard({
         >
           <CapabilityGlyph name={name} />
         </span>
-        <span className="caption text-ink-3">{String(index + 1).padStart(2, "0")}</span>
+        {exploring ? (
+          <Chip tone={tone}>Exploring</Chip>
+        ) : (
+          <span className="caption text-ink-3">{String(index + 1).padStart(2, "0")}</span>
+        )}
       </div>
       <div className="flex flex-col gap-2">
         <h3 className="text-[24px] font-medium tracking-[-0.04em]">{name}</h3>
@@ -60,10 +66,10 @@ export function CapabilityCard({
         </ul>
       )}
       <Link
-        href="/work"
+        href={exploring ? "/labs" : "/work"}
         className="mt-auto flex items-center justify-between border-t border-white/70 pt-4 text-[15px] font-medium"
       >
-        Explore <ArrowDot />
+        {exploring ? "Visit Labs" : "Explore"} <ArrowDot />
       </Link>
     </GlassCard>
   );

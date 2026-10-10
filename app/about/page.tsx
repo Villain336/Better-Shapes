@@ -22,7 +22,7 @@ export default function AboutPage() {
         eyebrow="About the studio"
         title="Small team."
         accent="Big calm."
-        sub="Better Shapes is an independent studio of designers, engineers and roboticists. We believe good ideas deserve a shape people can trust."
+        sub="Better Shapes is an independent studio of designers, engineers and AI builders. We believe good ideas deserve a shape people can trust."
       />
 
       {/* Story */}
@@ -37,7 +37,7 @@ export default function AboutPage() {
           <Reveal delay={0.05}>
             <p className="text-[20px] leading-[1.5] tracking-[-0.01em] md:text-[22px]">
               We started as a two-person design shop that kept getting asked to “also build it.” Then to “also make it
-              move.” Today we’re a calm, senior team that takes ideas from napkin to launch — software, hardware and
+              think.” Today we’re a calm, senior team that takes ideas from napkin to launch — software, AI agents and
               the story around both.
             </p>
           </Reveal>
