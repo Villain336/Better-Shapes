@@ -110,8 +110,9 @@ export default function ProductsPage() {
             ))}
           </Stagger>
           <Reveal className="text-[14px] leading-[1.55] text-ink-3">
-            Hum and Matinee play media you own or have the rights to, and work you upload yourself. They don’t
-            provide or unlock anyone else’s catalog.
+            Playlist and watchlist imports bring over titles and order, not the audio or video. Hum and Matinee play
+            media you own, sources you subscribe to and work artists upload themselves. They never rip, record or unlock
+            anyone else’s catalog.
           </Reveal>
         </div>
       </section>

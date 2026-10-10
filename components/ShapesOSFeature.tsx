@@ -5,7 +5,7 @@ import { Button } from "./Button";
 import { Reveal } from "./Reveal";
 import { StatusChip } from "./ProductCard";
 import { toneColor } from "./Shapes";
-import { ProductMark } from "./ProductMark";
+import { ProductRender } from "./ProductRender";
 
 const dots = ["blue", "red", "yellow", "green", "blue"] as const;
 
@@ -18,9 +18,7 @@ export function ShapesOSFeature() {
       <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(250,248,244,0.75),rgba(250,248,244,0.2))] lg:bg-[linear-gradient(90deg,rgba(250,248,244,0.8)_0%,rgba(250,248,244,0)_60%)]" />
       <div className="flex flex-col items-start gap-5 p-2 md:p-0">
         <div className="flex items-center gap-3">
-          <span className="grid size-12 place-items-center rounded-[14px] bg-white/80">
-            <ProductMark slug="shapesos" size={32} />
-          </span>
+          <ProductRender slug="shapesos" className="size-14 rounded-[16px] shadow-[0_8px_24px_-8px_rgba(20,30,60,0.3)]" sizes="56px" />
           <StatusChip status={p.status} />
         </div>
         <h3 className="text-[48px] font-semibold leading-[0.95] tracking-[-0.06em] md:text-[72px]">{p.name}</h3>

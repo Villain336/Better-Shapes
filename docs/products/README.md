@@ -25,6 +25,19 @@ Prices in the market notes are third-party estimates gathered in October 2026 an
 | [Snip](./snip.md) | OpusClip | AGPL-3.0 | Long videos into scored, reframed, captioned clips, drafted for approval; extracted from ShapesOS Clips. |
 | [Fab](./fab.md) | SolidWorks, Fusion | AGPL-3.0 | Parametric CAD in the browser with an AI assistant, versioned review and STEP/STL/3MF export. |
 
+## Everyday apps
+
+Consumer tools for everyone. Strong open-source projects already exist in each of these lanes, so every spec names them, says what we would do differently, and includes a point where the honest answer may be to contribute upstream instead.
+
+| Product | Alternative to | License | One line |
+|---|---|---|---|
+| [Toss](./toss.md) | AirDrop, Quick Share | MIT | Send files, folders, links and clipboard to nearby devices on any OS, with a visible device check; LocalSend-compatible. |
+| [Hum](./hum.md) | Spotify | AGPL-3.0 | Stream the music you own, bring your playlists as metadata, and buy directly from independent artists; never rips audio. |
+| [Matinee](./matinee.md) | Kodi, Plex, Netflix-style apps | AGPL-3.0 | An AI-native media center for films you own or have rights to, with watchlist import and a curated, signed add-on catalog. |
+| [Keepsake](./keepsake.md) | Google Photos, iCloud Photos | AGPL-3.0 | Photo backup to storage you control, with local search by description and consent-first face grouping. |
+| [Huddle](./huddle.md) | Zoom | AGPL-3.0 | Browser video calls on a LiveKit SFU, with consent-first recording and AI notes run locally or on your own key. |
+| [Keyring](./keyring.md) | 1Password | AGPL-3.0 | A zero-knowledge vault for passwords and passkeys on audited crypto libraries, launched only after an independent audit. |
+
 ## Recommended build order
 
 1. **Concierge** — the clearest demonstration of Leash: real actions, real approvals, a buyer who feels the price.

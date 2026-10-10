@@ -25,7 +25,7 @@ export type Product = {
   license: string;
   /** Only set once the repository is public. */
   repo?: string;
-  /** What the product's logo means (logos live in lib/marks.ts and the Figma "Product Brands" page). */
+  /** What the product's 3D render depicts (renders in public/products, mirrored on the Figma "Product Brands" page). */
   meaning: string;
   /** Consumer tools for everyone, shown in their own section. */
   everyday?: boolean;
@@ -34,7 +34,7 @@ export type Product = {
 export const products: Product[] = [
   {
     slug: "shapesos",
-    meaning: "Four petals from one center: every part of the business, growing together.",
+    meaning: "Four glass layers around one titanium core: every part of the business on one system.",
     name: "ShapesOS",
     glyph: "Tech",
     lane: "Agentic business OS",
@@ -55,7 +55,7 @@ export const products: Product[] = [
   },
   {
     slug: "leash",
-    meaning: "A leash looped around a hand, holding the agent at the other end.",
+    meaning: "A carabiner clipped to a glowing agent: real power, on a tether.",
     name: "Leash",
     glyph: "Tech",
     lane: "Agent infrastructure",
@@ -75,7 +75,7 @@ export const products: Product[] = [
   },
   {
     slug: "shapes-ui",
-    meaning: "Three panes of glass, with one clear interface in front.",
+    meaning: "Panes of frosted glass stacked in depth.",
     name: "Shapes UI",
     glyph: "Design",
     lane: "Design system",
@@ -95,7 +95,7 @@ export const products: Product[] = [
   },
   {
     slug: "beacon",
-    meaning: "A lighthouse: making sure you can be seen.",
+    meaning: "A lighthouse lens: making sure you can be seen.",
     name: "Beacon",
     glyph: "Marketing",
     lane: "AI visibility",
@@ -135,7 +135,7 @@ export const products: Product[] = [
   },
   {
     slug: "prism",
-    meaning: "A gem splitting one beam into many.",
+    meaning: "One beam of light, split into a spectrum.",
     name: "Prism",
     glyph: "Marketing",
     lane: "GTM data & research",
@@ -155,7 +155,7 @@ export const products: Product[] = [
   },
   {
     slug: "echo",
-    meaning: "A voice, captured as a waveform.",
+    meaning: "A voice, cast in glass as a waveform.",
     name: "Echo",
     glyph: "Marketing",
     lane: "Revenue intelligence",
@@ -175,7 +175,7 @@ export const products: Product[] = [
   },
   {
     slug: "recall",
-    meaning: "An open book with a spark: what you already know, found.",
+    meaning: "A stack of index cards, with the right one lifted.",
     name: "Recall",
     glyph: "Tech",
     lane: "Company search",
@@ -195,7 +195,7 @@ export const products: Product[] = [
   },
   {
     slug: "orbit",
-    meaning: "A trend line breaking out of its loop.",
+    meaning: "A planet with a ring and a signal riding it.",
     name: "Orbit",
     glyph: "Marketing",
     lane: "Automated ads",
@@ -215,7 +215,7 @@ export const products: Product[] = [
   },
   {
     slug: "forge",
-    meaning: "An anvil, with a spark of help.",
+    meaning: "An anvil and hammer, with sparks.",
     name: "Forge",
     glyph: "Tech",
     lane: "AI code editor",
@@ -235,7 +235,7 @@ export const products: Product[] = [
   },
   {
     slug: "frame",
-    meaning: "A pen nib, where every design starts.",
+    meaning: "A pen nib on a design grid.",
     name: "Frame",
     glyph: "Design",
     lane: "Interface design",
@@ -255,7 +255,7 @@ export const products: Product[] = [
   },
   {
     slug: "collage",
-    meaning: "Snapshots, layered into something new.",
+    meaning: "Cards fanned out, layered into something new.",
     name: "Collage",
     glyph: "Design",
     lane: "Everyday design",
@@ -275,7 +275,7 @@ export const products: Product[] = [
   },
   {
     slug: "atelier",
-    meaning: "One confident brush stroke.",
+    meaning: "A brushstroke of paint frozen in mid-air.",
     name: "Atelier",
     glyph: "Design",
     lane: "Creative studio",
@@ -295,7 +295,7 @@ export const products: Product[] = [
   },
   {
     slug: "snip",
-    meaning: "Scissors: cut to the best part.",
+    meaning: "Scissors cutting through a film strip.",
     name: "Snip",
     glyph: "Marketing",
     lane: "Video repurposing",
@@ -335,7 +335,7 @@ export const products: Product[] = [
   },
   {
     slug: "toss",
-    meaning: "A paper plane, tossed to the device next to you.",
+    meaning: "A paper plane flying from phone to laptop.",
     name: "Toss",
     glyph: "Tech",
     lane: "File sharing",
@@ -356,49 +356,51 @@ export const products: Product[] = [
   },
   {
     slug: "hum",
-    meaning: "A record with a melody running across it.",
+    meaning: "A record on a turntable.",
     name: "Hum",
     glyph: "Marketing",
     lane: "Music streaming",
     status: "planned",
     everyday: true,
-    tagline: "Your music, streamed beautifully, everywhere.",
+    tagline: "Bring your playlists. Keep your music.",
     description:
-      "Stream the music you own from your own server to every device, and give independent artists a place to upload and earn directly. AI playlists and radio run on your hardware, not someone else’s.",
+      "Import your Spotify, Apple Music and YouTube Music playlists in one click. Hum matches every track to music you own, artists who upload directly, or a place to buy it, then streams it from your own server to every device. AI radio runs on your hardware.",
     alternativeTo: "Spotify",
     audience: "Music lovers with a library, and independent artists",
     features: [
+      "Import playlists from Spotify, Apple Music and YouTube Music",
+      "Playlist health: see what’s matched, missing, and where to buy it",
       "Stream your own library to phone, desktop and car",
       "Artist uploads with direct support and fair splits",
-      "AI radio and playlists that run locally",
-      "Offline downloads and lossless playback",
+      "AI radio and playlists that run locally, lossless and offline",
     ],
     license: "AGPL-3.0",
   },
   {
     slug: "matinee",
-    meaning: "An admit-one ticket with a gold star.",
+    meaning: "A home theater, ready for movie night.",
     name: "Matinee",
     glyph: "Design",
-    lane: "Video streaming",
+    lane: "Media center",
     status: "planned",
     everyday: true,
-    tagline: "Your own streaming service.",
+    tagline: "A media center like Kodi, with AI built in.",
     description:
-      "A cinematic home for the movies and shows you own or have the rights to: rich library pages, profiles, downloads, watch-together and AI recommendations, running on your own server.",
-    alternativeTo: "Netflix-style streaming apps and Plex",
+      "One beautiful home for movies, shows and live TV from every source you have: your files and NAS, TV tuners, and the services you subscribe to. Bring your watchlists and history, then search by describing a scene.",
+    alternativeTo: "Kodi, Plex and Netflix-style apps",
     audience: "Families, film collectors and independent filmmakers",
     features: [
-      "Beautiful library with automatic artwork and details",
-      "Profiles, parental controls and watch history",
-      "Watch together in sync with friends",
-      "Apps for TV, phone and web",
+      "Import watchlists and history from Netflix, Trakt, Letterboxd and IMDb",
+      "Kodi-style add-ons for your files, NAS, tuners and subscriptions",
+      "AI search: “the heist movie with the train”",
+      "AI subtitles, translation, chapters and dialogue boost",
+      "Profiles, watch-together and apps for TV, phone and web",
     ],
     license: "AGPL-3.0",
   },
   {
     slug: "keepsake",
-    meaning: "A sunset over the hills: the moments worth keeping.",
+    meaning: "A stack of instant photos.",
     name: "Keepsake",
     glyph: "Design",
     lane: "Photos",
@@ -419,7 +421,7 @@ export const products: Product[] = [
   },
   {
     slug: "huddle",
-    meaning: "A camera with two people in frame.",
+    meaning: "A camera, ready for the call.",
     name: "Huddle",
     glyph: "Tech",
     lane: "Video calls",
@@ -440,7 +442,7 @@ export const products: Product[] = [
   },
   {
     slug: "keyring",
-    meaning: "A key on a ring.",
+    meaning: "A key and a hardware security key on one ring.",
     name: "Keyring",
     glyph: "Tech",
     lane: "Passwords",

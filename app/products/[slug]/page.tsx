@@ -8,7 +8,7 @@ import { Button } from "@/components/Button";
 import { Reveal, RevealItem, Stagger } from "@/components/Reveal";
 import { SectionHeading } from "@/components/Sections";
 import { toneColor } from "@/components/Shapes";
-import { ProductMark, markTint } from "@/components/ProductMark";
+import { ProductRender } from "@/components/ProductRender";
 import { art } from "@/lib/content";
 import { productBySlug, products, statusMeta } from "@/lib/products";
 
@@ -65,16 +65,8 @@ export default async function ProductPage({ params }: Params) {
           </GlassCard>
         </Reveal>
         <Reveal delay={0.1}>
-          <GlassCard className="flex h-full flex-col gap-5 rounded-[32px] p-8">
-            <div className="flex items-center gap-4">
-              <span className="grid size-20 shrink-0 place-items-center rounded-[22px]" style={{ background: markTint(p.slug) }}>
-                <ProductMark slug={p.slug} size={52} />
-              </span>
-              <p className="text-[14px] leading-[1.45] text-ink-2">
-                <span className="caption block text-ink-3">The mark</span>
-                {p.meaning}
-              </p>
-            </div>
+          <GlassCard className="flex h-full flex-col gap-5 rounded-[32px] p-3 pb-8 [&>*:not(:first-child)]:mx-5">
+            <ProductRender slug={p.slug} alt={`${p.name} product render`} className="aspect-square rounded-[24px]" sizes="380px" />
             <div>
               <StatusChip status={p.status} />
             </div>
