@@ -474,7 +474,7 @@ export const products: Product[] = [
     openSource: false,
     tagline: "Movies and series made with AI, free to watch.",
     description:
-      "A streaming service of AI-made movies and series, free with ads. Plus adds ad-free viewing and minutes of episodes generated just for you. Creators can apply to publish their own series, and we launch with three originals.",
+      "A streaming service of AI-made movies and series, free with ads. Plus adds ad-free viewing and credits for episodes generated just for you. Creators can apply to publish their own series, and we launch with three originals.",
     audience: "Viewers who want something new, and creators making AI series",
     features: [
       "Free catalog of originals and creator series, with ads",

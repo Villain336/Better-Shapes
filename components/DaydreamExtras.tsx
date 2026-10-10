@@ -64,8 +64,9 @@ export function DaydreamExtras() {
           ))}
         </Stagger>
         <Reveal className="text-[14px] leading-[1.55] text-ink-3">
-          Draft pricing. Personalized minutes don’t roll over, and episodes can never depict real or identifiable people.
-          Creators keep rights to their series and share in ad and Plus revenue by watch time.
+          Draft pricing. 1 credit makes a storyboard-style minute (illustrated scenes with camera moves, voice and
+          music); a full-motion minute uses 6. Credits don’t roll over, and episodes can never depict real or
+          identifiable people. Creators keep rights to their series and share in ad and Plus revenue by watch time.
         </Reveal>
       </section>
     </>

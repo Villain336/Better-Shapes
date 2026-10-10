@@ -45,7 +45,10 @@ export const originals: Original[] = [
   },
 ];
 
-// Draft prices and allowances; validated against generation cost in the spec.
+// Draft prices. Personalized episodes are paid in credits so plans stay profitable at today's generation
+// costs (see docs/products/daydream.md, "Plans and unit economics"):
+// 1 credit = 1 storyboard minute (illustrated stills with camera moves, voice and music);
+// a full-motion 720p minute costs 6 credits.
 export const daydreamPlans = [
   {
     name: "Free",
@@ -61,13 +64,13 @@ export const daydreamPlans = [
     name: "Plus",
     price: "$9.99",
     period: "/month",
-    description: "Ad-free, plus an hour a month of episodes made just for you.",
+    description: "Ad-free, plus credits for episodes made just for you.",
     features: [
       "Ad-free viewing",
-      "60 personalized minutes a month",
+      "6 credits a month for personalized episodes",
       "“Make me a series about…”",
       "Continue any original your way",
-      "Downloads for offline",
+      "Top up 6 credits for $9.99",
     ],
     cta: "Join the waitlist",
     featured: true,
@@ -75,11 +78,11 @@ export const daydreamPlans = [
   },
   {
     name: "Studio",
-    price: "$24.99",
+    price: "$49.99",
     period: "/month",
-    description: "For creators: more minutes, higher resolution and publishing tools.",
+    description: "For creators: more credits, higher resolution and publishing tools.",
     features: [
-      "240 personalized minutes a month",
+      "36 credits a month",
       "Higher-resolution renders",
       "Series bible and character tools",
       "Apply to publish and earn",
