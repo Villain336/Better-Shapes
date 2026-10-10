@@ -32,28 +32,42 @@ Open source wins because design files are long-lived company assets, and an open
 
 1. **Vector canvas.**
    Frames, rectangles, ellipses, paths with a pen tool, text, images, boolean operations, groups, constraints, zoom to 6400%.
-   *Acceptance:* 60 fps panning on a file with 10,000 layers on a mid-range laptop; vector paths export to SVG without loss.
+   *Acceptance:*
+   - 60 fps panning on a file with 10,000 layers on a mid-range laptop.
+   - Vector paths export to SVG without loss.
 2. **Multiplayer.**
    Live cursors, presence, comments with mentions, offline edits that merge on reconnect.
-   *Acceptance:* 20 concurrent editors on one file with edits visible to others within 200 ms on a normal connection; no lost edits after a forced disconnect and reconnect.
+   *Acceptance:*
+   - 20 concurrent editors on one file with edits visible to others within 200 ms on a normal connection.
+   - No lost edits after a forced disconnect and reconnect.
 3. **Components and variables.**
    Main components and instances with overrides; variables for color, number, string and boolean, with modes (for example light and dark).
-   *Acceptance:* editing a main component updates all instances while keeping overrides; switching a mode recolors the frame.
+   *Acceptance:*
+   - Editing a main component updates all instances while keeping overrides.
+   - Switching a mode recolors the frame.
 4. **Auto layout.**
    Stack direction, gap, padding, alignment, hug/fill/fixed sizing, wrap.
-   *Acceptance:* behavior matches the documented flexbox subset Frame maps to, and design-to-code output reproduces the same layout in a browser within 1 px.
+   *Acceptance:*
+   - Behavior matches the documented flexbox subset Frame maps to, and design-to-code output reproduces the same layout in a browser within 1 px.
 5. **AI layout drafts.**
    Describe a screen; Frame drafts it using components and variables from the file's libraries.
-   *Acceptance:* drafts land in a new frame marked as a draft; only existing components are used when a library is attached; the prompt and model are stored on the frame.
+   *Acceptance:*
+   - Drafts land in a new frame marked as a draft.
+   - Only existing components are used when a library is attached.
+   - The prompt and model are stored on the frame.
 6. **Design-to-code.**
    Export a selection as HTML/CSS or React with Tailwind, mapping components to code components through a mapping file.
-   *Acceptance:* output builds without edits for the reference examples; mapped components emit the mapped import instead of raw markup.
+   *Acceptance:*
+   - Output builds without edits for the reference examples.
+   - Mapped components emit the mapped import instead of raw markup.
 7. **Prototyping basics.**
    Click-through links between frames, overlays, simple transitions, a share link for viewing.
-   *Acceptance:* a prototype link works for logged-out viewers when the owner enables it, and can be revoked.
+   *Acceptance:*
+   - A prototype link works for logged-out viewers when the owner enables it, and can be revoked.
 8. **Self-hostable files.**
    An open JSON-based file format, import of SVG and of Penpot exports, export to SVG, PNG and PDF.
-   *Acceptance:* the format is documented in the repository and round-trips without loss.
+   *Acceptance:*
+   - The format is documented in the repository and round-trips without loss.
 
 ## Not in v1
 

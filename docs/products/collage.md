@@ -32,28 +32,43 @@ Open source wins for teams that want their brand assets, templates and content i
 
 1. **Editor.**
    Text, shapes, images, icons, charts, QR codes, pages, layers, grouping, alignment guides, undo/redo.
-   *Acceptance:* a first-time user can change the text, image and color of a template and export it in under three minutes in usability tests.
+   *Acceptance:*
+   - A first-time user can change the text, image and color of a template and export it in under three minutes in usability tests.
 2. **Template library.**
    At least 150 original templates at launch across social, presentation, print and ads, each with editable placeholders.
-   *Acceptance:* every template is original work or under a license allowing redistribution, with the license recorded per template.
+   *Acceptance:*
+   - Every template is original work or under a license allowing redistribution, with the license recorded per template.
 3. **Brand kits.**
    Logos, colors, fonts and voice notes; one-click "apply brand" on any design.
-   *Acceptance:* applying a brand kit replaces template colors and fonts consistently; custom fonts upload with a license reminder.
+   *Acceptance:*
+   - Applying a brand kit replaces template colors and fonts consistently.
+   - Custom fonts upload with a license reminder.
 4. **AI generate.**
    A prompt produces a draft design using templates and the brand kit; optional AI images.
-   *Acceptance:* AI output lands as a draft; generated images are labeled in the asset panel; the model used is recorded.
+   *Acceptance:*
+   - AI output lands as a draft.
+   - Generated images are labeled in the asset panel.
+   - The model used is recorded.
 5. **Magic resize.**
    Resize a design to many platform sizes in one step.
-   *Acceptance:* text never overflows its box after resize; the resized set is created as new designs and the original is unchanged.
+   *Acceptance:*
+   - Text never overflows its box after resize.
+   - The resized set is created as new designs and the original is unchanged.
 6. **Batch fill.**
    Fill a template from CSV rows to make many designs.
-   *Acceptance:* 500 rows produce 500 designs with a preview of the first 10 before running; errors per row are listed.
+   *Acceptance:*
+   - 500 rows produce 500 designs with a preview of the first 10 before running.
+   - Errors per row are listed.
 7. **Share, comment and approve.**
    Share links with view or comment rights, threaded comments, an approval request with approve/request changes.
-   *Acceptance:* approval state is shown on the design; links can expire and be revoked.
+   *Acceptance:*
+   - Approval state is shown on the design.
+   - Links can expire and be revoked.
 8. **Export.**
    PNG, JPG, SVG, PDF (with print bleed and crop marks), and an MP4 for simple animated designs (v0.5).
-   *Acceptance:* PDF export embeds fonts; print PDFs have correct bleed for the chosen size.
+   *Acceptance:*
+   - PDF export embeds fonts.
+   - Print PDFs have correct bleed for the chosen size.
 
 ## Not in v1
 

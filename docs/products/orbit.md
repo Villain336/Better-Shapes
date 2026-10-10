@@ -32,24 +32,38 @@ Open source wins because budget allocation is a decision a business should be ab
 
 1. **Brand kit and creative variations.**
    Import logo, colors, fonts, product photos and approved copy; generate image and copy variations sized for each platform.
-   *Acceptance:* every generated asset uses only brand-kit colors and fonts unless a person overrides; generated assets are labeled as AI-generated in Orbit's library; nothing is uploaded to an ad platform at this step.
+   *Acceptance:*
+   - Every generated asset uses only brand-kit colors and fonts unless a person overrides.
+   - Generated assets are labeled as AI-generated in Orbit's library.
+   - Nothing is uploaded to an ad platform at this step.
 2. **Test plans.**
    Define a test (hypothesis, variants, audience, budget, duration, success metric) and have Orbit compute the sample size needed.
-   *Acceptance:* Orbit refuses to call a winner before the planned sample is reached and shows the confidence interval with the result.
+   *Acceptance:*
+   - Orbit refuses to call a winner before the planned sample is reached and shows the confidence interval with the result.
 3. **Cross-platform launcher.**
    Launch tests on Meta and Google Ads in v1 through their public APIs.
-   *Acceptance:* a launch is a proposal showing every campaign, ad set and ad to be created and the maximum daily and total spend; nothing is created until approved; created objects start paused unless the approver chooses otherwise.
+   *Acceptance:*
+   - A launch is a proposal showing every campaign, ad set and ad to be created and the maximum daily and total spend.
+   - Nothing is created until approved.
+   - Created objects start paused unless the approver chooses otherwise.
 4. **Budget rebalancing proposals.**
    Daily, Orbit proposes moving budget between ad sets or campaigns based on results and diminishing-returns curves.
-   *Acceptance:* each proposal shows current vs proposed spend, the evidence, the expected effect with uncertainty, and the cap it stays within; execution re-checks caps and approval at the moment of the change.
+   *Acceptance:*
+   - Each proposal shows current vs proposed spend, the evidence, the expected effect with uncertainty, and the cap it stays within.
+   - Execution re-checks caps and approval at the moment of the change.
 5. **Circuit breakers.**
    Automatic pause (never increase) on spend velocity, sudden performance drops, tracking outages or API errors.
-   *Acceptance:* a breaker can only pause or freeze; resuming requires a human acknowledgment.
+   *Acceptance:*
+   - A breaker can only pause or freeze.
+   - Resuming requires a human acknowledgment.
 6. **Attribution with offline channels.**
    Platform-reported results plus first-party conversions, UTM touches, promo codes and manual entry for offline channels (radio, print, direct mail, events).
-   *Acceptance:* every report states which model it uses (for example last-touch, position-based) and shows platform-claimed and Orbit-measured numbers side by side.
+   *Acceptance:*
+   - Every report states which model it uses (for example last-touch, position-based) and shows platform-claimed and Orbit-measured numbers side by side.
 7. **Audit and spend ledger.**
-   *Acceptance:* every proposal, approval, denial, execution and breaker event is in the hash-chained log; the ledger reconciles with platform-reported spend within a stated tolerance, and mismatches are flagged.
+   *Acceptance:*
+   - Every proposal, approval, denial, execution and breaker event is in the hash-chained log.
+   - The ledger reconciles with platform-reported spend within a stated tolerance, and mismatches are flagged.
 
 ## Not in v1
 

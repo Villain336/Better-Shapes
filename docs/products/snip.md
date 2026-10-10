@@ -32,28 +32,43 @@ Open source wins because every step of the pipeline now has good open components
 
 1. **Import.**
    Upload files (up to 4 hours) or import from a URL the user has rights to (YouTube via the official API for the user's own channel, direct links).
-   *Acceptance:* uploads resume after interruption; the user confirms they have rights to the content before processing.
+   *Acceptance:*
+   - Uploads resume after interruption.
+   - The user confirms they have rights to the content before processing.
 2. **Transcription.**
    Word-level timestamps, speaker labels, 20+ languages via open models.
-   *Acceptance:* transcript is editable and edits flow into captions; no transcript is ever faked when no provider is configured.
+   *Acceptance:*
+   - Transcript is editable and edits flow into captions.
+   - No transcript is ever faked when no provider is configured.
 3. **Highlight detection with scoring.**
    Candidate segments of 15 to 90 seconds scored on hook strength, self-containedness, emotional or informational payoff, and pacing.
-   *Acceptance:* each clip shows its overall score and the sub-scores with a one-line reason each; the user can re-rank by any sub-score.
+   *Acceptance:*
+   - Each clip shows its overall score and the sub-scores with a one-line reason each.
+   - The user can re-rank by any sub-score.
 4. **Clip editor.**
    Adjust start/end on word boundaries, trim filler words, reorder, split.
-   *Acceptance:* boundary changes snap to words; preview plays within one second of a change.
+   *Acceptance:*
+   - Boundary changes snap to words.
+   - Preview plays within one second of a change.
 5. **Auto reframe.**
    Convert 16:9 to 9:16, 1:1 or 4:5 by tracking the active speaker's face; split-screen layout for two speakers.
-   *Acceptance:* the subject stays in frame for at least 95% of frames in the reference test set; the user can override the crop per section.
+   *Acceptance:*
+   - The subject stays in frame for at least 95% of frames in the reference test set.
+   - The user can override the crop per section.
 6. **Animated captions.**
    Word-by-word highlighted captions with style presets and brand fonts; export burned-in or as SRT/ASS.
-   *Acceptance:* captions stay within platform safe zones for each target aspect ratio.
+   *Acceptance:*
+   - Captions stay within platform safe zones for each target aspect ratio.
 7. **Brand templates.**
    Fonts, colors, logo, intro/outro cards, caption style per brand.
-   *Acceptance:* applying a template to 20 clips renders consistently; templates can be exported and shared.
+   *Acceptance:*
+   - Applying a template to 20 clips renders consistently.
+   - Templates can be exported and shared.
 8. **Draft-for-approval publishing.**
    Draft caption, title and hashtags per clip; publish or schedule to connected accounts after approval.
-   *Acceptance:* no post leaves Snip without an approval record in the Leash queue; scheduled posts can be cancelled until they go out.
+   *Acceptance:*
+   - No post leaves Snip without an approval record in the Leash queue.
+   - Scheduled posts can be cancelled until they go out.
 
 ## Not in v1
 

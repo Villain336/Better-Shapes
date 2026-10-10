@@ -32,28 +32,44 @@ Open source wins because the core value is orchestration: deciding which provide
 
 1. **Table workspace.**
    Fast grid with up to 50,000 rows per table, CSV import/export, column types (text, number, URL, email, JSON, enrichment, research, formula).
-   *Acceptance:* scrolling 50,000 rows stays smooth on a mid-range laptop; CSV round-trip preserves values exactly.
+   *Acceptance:*
+   - Scrolling 50,000 rows stays smooth on a mid-range laptop.
+   - CSV round-trip preserves values exactly.
 2. **Waterfall enrichment.**
    A column that tries providers in a chosen order and stops at the first valid hit. v1 ships adapters for a handful of providers with public APIs and a generic HTTP adapter.
-   *Acceptance:* each attempt (hit, miss, error, skipped) is recorded with provider, cost and timestamp; a repeated lookup of the same input within the cache window costs nothing and is labeled "cached".
+   *Acceptance:*
+   - Each attempt (hit, miss, error, skipped) is recorded with provider, cost and timestamp.
+   - A repeated lookup of the same input within the cache window costs nothing and is labeled "cached".
 3. **Cost estimate and caps.**
    Before running a column on many rows, show the estimated cost per provider and total.
-   *Acceptance:* runs above the workspace cap refuse to start; a run stops when the cap is reached mid-way and reports exactly how many rows completed.
+   *Acceptance:*
+   - Runs above the workspace cap refuse to start.
+   - A run stops when the cap is reached mid-way and reports exactly how many rows completed.
 4. **AI research columns.**
    A prompt template with row variables; a research agent may search the web and read pages, then returns an answer plus source URLs.
-   *Acceptance:* every non-empty research cell links to at least one source; cells where the agent found nothing say so instead of guessing; the agent's page fetches respect robots.txt.
+   *Acceptance:*
+   - Every non-empty research cell links to at least one source.
+   - Cells where the agent found nothing say so instead of guessing.
+   - The agent's page fetches respect robots.txt.
 5. **Formulas, scoring and filters.**
    Simple formula language plus a scoring column built from weighted rules.
-   *Acceptance:* scores recompute on change; the rule set is visible and exportable.
+   *Acceptance:*
+   - Scores recompute on change.
+   - The rule set is visible and exportable.
 6. **Dedupe.**
    Match on domain, email and fuzzy company name, with a merge preview.
-   *Acceptance:* no merge happens without a preview; merges can be undone.
+   *Acceptance:*
+   - No merge happens without a preview.
+   - Merges can be undone.
 7. **CRM sync with approval.**
    Push rows to HubSpot or to ShapesOS CRM as creates and updates.
-   *Acceptance:* a sync produces a change set (creates, updates, skips) that a person approves in the Leash queue before any write; field mapping is saved per table.
+   *Acceptance:*
+   - A sync produces a change set (creates, updates, skips) that a person approves in the Leash queue before any write.
+   - Field mapping is saved per table.
 8. **Bring your own keys.**
    Keys are stored encrypted per workspace; Prism adds no markup.
-   *Acceptance:* the provider settings page shows which key each column uses and its month-to-date spend as reported by Prism's own records.
+   *Acceptance:*
+   - The provider settings page shows which key each column uses and its month-to-date spend as reported by Prism's own records.
 
 ## Not in v1
 

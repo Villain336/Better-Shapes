@@ -32,25 +32,39 @@ Open source wins because the geometry kernel is already open (OpenCascade powers
 
 1. **Sketcher.**
    2D sketches on planes and faces with lines, arcs, circles, splines, and constraints (coincident, parallel, perpendicular, tangent, equal, dimension).
-   *Acceptance:* the constraint solver shows fully, under and over constrained states; sketches with 200 entities solve in under 100 ms.
+   *Acceptance:*
+   - The constraint solver shows fully, under and over constrained states.
+   - Sketches with 200 entities solve in under 100 ms.
 2. **Part features.**
    Extrude, revolve, fillet, chamfer, shell, hole (with standard metric sizes), linear and circular pattern, mirror, boolean.
-   *Acceptance:* editing an early feature's dimension rebuilds the model; failed rebuilds point to the failing feature with a plain-language reason.
+   *Acceptance:*
+   - Editing an early feature's dimension rebuilds the model.
+   - Failed rebuilds point to the failing feature with a plain-language reason.
 3. **Parameters and expressions.**
    Named parameters and simple expressions shared across features.
-   *Acceptance:* changing a parameter rebuilds all dependent features; parameters export as a table.
+   *Acceptance:*
+   - Changing a parameter rebuilds all dependent features.
+   - Parameters export as a table.
 4. **AI design assistant.**
    From a description, propose a feature history (sketches, features, parameters); also explain or modify an existing model on request.
-   *Acceptance:* the assistant's output is a proposal shown as a diff of the feature tree; nothing applies until accepted; the result is always parametric and editable.
+   *Acceptance:*
+   - The assistant's output is a proposal shown as a diff of the feature tree.
+   - Nothing applies until accepted.
+   - The result is always parametric and editable.
 5. **Versioning and review.**
    Immutable versions, compare any two (feature tree diff plus geometry diff), comments pinned to geometry, review approval.
-   *Acceptance:* comparing two versions shows changed features and the volume and bounding-box change; a version marked "released" cannot be edited, only superseded.
+   *Acceptance:*
+   - Comparing two versions shows changed features and the volume and bounding-box change.
+   - A version marked "released" cannot be edited, only superseded.
 6. **Export and import.**
    Export STEP AP214/AP242, STL, 3MF and the native format; import STEP and STL for reference geometry.
-   *Acceptance:* exported STEP files open in FreeCAD and a commercial CAD viewer with matching dimensions; 3MF files open in PrusaSlicer and OrcaSlicer.
+   *Acceptance:*
+   - Exported STEP files open in FreeCAD and a commercial CAD viewer with matching dimensions.
+   - 3MF files open in PrusaSlicer and OrcaSlicer.
 7. **Manufacturability checks.**
    Basic checks for 3D printing (wall thickness, overhangs) and CNC (minimum internal radius, tool access hints).
-   *Acceptance:* each warning links to the region on the model and explains the rule in one sentence.
+   *Acceptance:*
+   - Each warning links to the region on the model and explains the rule in one sentence.
 
 ## Not in v1
 
@@ -89,6 +103,8 @@ Fab grows out of the ShapesOS CAD module (both AGPL-3.0).
 - **Technical:** robust B-rep modeling is very hard; topological naming (features referencing faces that change after edits) is a known problem in open CAD. Mitigation: start with a narrow feature set, study FreeCAD's public work on this, and add rebuild regression tests from real parts.
 - **Inference cost:** assistant sessions involve several model calls and rebuilds; moderate per session. Mitigation: per-session caps and small models for simple edits.
 - **Performance:** WebAssembly kernels are slower than native; large parts may need the server worker.
+- **Interoperability:** STEP files from other tools vary in quality. Import is for reference geometry in v1, and failed imports report which entities could not be read.
+- **Unit mistakes:** a part exported in the wrong unit is a costly error. Every export states its unit in the file name and in a confirmation step.
 
 ## Milestones
 

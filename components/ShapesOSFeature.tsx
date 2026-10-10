@@ -18,7 +18,7 @@ export function ShapesOSFeature() {
       <div className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(250,248,244,0.75),rgba(250,248,244,0.2))] lg:bg-[linear-gradient(90deg,rgba(250,248,244,0.8)_0%,rgba(250,248,244,0)_60%)]" />
       <div className="flex flex-col items-start gap-5 p-2 md:p-0">
         <div className="flex items-center gap-3">
-          <span className="glass grid size-12 place-items-center rounded-[14px]">
+          <span className="grid size-12 place-items-center rounded-[14px] bg-white/80">
             <ProductMark slug="shapesos" size={32} />
           </span>
           <StatusChip status={p.status} />

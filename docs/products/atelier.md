@@ -32,25 +32,38 @@ Open source wins on control and provenance. Studios with client confidentiality 
 
 1. **Layers and masks.**
    Pixel layers, vector layers, groups, layer masks, clipping, blend modes, opacity.
-   *Acceptance:* a 6000x4000 image with 30 layers stays responsive (brush strokes under 16 ms per frame) on a laptop with a recent integrated GPU.
+   *Acceptance:*
+   - A 6000x4000 image with 30 layers stays responsive (brush strokes under 16 ms per frame) on a laptop with a recent integrated GPU.
 2. **Non-destructive adjustments.**
    Adjustment layers (levels, curves, hue/saturation, color balance, black and white), smart-object style placed layers with transform history.
-   *Acceptance:* every adjustment can be edited or removed later without quality loss; 16-bit per channel editing is supported.
+   *Acceptance:*
+   - Every adjustment can be edited or removed later without quality loss.
+   - 16-bit per channel editing is supported.
 3. **Selections.**
    Marquee, lasso, magic wand, color range, and AI subject/object selection.
-   *Acceptance:* AI subject selection runs locally in the browser or on the configured server; a selection can be refined with brush and feather and saved as a mask.
+   *Acceptance:*
+   - AI subject selection runs locally in the browser or on the configured server.
+   - A selection can be refined with brush and feather and saved as a mask.
 4. **Generative fill, expand and remove.**
    Fill a selection from a prompt, extend the canvas, remove an object, all as new layers.
-   *Acceptance:* generated content is always a separate layer with the model, prompt, seed and date in its properties; the source pixels below are never overwritten.
+   *Acceptance:*
+   - Generated content is always a separate layer with the model, prompt, seed and date in its properties.
+   - The source pixels below are never overwritten.
 5. **Vector tools and tracing.**
    Pen tool, shapes, boolean operations, stroke and fill styles, text on path; bitmap-to-vector tracing.
-   *Acceptance:* traced output is editable paths; SVG export opens correctly in Inkscape and browsers.
+   *Acceptance:*
+   - Traced output is editable paths.
+   - SVG export opens correctly in Inkscape and browsers.
 6. **Local or hosted models.**
    A model settings page listing available models with their licenses; local inference through a companion server (ComfyUI-compatible or a small built-in server), hosted providers by key.
-   *Acceptance:* Atelier works fully offline for non-generative editing; for each model, the license name and link are shown before first use.
+   *Acceptance:*
+   - Atelier works fully offline for non-generative editing.
+   - For each model, the license name and link are shown before first use.
 7. **File format and interchange.**
    An open, documented layered format; import and export PNG, JPEG, WebP, TIFF and SVG; PSD import of basic layers (read-only best effort, from the public specification).
-   *Acceptance:* the native format round-trips without loss; provenance metadata can be embedded on export (C2PA content credentials, v0.5).
+   *Acceptance:*
+   - The native format round-trips without loss.
+   - Provenance metadata can be embedded on export (C2PA content credentials, v0.5).
 
 ## Not in v1
 
@@ -59,6 +72,8 @@ Open source wins on control and provenance. Studios with client confidentiality 
 - Plugin system.
 - Real-time collaboration.
 - RAW photo development (later, or via integration with darktable/RawTherapee as external tools).
+- CMYK editing and print soft-proofing.
+- Bundled hosted GPU service from the studio (v1 is bring-your-own model or key).
 
 ## Architecture
 
@@ -89,6 +104,8 @@ Atelier is a new product rather than an extraction, but it shares pieces with Sh
 - **Technical:** high-performance image editing in the browser is hard (memory limits, color management, 16-bit pipelines). Mitigation: tiled rendering, WebGPU first, and a desktop wrapper for large files.
 - **Inference cost:** generative fill on hosted GPUs costs real money per call; local inference needs a capable GPU. Mitigation: caps, small-region generation, and clear guidance on hardware.
 - **Scope:** the incumbents represent decades of work. v1 must be narrow and excellent at a few workflows rather than broad.
+- **Color accuracy:** professionals expect ICC color management and soft-proofing. v1 supports sRGB and Display P3 with embedded profiles; CMYK soft-proofing is a known gap, stated plainly.
+- **Model drift:** open image models change quickly. Pin model versions per workspace so the same prompt and seed reproduce the same result.
 
 ## Milestones
 

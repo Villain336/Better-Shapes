@@ -37,28 +37,43 @@ Open source wins here because the hard part is trust, not the chat window. A sup
 
 1. **Knowledge sources and grounded answers.**
    Import a help center (sitemap or URL list), Markdown/PDF files, and past resolved tickets. Answers cite the source passages.
-   *Acceptance:* every answer shown to a customer includes at least one citation link, or the agent says it does not know and offers a handoff. A test set of 50 questions with known answers reaches a measured accuracy that is reported in the dashboard, not assumed.
+   *Acceptance:*
+   - Every answer shown to a customer includes at least one citation link, or the agent says it does not know and offers a handoff. A test set of 50 questions with known answers reaches a measured accuracy that is reported in the dashboard, not assumed.
 2. **Web chat widget and email channel.**
    An embeddable script tag widget and an inbound email address that threads replies.
-   *Acceptance:* widget loads under 60 KB gzipped; works without third-party cookies; email replies thread correctly on Gmail and Outlook.
+   *Acceptance:*
+   - Widget loads under 60 KB gzipped.
+   - Works without third-party cookies.
+   - Email replies thread correctly on Gmail and Outlook.
 3. **Action tools through Leash.**
    Ship adapters for Stripe refunds, Shopify order lookup and cancel, and a generic signed-webhook tool for anything else. Each tool declares a risk level (read, low, high) and parameters.
-   *Acceptance:* a high-risk tool call never executes without an approval record or a matching auto-approve policy; denial is shown to the customer in plain words; each call appears in the hash-chained audit log and the chain verifies.
+   *Acceptance:*
+   - A high-risk tool call never executes without an approval record or a matching auto-approve policy.
+   - Denial is shown to the customer in plain words.
+   - Each call appears in the hash-chained audit log and the chain verifies.
 4. **Policies and caps.**
    Per-tool rules such as "refunds up to $25 auto-approve, max 20 per day per workspace".
-   *Acceptance:* caps are enforced at execution time, not only at proposal time; breaching a cap pauses the tool and notifies an owner.
+   *Acceptance:*
+   - Caps are enforced at execution time, not only at proposal time.
+   - Breaching a cap pauses the tool and notifies an owner.
 5. **Human handoff.**
    One click (or agent decision) moves the conversation to a person, in Concierge's own inbox or in a connected helpdesk.
-   *Acceptance:* the receiving person sees the transcript, the cited sources, pending or denied actions, and a three-line summary. The customer is told a person is coming and roughly when.
+   *Acceptance:*
+   - The receiving person sees the transcript, the cited sources, pending or denied actions, and a three-line summary. The customer is told a person is coming and roughly when.
 6. **Approvals inbox.**
    One list of pending actions with the conversation context, the exact parameters, and approve / edit / deny.
-   *Acceptance:* approving from the inbox resumes the conversation within 5 seconds; edits are recorded as a separate audit event.
+   *Acceptance:*
+   - Approving from the inbox resumes the conversation within 5 seconds.
+   - Edits are recorded as a separate audit event.
 7. **Resolution analytics.**
    Counts of conversations, answered-with-citation, actions taken, handoffs, customer-confirmed resolutions and cost per conversation (tokens times the configured price).
-   *Acceptance:* "resolved" is defined in the settings page in plain words and the team can change it; numbers can be exported as CSV.
+   *Acceptance:*
+   - "resolved" is defined in the settings page in plain words and the team can change it.
+   - Numbers can be exported as CSV.
 8. **Evaluation harness.**
    Replay a saved set of conversations against a new prompt, model or knowledge base before switching.
-   *Acceptance:* a run produces a side-by-side diff of answers and actions, and no tool executes during a replay.
+   *Acceptance:*
+   - A run produces a side-by-side diff of answers and actions, and no tool executes during a replay.
 
 ## Not in v1
 

@@ -32,25 +32,42 @@ Open source wins because developers can then choose their own model and pay the 
 
 1. **Editor base.**
    A build of Code - OSS with Forge branding, the Open VSX extension registry, and settings import from an existing VS Code profile.
-   *Acceptance:* builds reproducibly for macOS, Windows and Linux from a public CI pipeline; no Microsoft trademarks, marketplace endpoints or proprietary components are included.
+   *Acceptance:*
+   - Builds reproducibly for macOS, Windows and Linux from a public CI pipeline.
+   - No Microsoft trademarks, marketplace endpoints or proprietary components are included.
 2. **Inline completion and chat.**
    Multi-line completion and a chat panel with workspace context (open files, selection, symbols).
-   *Acceptance:* completion latency under 400 ms p50 with a local small model on reference hardware; the chat shows which files were sent to the model.
+   *Acceptance:*
+   - Completion latency under 400 ms p50 with a local small model on reference hardware.
+   - The chat shows which files were sent to the model.
 3. **Repo-wide agent edits.**
    An agent that writes a short plan, edits multiple files, and presents a combined diff.
-   *Acceptance:* no file changes on disk until the developer accepts; partial accept per file and per hunk; undo restores the exact prior state.
+   *Acceptance:*
+   - No file changes on disk until the developer accepts.
+   - Partial accept per file and per hunk.
+   - Undo restores the exact prior state.
 4. **Run tests and fix.**
    The agent detects the test command, runs it in the integrated terminal and iterates on failures within a step limit.
-   *Acceptance:* each command is shown before it runs; commands outside an allow-list require approval; the loop stops at the configured step or token cap and says why.
+   *Acceptance:*
+   - Each command is shown before it runs.
+   - Commands outside an allow-list require approval.
+   - The loop stops at the configured step or token cap and says why.
 5. **Model routing.**
    Providers configured by the user: Anthropic, OpenAI, Google, OpenRouter-style gateways, and local endpoints (Ollama, llama.cpp server, vLLM).
-   *Acceptance:* a fully local setup works with network disabled; per-request token usage and estimated cost are visible.
+   *Acceptance:*
+   - A fully local setup works with network disabled.
+   - Per-request token usage and estimated cost are visible.
 6. **Codebase index.**
    Local embedding index and symbol graph used for context retrieval.
-   *Acceptance:* indexing a 500,000-line repo finishes in under 10 minutes on a laptop; the index stays on disk locally; `.gitignore` and a `.forgeignore` are respected.
+   *Acceptance:*
+   - Indexing a 500,000-line repo finishes in under 10 minutes on a laptop.
+   - The index stays on disk locally.
+   - `.gitignore` and a `.forgeignore` are respected.
 7. **Agent rules and audit.**
    A project file (for example `.forge/rules.md`) for conventions, and a local, hash-chained log of agent actions.
-   *Acceptance:* the log can be exported and verified; secrets detected in prompts are masked before sending.
+   *Acceptance:*
+   - The log can be exported and verified.
+   - Secrets detected in prompts are masked before sending.
 
 ## Not in v1
 

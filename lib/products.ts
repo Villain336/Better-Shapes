@@ -25,16 +25,16 @@ export type Product = {
   license: string;
   /** Only set once the repository is public. */
   repo?: string;
-  /** Brand tint behind the product mark, and what the mark means (Figma "Product Brands" page). */
-  tint: string;
+  /** What the product's logo means (logos live in lib/marks.ts and the Figma "Product Brands" page). */
   meaning: string;
+  /** Consumer tools for everyone, shown in their own section. */
+  everyday?: boolean;
 };
 
 export const products: Product[] = [
   {
     slug: "shapesos",
-    tint: "#e6e2d9",
-    meaning: "Every shape of the business in one window.",
+    meaning: "Four petals from one center: every part of the business, growing together.",
     name: "ShapesOS",
     glyph: "Tech",
     lane: "Agentic business OS",
@@ -55,8 +55,7 @@ export const products: Product[] = [
   },
   {
     slug: "leash",
-    tint: "#dee5fb",
-    meaning: "An agent, tethered to an approval.",
+    meaning: "A leash looped around a hand, holding the agent at the other end.",
     name: "Leash",
     glyph: "Tech",
     lane: "Agent infrastructure",
@@ -76,8 +75,7 @@ export const products: Product[] = [
   },
   {
     slug: "shapes-ui",
-    tint: "#ece6fa",
-    meaning: "Layered glass, one calm system.",
+    meaning: "Three panes of glass, with one clear interface in front.",
     name: "Shapes UI",
     glyph: "Design",
     lane: "Design system",
@@ -97,8 +95,7 @@ export const products: Product[] = [
   },
   {
     slug: "beacon",
-    tint: "#fdf5d3",
-    meaning: "A light that shows where you’re seen.",
+    meaning: "A lighthouse: making sure you can be seen.",
     name: "Beacon",
     glyph: "Marketing",
     lane: "AI visibility",
@@ -118,8 +115,7 @@ export const products: Product[] = [
   },
   {
     slug: "concierge",
-    tint: "#fbe3de",
-    meaning: "A conversation that gets things done.",
+    meaning: "A service bell. Ring once and it gets handled.",
     name: "Concierge",
     glyph: "Tech",
     lane: "AI customer agent",
@@ -139,8 +135,7 @@ export const products: Product[] = [
   },
   {
     slug: "prism",
-    tint: "#dee5fb",
-    meaning: "One input, split into every insight.",
+    meaning: "A gem splitting one beam into many.",
     name: "Prism",
     glyph: "Marketing",
     lane: "GTM data & research",
@@ -160,8 +155,7 @@ export const products: Product[] = [
   },
   {
     slug: "echo",
-    tint: "#ddf2e5",
-    meaning: "Every call, heard again and understood.",
+    meaning: "A voice, captured as a waveform.",
     name: "Echo",
     glyph: "Marketing",
     lane: "Revenue intelligence",
@@ -181,8 +175,7 @@ export const products: Product[] = [
   },
   {
     slug: "recall",
-    tint: "#dee5fb",
-    meaning: "Find what your company already knows.",
+    meaning: "An open book with a spark: what you already know, found.",
     name: "Recall",
     glyph: "Tech",
     lane: "Company search",
@@ -202,8 +195,7 @@ export const products: Product[] = [
   },
   {
     slug: "orbit",
-    tint: "#ddf2e5",
-    meaning: "Ads that circle back to what works.",
+    meaning: "A trend line breaking out of its loop.",
     name: "Orbit",
     glyph: "Marketing",
     lane: "Automated ads",
@@ -223,8 +215,7 @@ export const products: Product[] = [
   },
   {
     slug: "forge",
-    tint: "#e6e2d9",
-    meaning: "Code, with a spark of help.",
+    meaning: "An anvil, with a spark of help.",
     name: "Forge",
     glyph: "Tech",
     lane: "AI code editor",
@@ -244,8 +235,7 @@ export const products: Product[] = [
   },
   {
     slug: "frame",
-    tint: "#fbe3de",
-    meaning: "Crop marks around an idea.",
+    meaning: "A pen nib, where every design starts.",
     name: "Frame",
     glyph: "Design",
     lane: "Interface design",
@@ -265,8 +255,7 @@ export const products: Product[] = [
   },
   {
     slug: "collage",
-    tint: "#fdf5d3",
-    meaning: "Shapes layered into something new.",
+    meaning: "Snapshots, layered into something new.",
     name: "Collage",
     glyph: "Design",
     lane: "Everyday design",
@@ -286,8 +275,7 @@ export const products: Product[] = [
   },
   {
     slug: "atelier",
-    tint: "#ece6fa",
-    meaning: "A single drop of paint.",
+    meaning: "One confident brush stroke.",
     name: "Atelier",
     glyph: "Design",
     lane: "Creative studio",
@@ -307,8 +295,7 @@ export const products: Product[] = [
   },
   {
     slug: "snip",
-    tint: "#fbe3de",
-    meaning: "The play button, cut to the best part.",
+    meaning: "Scissors: cut to the best part.",
     name: "Snip",
     glyph: "Marketing",
     lane: "Video repurposing",
@@ -328,8 +315,7 @@ export const products: Product[] = [
   },
   {
     slug: "fab",
-    tint: "#ddf2e5",
-    meaning: "Three faces of a part you can make.",
+    meaning: "A part being printed, layer by layer.",
     name: "Fab",
     glyph: "Robotics",
     lane: "AI-native CAD",
@@ -344,6 +330,132 @@ export const products: Product[] = [
       "AI design assistant",
       "Versioning and review",
       "STEP, STL and 3MF export",
+    ],
+    license: "AGPL-3.0",
+  },
+  {
+    slug: "toss",
+    meaning: "A paper plane, tossed to the device next to you.",
+    name: "Toss",
+    glyph: "Tech",
+    lane: "File sharing",
+    status: "planned",
+    everyday: true,
+    tagline: "Send anything to the device next to you.",
+    description:
+      "Drop files, photos and links between phones and computers on any operating system, over your own network, end-to-end encrypted, with no account.",
+    alternativeTo: "AirDrop and Quick Share",
+    audience: "Anyone with more than one kind of device",
+    features: [
+      "Works across iPhone, Android, Mac, Windows and Linux",
+      "Peer-to-peer on your local network, no cloud upload",
+      "End-to-end encrypted with a visible device check",
+      "Folders, clipboard and links, not just files",
+    ],
+    license: "MIT",
+  },
+  {
+    slug: "hum",
+    meaning: "A record with a melody running across it.",
+    name: "Hum",
+    glyph: "Marketing",
+    lane: "Music streaming",
+    status: "planned",
+    everyday: true,
+    tagline: "Your music, streamed beautifully, everywhere.",
+    description:
+      "Stream the music you own from your own server to every device, and give independent artists a place to upload and earn directly. AI playlists and radio run on your hardware, not someone else’s.",
+    alternativeTo: "Spotify",
+    audience: "Music lovers with a library, and independent artists",
+    features: [
+      "Stream your own library to phone, desktop and car",
+      "Artist uploads with direct support and fair splits",
+      "AI radio and playlists that run locally",
+      "Offline downloads and lossless playback",
+    ],
+    license: "AGPL-3.0",
+  },
+  {
+    slug: "matinee",
+    meaning: "An admit-one ticket with a gold star.",
+    name: "Matinee",
+    glyph: "Design",
+    lane: "Video streaming",
+    status: "planned",
+    everyday: true,
+    tagline: "Your own streaming service.",
+    description:
+      "A cinematic home for the movies and shows you own or have the rights to: rich library pages, profiles, downloads, watch-together and AI recommendations, running on your own server.",
+    alternativeTo: "Netflix-style streaming apps and Plex",
+    audience: "Families, film collectors and independent filmmakers",
+    features: [
+      "Beautiful library with automatic artwork and details",
+      "Profiles, parental controls and watch history",
+      "Watch together in sync with friends",
+      "Apps for TV, phone and web",
+    ],
+    license: "AGPL-3.0",
+  },
+  {
+    slug: "keepsake",
+    meaning: "A sunset over the hills: the moments worth keeping.",
+    name: "Keepsake",
+    glyph: "Design",
+    lane: "Photos",
+    status: "planned",
+    everyday: true,
+    tagline: "Every photo you’ve taken, safe and searchable.",
+    description:
+      "Back up your photos and videos to storage you control, then find any moment by describing it. Faces, places and memories are worked out on your own server.",
+    alternativeTo: "Google Photos and iCloud Photos",
+    audience: "Families and anyone with years of photos",
+    features: [
+      "Automatic phone backup",
+      "Search by description, face or place",
+      "Shared albums and memories",
+      "Private by default, your storage",
+    ],
+    license: "AGPL-3.0",
+  },
+  {
+    slug: "huddle",
+    meaning: "A camera with two people in frame.",
+    name: "Huddle",
+    glyph: "Tech",
+    lane: "Video calls",
+    status: "planned",
+    everyday: true,
+    tagline: "Calm video calls with notes that write themselves.",
+    description:
+      "Meetings in the browser with no download, AI notes and action items afterward, and recordings that stay on your server.",
+    alternativeTo: "Zoom",
+    audience: "Teams, classrooms and families",
+    features: [
+      "Browser-based calls, no install",
+      "AI summaries and action items",
+      "Recording and transcripts you own",
+      "Waiting rooms, breakouts and screen sharing",
+    ],
+    license: "AGPL-3.0",
+  },
+  {
+    slug: "keyring",
+    meaning: "A key on a ring.",
+    name: "Keyring",
+    glyph: "Tech",
+    lane: "Passwords",
+    status: "planned",
+    everyday: true,
+    tagline: "Every password and passkey, in one safe place.",
+    description:
+      "An end-to-end encrypted vault for passwords, passkeys and secrets, shared safely with family or a team, with autofill everywhere.",
+    alternativeTo: "1Password",
+    audience: "Families and teams",
+    features: [
+      "Passwords, passkeys, cards and secure notes",
+      "Zero-knowledge encryption",
+      "Family and team sharing",
+      "Autofill in every browser and phone",
     ],
     license: "AGPL-3.0",
   },

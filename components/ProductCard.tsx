@@ -3,7 +3,7 @@ import { statusMeta, type Product } from "@/lib/products";
 import { GlassCard } from "./GlassCard";
 import { Chip } from "./Chip";
 import { ArrowUpRight } from "./Shapes";
-import { ProductMark } from "./ProductMark";
+import { ProductMark, markTint } from "./ProductMark";
 
 export function StatusChip({ status }: { status: Product["status"] }) {
   const s = statusMeta[status];
@@ -18,7 +18,7 @@ export function ProductCard({ product }: { product: Product }) {
         <div className="flex items-start justify-between gap-3">
           <span
             className="grid size-14 shrink-0 place-items-center rounded-[18px] transition-transform duration-700 ease-[var(--ease-out)] group-hover/card:rotate-[12deg]"
-            style={{ background: product.tint }}
+            style={{ background: markTint(product.slug) }}
           >
             <ProductMark slug={product.slug} size={34} />
           </span>

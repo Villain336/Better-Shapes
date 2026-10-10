@@ -17,7 +17,8 @@ export const metadata: Metadata = {
 
 export default function ProductsPage() {
   const building = products.filter((p) => p.status === "in-development");
-  const planned = products.filter((p) => p.status === "planned");
+  const planned = products.filter((p) => p.status === "planned" && !p.everyday);
+  const everyday = products.filter((p) => p.everyday);
 
   return (
     <>
@@ -85,6 +86,34 @@ export default function ProductsPage() {
           Product names are working names. Other companies’ names are used only to describe what each tool replaces; we
           aren’t affiliated with them.
         </Reveal>
+      </section>
+
+      <section className="relative isolate py-16">
+        <Blobs className="opacity-60" />
+        <div className="container-x flex flex-col gap-10">
+          <SectionHeading
+            eyebrow="For everyone"
+            title="Everyday apps,"
+            accent="yours to keep."
+            side={
+              <p className="max-w-[380px] text-[16px] leading-[1.55] text-ink-2">
+                Open-source versions of the apps people use every day. Your files, music, movies, photos, calls and
+                passwords, on hardware you control.
+              </p>
+            }
+          />
+          <Stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {everyday.map((p) => (
+              <RevealItem key={p.slug} className="h-full">
+                <ProductCard product={p} />
+              </RevealItem>
+            ))}
+          </Stagger>
+          <Reveal className="text-[14px] leading-[1.55] text-ink-3">
+            Hum and Matinee play media you own or have the rights to, and work you upload yourself. They don’t
+            provide or unlock anyone else’s catalog.
+          </Reveal>
+        </div>
       </section>
 
       <section className="container-x flex flex-col gap-6 pb-24">

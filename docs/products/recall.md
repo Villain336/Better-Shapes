@@ -32,22 +32,33 @@ Open source wins because company search is a trust problem. A single index of ev
 
 1. **Connectors.**
    v1 connectors: Google Drive, Slack, GitHub (issues, PRs, Markdown), Notion, a Confluence-compatible wiki, Linear or Jira (one of the two), and local file upload. Each connector uses the public API of its tool.
-   *Acceptance:* initial sync of 100,000 documents completes within 24 hours on the reference hardware; incremental sync picks up edits within 15 minutes; connector health and last sync time are visible.
+   *Acceptance:*
+   - Initial sync of 100,000 documents completes within 24 hours on the reference hardware.
+   - Incremental sync picks up edits within 15 minutes.
+   - Connector health and last sync time are visible.
 2. **Permission sync.**
    Store per-document access lists (users, groups, "anyone in domain") from each source and enforce them at query time.
-   *Acceptance:* an automated test suite checks that a user never receives a result, snippet or answer sentence drawn from a document they cannot open in the source; permission revocations take effect within the next sync cycle and immediately on a manual "re-check".
+   *Acceptance:*
+   - An automated test suite checks that a user never receives a result, snippet or answer sentence drawn from a document they cannot open in the source.
+   - Permission revocations take effect within the next sync cycle and immediately on a manual "re-check".
 3. **Hybrid search.**
    Keyword plus vector search with re-ranking; filters by source, author, date.
-   *Acceptance:* p95 query latency under 800 ms on one million chunks; results show source, title, snippet and date.
+   *Acceptance:*
+   - P95 query latency under 800 ms on one million chunks.
+   - Results show source, title, snippet and date.
 4. **Answers with sources.**
    An assistant answers questions using only retrieved, permitted passages and cites them.
-   *Acceptance:* every factual sentence in an answer is attached to a citation, or the assistant says it could not find it.
+   *Acceptance:*
+   - Every factual sentence in an answer is attached to a citation, or the assistant says it could not find it.
 5. **Assistant actions.**
    A small set of Leash tools: create a ticket, draft a Slack message, draft an email.
-   *Acceptance:* any action that posts or sends waits for the user's approval; the draft shows exactly what will be posted and where.
+   *Acceptance:*
+   - Any action that posts or sends waits for the user's approval.
+   - The draft shows exactly what will be posted and where.
 6. **Admin console.**
    Connector setup, sync status, excluded sources and paths, usage, audit log.
-   *Acceptance:* an admin can exclude a channel or folder and confirm that its content disappears from the index within one sync cycle.
+   *Acceptance:*
+   - An admin can exclude a channel or folder and confirm that its content disappears from the index within one sync cycle.
 
 ## Not in v1
 
@@ -56,6 +67,9 @@ Open source wins because company search is a trust problem. A single index of ev
 - Meeting transcript indexing (comes from Echo later).
 - Browser extension and desktop app.
 - More than the listed connectors; a connector SDK is in v1.0 so the community can add more.
+- Answers that combine content across workspaces or organizations.
+- Automatic summaries pushed to people (digests); Recall answers when asked.
+- Fine-tuning models on company data; retrieval only.
 
 ## Architecture
 
@@ -88,6 +102,8 @@ Recall can embed in ShapesOS as its company-wide search and borrow existing piec
 - **Technical:** permission sync is the hard part and failures leak data. Mitigation: deny by default when an access list is unknown, a dedicated permission test suite, and a "why can I see this" explainer for admins. Source API rate limits slow initial syncs.
 - **Inference cost:** embedding a large corpus once is affordable with local models; per-query answer generation is the ongoing cost. Mitigation: cache answers for identical permission sets, use small models for re-ranking, daily caps.
 - **Name:** "Recall" is used by other products (for example Recall.ai and a Microsoft Windows feature); trademark check before launch.
+- **Prompt injection through indexed content:** a document or message can contain instructions aimed at the assistant. Mitigation: retrieved text is treated as data, actions always need user approval, and the assistant never follows instructions found in sources to change permissions or send content elsewhere.
+- **Stale answers:** documents go out of date. Show the last-updated date on every citation and prefer recent sources when two disagree.
 
 ## Milestones
 

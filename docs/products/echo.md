@@ -32,25 +32,39 @@ Recordings of customer calls are also some of the most sensitive data a company 
 
 1. **Capture.**
    Upload audio/video files; a meeting bot for Google Meet and Zoom via their public developer offerings; a browser extension that records the current tab with a visible indicator (later, see Not in v1).
-   *Acceptance:* uploads up to 3 hours process end to end; the bot announces itself by name in the meeting and in chat; capture refuses to start if the workspace's consent setting requires a notice and none was configured.
+   *Acceptance:*
+   - Uploads up to 3 hours process end to end.
+   - The bot announces itself by name in the meeting and in chat.
+   - Capture refuses to start if the workspace's consent setting requires a notice and none was configured.
 2. **Transcription with speakers.**
    Word-level timestamps and speaker diarization; local Whisper-class models by default, hosted APIs optional.
-   *Acceptance:* a one-hour call transcribes in under 15 minutes on a single consumer GPU; speakers can be renamed and the rename applies to the whole call.
+   *Acceptance:*
+   - A one-hour call transcribes in under 15 minutes on a single consumer GPU.
+   - Speakers can be renamed and the rename applies to the whole call.
 3. **Call summary and next steps.**
    Summary, decisions, open questions, next steps with owners and dates.
-   *Acceptance:* every next step links to the transcript moment it came from; no next step is shown without a timestamp link.
+   *Acceptance:*
+   - Every next step links to the transcript moment it came from.
+   - No next step is shown without a timestamp link.
 4. **Deal signals.**
    Talk ratio, longest monologue, questions asked, mentions of competitors, pricing, timeline, decision makers; a simple "risk" list per deal (for example, no next meeting booked, champion silent for 14 days).
-   *Acceptance:* each signal shows how it was computed in one sentence; risk rules are editable per workspace.
+   *Acceptance:*
+   - Each signal shows how it was computed in one sentence.
+   - Risk rules are editable per workspace.
 5. **Follow-up and CRM drafts.**
    Drafted follow-up email and CRM note/fields after each call.
-   *Acceptance:* nothing is sent or written without approval in the Leash queue; edits before approval are saved as a separate audit event.
+   *Acceptance:*
+   - Nothing is sent or written without approval in the Leash queue.
+   - Edits before approval are saved as a separate audit event.
 6. **Search and library.**
    Full-text search across transcripts, filters by rep, account and date; short shareable snippets.
-   *Acceptance:* search returns within one second on 10,000 calls; snippet links respect permissions and can expire.
+   *Acceptance:*
+   - Search returns within one second on 10,000 calls.
+   - Snippet links respect permissions and can expire.
 7. **Access control and retention.**
    Per-call visibility (owner, team, workspace), retention policies, deletion.
-   *Acceptance:* a deleted call removes audio, transcript and derived data, and the deletion is logged.
+   *Acceptance:*
+   - A deleted call removes audio, transcript and derived data, and the deletion is logged.
 
 ## Not in v1
 

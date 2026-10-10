@@ -4,7 +4,7 @@ import { GlassCard } from "@/components/GlassCard";
 import { WaitlistForm } from "@/components/Forms";
 import { Button } from "@/components/Button";
 import { Chip } from "@/components/Chip";
-import { ProductMark } from "@/components/ProductMark";
+import { ProductMark, markTint } from "@/components/ProductMark";
 import { Reveal, RevealItem, Stagger } from "@/components/Reveal";
 import { Blobs, SectionHeading } from "@/components/Sections";
 import { toneColor } from "@/components/Shapes";
@@ -65,7 +65,7 @@ export default function LabsPage() {
             accent="we can’t stop asking."
             side={
               <div className="flex items-center gap-3">
-                <span className="grid size-12 place-items-center rounded-[14px] bg-tint-red">
+                <span className="grid size-12 place-items-center rounded-[14px]" style={{ background: markTint("field") }}>
                   <ProductMark slug="field" size={32} />
                 </span>
                 <Chip tone="red">Nothing released yet</Chip>
