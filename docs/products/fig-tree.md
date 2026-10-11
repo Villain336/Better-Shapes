@@ -1,4 +1,4 @@
-# Frame
+# Fig Tree (formerly Frame)
 
 > Collaborative design with AI as a teammate.
 

@@ -19,10 +19,10 @@ Prices in the market notes are third-party estimates gathered in October 2026 an
 | [Recall](./recall.md) | Glean | AGPL-3.0 | Permission-aware search and an assistant across your docs, chat, tickets and code. |
 | [Orbit](./orbit.md) | Smartly, Madgicx, AdCreative | AGPL-3.0 | Ad creative, cross-platform tests and budget rebalancing, with every spend change approved. |
 | [Forge](./forge.md) | Cursor | MIT | An AI code editor on the MIT Code - OSS core, with any model and diff-first agent edits. |
-| [Frame](./frame.md) | Figma | AGPL-3.0 | Multiplayer interface design with components, auto layout, AI layout drafts and design-to-code. |
+| [Fig Tree](./fig-tree.md) | Figma | AGPL-3.0 | Multiplayer interface design with components, auto layout, AI layout drafts and design-to-code. |
 | [Collage](./collage.md) | Canva | AGPL-3.0 | Templates, brand kits, AI generate, resize and batch fill, extracted from ShapesOS Studio. |
 | [Atelier](./atelier.md) | Photoshop and Illustrator generative tools | AGPL-3.0 | Layered photo and vector editing with generative tools on open models you can run yourself. |
-| [Snip](./snip.md) | OpusClip | AGPL-3.0 | Long videos into scored, reframed, captioned clips, drafted for approval; extracted from ShapesOS Clips. |
+| [Snipper](./snipper.md) | OpusClip | AGPL-3.0 | Long videos into scored, reframed, captioned clips, drafted for approval; extracted from ShapesOS Clips. |
 | [Fab](./fab.md) | SolidWorks, Fusion | AGPL-3.0 | Parametric CAD in the browser with an AI assistant, versioned review and STEP/STL/3MF export. |
 
 ## Everyday apps
@@ -44,11 +44,11 @@ Consumer tools for everyone. Strong open-source projects already exist in each o
 1. **Concierge** — the clearest demonstration of Leash: real actions, real approvals, a buyer who feels the price.
 2. **Prism** — the ShapesOS enrichment waterfall is ready to extract; bring-your-own-key is the whole pitch.
 3. **Echo** — reuses transcription work and pairs naturally with Prism and the ShapesOS CRM.
-4. **Snip** — extracted from ShapesOS Clips (`lib/clipper`), which already has most of the pipeline.
+4. **Snipper** (in development) — extracted from ShapesOS Clips (`lib/clipper`), which already has most of the pipeline.
 5. **Collage** — extracted from ShapesOS Studio, sharing one editor package with it.
 6. **Forge** — MIT and built on Code - OSS; ShapesOS is a reference only, because its code is AGPL.
-7. **Frame** — the hardest editor; benefits from the canvas work done for Collage.
+7. **Fig Tree** (in development, pulled forward) — our own WebGPU renderer and CSS-native layout engine; see the Fig-tree repo.
 8. **Fab** — builds on the ShapesOS CAD module and adds an open geometry kernel.
-9. **Atelier** — a deep editor; starts after the canvas and model-hosting lessons from Collage and Frame.
+9. **Atelier** — a deep editor; starts after the canvas and model-hosting lessons from Collage and Fig Tree.
 10. **Orbit** — the most existing code (ShapesOS Media and Flywheel), but it moves money, so it ships after Leash has matured in production.
 11. **Recall** — permission sync across many connectors is long, careful work; it goes last.

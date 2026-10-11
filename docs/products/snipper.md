@@ -1,4 +1,4 @@
-# Snip
+# Snipper (formerly Snip)
 
 > Long videos in, scroll-stopping clips out.
 
