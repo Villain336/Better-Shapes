@@ -24,10 +24,9 @@ const cols = [
   {
     title: "Say hi",
     links: [
-      ["hello@bettershapes.co", "mailto:hello@bettershapes.co"],
-      ["LinkedIn", "#"],
-      ["Instagram", "#"],
-      ["Dribbble", "#"],
+      ["Contact us", "/about#contact"],
+      ["Newsletter", "/blog#newsletter"],
+      ["Products waitlists", "/products"],
     ],
   },
 ];

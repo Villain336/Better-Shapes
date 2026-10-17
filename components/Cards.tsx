@@ -5,6 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { toneFor, type Capability, type Post, type Project, type Tone } from "@/lib/content";
 import { GlassCard } from "./GlassCard";
+import { RENDER_BG } from "./ProductRender";
 import { ArrowUpRight, CapabilityGlyph, toneColor, toneTint } from "./Shapes";
 import { Chip } from "./Chip";
 import { Button } from "./Button";
@@ -84,28 +85,35 @@ export function ProjectCard({ project, className = "" }: { project: Project; cla
       exit={{ opacity: 0, scale: 0.96 }}
       transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
       className={`group/card relative isolate flex min-h-[420px] flex-col justify-between overflow-hidden rounded-[32px] p-4 md:min-h-[500px] ${className}`}
+      style={{ background: RENDER_BG }}
     >
       <Image
         src={project.image}
-        alt={`${project.title} project cover`}
+        alt={`${project.title} product render`}
         fill
         sizes="(min-width: 1024px) 60vw, 100vw"
         className="-z-10 object-cover transition-transform duration-[1.4s] ease-[var(--ease-out)] group-hover/card:scale-[1.06]"
       />
-      <div className="flex gap-2">
+      <div className="flex flex-wrap gap-2">
         {project.tags.map((t) => (
           <Chip key={t} tone={toneFor[t]} glass>
             {t}
           </Chip>
         ))}
+        <Chip tone="blue" glass>
+          {project.status}
+        </Chip>
       </div>
-      <div className="glass flex items-center justify-between gap-4 rounded-[24px] py-4 pl-5 pr-3 transition-transform duration-700 ease-[var(--ease-out)] group-hover/card:-translate-y-1">
+      <Link
+        href={project.href}
+        className="glass flex items-center justify-between gap-4 rounded-[24px] py-4 pl-5 pr-3 transition-transform duration-700 ease-[var(--ease-out)] group-hover/card:-translate-y-1"
+      >
         <div>
           <h3 className="text-[22px] font-medium tracking-[-0.04em] md:text-[24px]">{project.title}</h3>
           <p className="text-[14px] text-ink-2">{project.subtitle}</p>
         </div>
         <ArrowDot size={44} />
-      </div>
+      </Link>
     </motion.article>
   );
 }
@@ -180,28 +188,10 @@ export function PostCard({ post }: { post: Post }) {
       <div className="flex flex-1 flex-col gap-3 px-6 pb-6 pt-5">
         <div className="flex items-center gap-2.5">
           <Chip tone={toneFor[post.category]}>{post.category}</Chip>
-          <span className="caption text-ink-3">{post.read}</span>
+          <span className="caption text-ink-3">Coming soon</span>
         </div>
         <h3 className="text-[24px] font-medium leading-[1.15] tracking-[-0.04em]">{post.title}</h3>
         <p className="text-[14px] leading-[1.5] text-ink-2">{post.excerpt}</p>
-        <span className="caption mt-auto pt-2 text-ink-3">{post.date}</span>
-      </div>
-    </GlassCard>
-  );
-}
-
-export function TestimonialCard({ quote, name, role, image }: { quote: string; name: string; role: string; image: string }) {
-  return (
-    <GlassCard className="flex flex-col gap-7 rounded-[32px] p-8">
-      <blockquote className="text-[24px] font-medium leading-[1.25] tracking-[-0.035em] text-ink md:text-[28px]">“{quote}”</blockquote>
-      <div className="flex items-center gap-3">
-        <span className="relative size-11 overflow-hidden rounded-full">
-          <Image src={image} alt="" fill sizes="44px" className="object-cover" />
-        </span>
-        <div>
-          <div className="text-[18px] font-semibold tracking-[-0.02em]">{name}</div>
-          <div className="text-[14px] text-ink-3">{role}</div>
-        </div>
       </div>
     </GlassCard>
   );

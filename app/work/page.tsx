@@ -14,10 +14,10 @@ export default function WorkPage() {
       <PageHero
         image={art.work}
         alt="Rows of lavender at golden hour beneath tall clouds"
-        eyebrow="Selected work"
+        eyebrow="Our work"
         title="Work that"
         accent="feels right."
-        sub="A few of the products, brands and machines we’ve helped shape — for startups, labs and teams who care about the details."
+        sub="Right now that’s our own products: an agentic business OS, open-source design and video tools, and a streaming service for AI-made stories. Client work joins them as it ships."
       />
 
       <section className="container-x flex flex-col gap-8 pb-24">

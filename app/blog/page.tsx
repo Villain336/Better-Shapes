@@ -19,7 +19,7 @@ export default function BlogPage() {
         eyebrow="Field notes"
         title="Notes from"
         accent="the meadow."
-        sub="Essays on design, engineering, AI and growth — written by the people doing the work."
+        sub="Essays on design, engineering, AI and growth, written by the people doing the work. The first ones are on the way."
       />
 
       <section className="container-x flex flex-col gap-8 pb-24">
@@ -27,16 +27,14 @@ export default function BlogPage() {
           <Image src={featuredPost.image} alt="" fill sizes="100vw" className="-z-10 object-cover" />
           <div className="glass flex max-w-[560px] flex-col items-start gap-4 rounded-[28px] p-6 md:p-8">
             <div className="flex items-center gap-2.5">
-              <Chip tone="red">Featured</Chip>
-              <span className="caption text-ink-3">
-                {featuredPost.date} · {featuredPost.read}
-              </span>
+              <Chip tone="red">First up</Chip>
+              <span className="caption text-ink-3">Coming soon</span>
             </div>
             <h2 className="text-[30px] font-medium leading-[1.05] tracking-[-0.05em] md:text-[40px]">
               {featuredPost.title}
             </h2>
             <p className="text-[16px] leading-[1.55] text-ink-2">{featuredPost.excerpt}</p>
-            <Button href="#posts">Read the essay</Button>
+            <Button href="#newsletter">Get it in your inbox</Button>
           </div>
         </Reveal>
 
@@ -50,9 +48,11 @@ export default function BlogPage() {
           </Stagger>
         </div>
 
-        <Reveal>
-          <NewsletterForm />
-        </Reveal>
+        <div id="newsletter" className="scroll-mt-28">
+          <Reveal>
+            <NewsletterForm />
+          </Reveal>
+        </div>
       </section>
     </>
   );

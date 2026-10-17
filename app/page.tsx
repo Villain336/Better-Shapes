@@ -3,15 +3,15 @@ import { PageHero } from "@/components/PageHero";
 import { HeroStack } from "@/components/HeroStack";
 import { Button } from "@/components/Button";
 import { Reveal, RevealItem, Stagger } from "@/components/Reveal";
-import { Blobs, CtaBand, Marquee, SectionHeading } from "@/components/Sections";
-import { CapabilityCard, ProjectCard, StatCard, TestimonialCard } from "@/components/Cards";
+import { Blobs, CtaBand, SectionHeading } from "@/components/Sections";
+import { CapabilityCard, ProjectCard, StatCard } from "@/components/Cards";
 import { GlassCard } from "@/components/GlassCard";
 import { LogoMark } from "@/components/Logo";
 import { toneColor } from "@/components/Shapes";
 import { ProductCard } from "@/components/ProductCard";
 import { ShapesOSFeature } from "@/components/ShapesOSFeature";
 import { products } from "@/lib/products";
-import { art, capabilities, clients, projects, stats, steps, testimonials } from "@/lib/content";
+import { art, capabilities, projects, steps } from "@/lib/content";
 
 export default function Home() {
   return (
@@ -32,22 +32,12 @@ export default function Home() {
         </Button>
       </PageHero>
 
-      {/* Steps ticker + trusted-by marquee */}
-      <section className="container-x flex flex-col gap-10 pb-16">
+      {/* Steps ticker */}
+      <section className="container-x pb-16">
         <div className="caption flex flex-wrap gap-x-10 gap-y-2 text-ink-2">
           {["01 / Strategy", "02 / Design", "03 / Build", "04 / Grow"].map((s) => (
             <span key={s}>{s}</span>
           ))}
-        </div>
-        <div className="flex flex-col items-start gap-6 md:flex-row md:items-center md:gap-12">
-          <span className="caption shrink-0 text-ink-3">
-            Trusted by teams
-            <br />
-            building what’s next
-          </span>
-          <div className="w-full min-w-0">
-            <Marquee items={clients} />
-          </div>
         </div>
       </section>
 
@@ -129,9 +119,9 @@ export default function Home() {
       {/* Featured work */}
       <section className="container-x flex flex-col gap-12 py-16 md:py-24">
         <SectionHeading
-          eyebrow="Selected work"
+          eyebrow="Our work"
           title="Shaped"
-          accent="with care."
+          accent="in-house."
           side={
             <Button href="/work" variant="ghost">
               View all work
@@ -143,23 +133,34 @@ export default function Home() {
             <ProjectCard project={projects[0]} />
           </Reveal>
           <Reveal delay={0.1}>
-            <ProjectCard project={projects[4]} />
+            <ProjectCard project={projects[1]} />
           </Reveal>
         </div>
       </section>
 
-      {/* Testimonials + stats */}
+      {/* Building in the open */}
       <section className="container-x grid gap-6 py-16 md:py-24 lg:grid-cols-[1.6fr_1fr]">
-        <Reveal className="relative isolate overflow-hidden rounded-[40px] p-5 md:p-12">
+        <Reveal className="relative isolate flex items-end overflow-hidden rounded-[40px] p-5 md:p-12">
           <Image src={art.pricing} alt="" fill sizes="(min-width:1024px) 60vw, 100vw" className="-z-10 object-cover" />
-          <div className="max-w-[540px]">
-            <TestimonialCard {...testimonials[0]} image={art.about} />
-          </div>
+          <GlassCard className="flex max-w-[540px] flex-col items-start gap-5 rounded-[32px] p-8">
+            <h2 className="text-[32px] font-semibold leading-[1.05] tracking-[-0.05em] md:text-[40px]">
+              We build in the open.
+            </h2>
+            <p className="text-[16px] leading-[1.55] text-ink-2">
+              Our own products are the proof of how we work. Almost everything we make is open source, so you can read
+              the code, run it yourself and hold us to it.
+            </p>
+            <Button href="/products">See the lineup</Button>
+          </GlassCard>
         </Reveal>
         <Stagger className="flex flex-col gap-6">
-          {stats.map((s) => (
-            <RevealItem key={s.label}>
-              <StatCard value={s.value} label={s.label} />
+          {[
+            [String(products.length), "Products in our lineup"],
+            [String(products.filter((p) => p.openSource !== false).length), "Of them open source"],
+            ["2027", "ShapesOS early access opens"],
+          ].map(([value, label]) => (
+            <RevealItem key={label}>
+              <StatCard value={value} label={label} />
             </RevealItem>
           ))}
         </Stagger>

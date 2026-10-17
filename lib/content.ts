@@ -81,79 +81,47 @@ export type Project = {
   subtitle: string;
   image: string;
   tags: Capability[];
-  year: string;
+  status: string;
+  href: string;
 };
 
+/** Work we can show today: our own products. Client work gets added here as it ships. */
 export const projects: Project[] = [
   {
-    title: "Bloom Labs",
-    subtitle: "Identity, site & analytics dashboard",
-    image: art.work,
-    tags: ["Design", "Tech"],
-    year: "2026",
-  },
-  {
-    title: "Skyline AI",
-    subtitle: "Product design for an LLM copilot",
-    image: art.home,
-    tags: ["Tech", "Design"],
-    year: "2026",
-  },
-  {
-    title: "Petal Commerce",
-    subtitle: "Shopify rebuild, +38% conversion",
-    image: art.pricing,
-    tags: ["Tech", "Marketing"],
-    year: "2025",
-  },
-  {
-    title: "Northfield",
-    subtitle: "Brand, launch & growth engine",
-    image: art.about,
-    tags: ["Marketing", "Design"],
-    year: "2025",
-  },
-  {
-    title: "Pollen Health",
-    subtitle: "Brand system & patient app",
-    image: art.blog,
-    tags: ["Design", "Tech"],
-    year: "2025",
-  },
-  {
     title: "ShapesOS",
-    subtitle: "Our agentic business OS, early access 2027",
-    image: art.sign,
+    subtitle: "Our agentic business OS",
+    image: asset("/products/shapesos.webp"),
     tags: ["Tech", "Design"],
-    year: "2027",
+    status: "Early access 2027",
+    href: "/products/shapesos",
+  },
+  {
+    title: "Fig Tree",
+    subtitle: "An open-source design tool with its own GPU renderer",
+    image: asset("/products/fig-tree.webp"),
+    tags: ["Design", "Tech"],
+    status: "In development",
+    href: "/products/fig-tree",
+  },
+  {
+    title: "Daydream",
+    subtitle: "AI-made movies and series, free to watch",
+    image: asset("/products/daydream.webp"),
+    tags: ["Design", "Marketing"],
+    status: "Planned",
+    href: "/products/daydream",
+  },
+  {
+    title: "Snipper",
+    subtitle: "Turns long videos into short clips worth sharing",
+    image: asset("/products/snipper.webp"),
+    tags: ["Marketing", "Tech"],
+    status: "In development",
+    href: "/products/snipper",
   },
 ];
 
-export const testimonials = [
-  {
-    quote:
-      "They took a messy idea and gave it a shape our whole team believes in. Calm, sharp, fast.",
-    name: "Maya Chen",
-    role: "COO, Northfield",
-  },
-  {
-    quote:
-      "It feels like having a senior product team on call — without the overhead or the drama.",
-    name: "Daniel Okafor",
-    role: "Founder, Skyline AI",
-  },
-  {
-    quote: "Our product went from sketch to launch in eleven weeks. I still don’t know how.",
-    name: "Priya Raman",
-    role: "Head of Product, Fieldwork",
-  },
-];
 
-export const stats = [
-  { value: "98%", label: "Clients who renew after month one" },
-  { value: "4.9/5", label: "Average satisfaction score" },
-  { value: "2027", label: "ShapesOS early access opens" },
-];
 
 export const plans = [
   {
@@ -218,13 +186,12 @@ export const faqs = [
   },
 ];
 
+/** Essays we're writing. None are published yet, so the blog shows them as coming soon. */
 export type Post = {
   slug: string;
   title: string;
   excerpt: string;
   category: Capability;
-  date: string;
-  read: string;
   image: string;
 };
 
@@ -234,8 +201,6 @@ export const featuredPost: Post = {
   excerpt:
     "Attention is the scarcest resource your customers have. Here’s how we design products that respect it.",
   category: "Design",
-  date: "Oct 2026",
-  read: "9 min read",
   image: art.home,
 };
 
@@ -245,8 +210,6 @@ export const posts: Post[] = [
     title: "What calm design could mean for machines",
     excerpt: "Notes from Labs: the interface lessons we’d bring to robots in homes and workplaces.",
     category: "Robotics",
-    date: "Sep 2026",
-    read: "6 min read",
     image: art.blog,
   },
   {
@@ -254,8 +217,6 @@ export const posts: Post[] = [
     title: "A brand is a promise you keep in public",
     excerpt: "Logos are easy. Consistency is the hard, valuable part — and it’s mostly operations.",
     category: "Design",
-    date: "Aug 2026",
-    read: "5 min read",
     image: art.work,
   },
   {
@@ -263,17 +224,13 @@ export const posts: Post[] = [
     title: "Growth loops beat growth hacks",
     excerpt: "Why the compounding channels are the boring ones — and how to build them on purpose.",
     category: "Marketing",
-    date: "Jul 2026",
-    read: "7 min read",
     image: art.pricing,
   },
   {
     slug: "ai-copilots",
     title: "Shipping an AI copilot people keep using",
-    excerpt: "Five patterns that turned a flashy demo into a daily habit for 40,000 users.",
+    excerpt: "The patterns that turn a flashy demo into something people open every day.",
     category: "Tech",
-    date: "Jun 2026",
-    read: "8 min read",
     image: art.about,
   },
   {
@@ -281,8 +238,6 @@ export const posts: Post[] = [
     title: "Prototype in cardboard before you prototype in code",
     excerpt: "The cheapest, fastest way to find out whether your idea has a shape.",
     category: "Robotics",
-    date: "May 2026",
-    read: "4 min read",
     image: art.sign,
   },
   {
@@ -290,8 +245,6 @@ export const posts: Post[] = [
     title: "Why we put design, code and AI in one room",
     excerpt: "Handoffs are where good ideas go to die. Here’s how we work without them.",
     category: "Tech",
-    date: "Apr 2026",
-    read: "6 min read",
     image: art.home,
   },
 ];
@@ -303,11 +256,4 @@ export const values: { title: string; body: string; tone: Tone }[] = [
   { title: "Grow together", body: "Long partnerships beat quick wins.", tone: "green" },
 ];
 
-export const team = [
-  { name: "Jordan Hale", role: "Founder & Creative Director", tone: "blue" as Tone },
-  { name: "Ava Lindqvist", role: "Head of Design", tone: "red" as Tone },
-  { name: "Marcus Bell", role: "Labs Lead, Physical AI", tone: "yellow" as Tone },
-  { name: "Sofia Reyes", role: "Growth Lead", tone: "green" as Tone },
-];
 
-export const clients = ["Northfield", "Lumen Labs", "Halo AI", "Fieldwork", "Kinetic", "Pollen", "Meadow", "Arc & Co"];

@@ -49,7 +49,7 @@ export default function ProductsPage() {
             accent="right now."
             side={
               <p className="max-w-[360px] text-[16px] leading-[1.55] text-ink-2">
-                The foundations everything else is made from: agent guardrails, our design system and AI visibility.
+                The foundations everything else is made from: agent guardrails, our design system and AI visibility. Plus Fig Tree for design and Snipper for video.
               </p>
             }
           />

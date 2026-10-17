@@ -14,7 +14,7 @@ export function WorkGrid() {
 
   return (
     <LayoutGroup>
-      <div className="flex flex-wrap gap-2" role="tablist" aria-label="Filter projects">
+      <div className="flex flex-wrap gap-2" role="tablist" aria-label="Filter work">
         {filters.map((f) => (
           <button
             key={f}

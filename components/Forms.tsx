@@ -9,7 +9,6 @@ import { SubmitButton } from "./Button";
  * (it is meant to be public). Without it, forms say so instead of pretending to send.
  */
 const ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? "";
-const STUDIO_EMAIL = "hello@bettershapes.co";
 
 type Status = "idle" | "sending" | "sent" | "error" | "offline";
 
@@ -49,16 +48,8 @@ function useSubmit() {
 
 const messages: Record<Exclude<Status, "idle" | "sending">, (sent: string) => React.ReactNode> = {
   sent: (sent) => sent,
-  error: () => (
-    <>
-      Something went wrong. Email us at <a className="underline" href={`mailto:${STUDIO_EMAIL}`}>{STUDIO_EMAIL}</a>.
-    </>
-  ),
-  offline: () => (
-    <>
-      This form isn’t connected yet. Email us at <a className="underline" href={`mailto:${STUDIO_EMAIL}`}>{STUDIO_EMAIL}</a>.
-    </>
-  ),
+  error: () => <>Something went wrong. Please try again in a moment.</>,
+  offline: () => <>This form isn’t connected yet. Please check back soon.</>,
 };
 
 function StatusLine({ status, sent }: { status: Status; sent: string }) {

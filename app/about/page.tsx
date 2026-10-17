@@ -1,17 +1,14 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import { PageHero } from "@/components/PageHero";
-import { StatCard } from "@/components/Cards";
 import { GlassCard } from "@/components/GlassCard";
 import { ContactForm } from "@/components/Forms";
 import { Reveal, RevealItem, Stagger } from "@/components/Reveal";
 import { Blobs, SectionHeading } from "@/components/Sections";
-import { CapabilityGlyph, toneColor, toneTint } from "@/components/Shapes";
-import { art, team, values } from "@/lib/content";
+import { toneColor } from "@/components/Shapes";
+import { art, values } from "@/lib/content";
 
 export const metadata: Metadata = { title: "About" };
-
-const glyphFor = { blue: "Tech", red: "Design", yellow: "Robotics", green: "Marketing" } as const;
 
 export default function AboutPage() {
   return (
@@ -36,22 +33,11 @@ export default function AboutPage() {
           </Reveal>
           <Reveal delay={0.05}>
             <p className="text-[20px] leading-[1.5] tracking-[-0.01em] md:text-[22px]">
-              We started as a two-person design shop that kept getting asked to “also build it.” Then to “also make it
-              think.” Today we’re a calm, senior team that takes ideas from napkin to launch — software, AI agents and
-              the story around both.
+              Most good ideas stall in the handoffs: design to code, code to launch, launch to growth. We do all of it
+              in one place, with AI built in from the start. We take ideas from napkin to launch, from software and AI
+              agents to the story around both, and we build our own products the same way.
             </p>
           </Reveal>
-          <Stagger className="grid grid-cols-3 gap-3 md:gap-4">
-            {[
-              ["2016", "Founded"],
-              ["24", "People"],
-              ["9", "Countries"],
-            ].map(([v, l]) => (
-              <RevealItem key={l}>
-                <StatCard value={v} label={l} className="!px-4 md:!px-6" />
-              </RevealItem>
-            ))}
-          </Stagger>
         </div>
       </section>
 
@@ -74,40 +60,11 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* Team */}
-      <section className="container-x flex flex-col gap-10 py-16">
-        <SectionHeading eyebrow="Team" title="The people" accent="behind the shapes." />
-        <Stagger className="grid grid-cols-2 gap-5 lg:grid-cols-4">
-          {team.map((m) => (
-            <RevealItem key={m.name}>
-              <GlassCard className="flex flex-col gap-4 rounded-[28px] p-4">
-                <div
-                  className="grid aspect-square place-items-center rounded-[20px] transition-transform duration-700 ease-[var(--ease-out)] group-hover/card:scale-[0.98]"
-                  style={{ background: toneTint[m.tone] }}
-                >
-                  <span className="transition-transform duration-700 ease-[var(--ease-out)] group-hover/card:rotate-[20deg] group-hover/card:scale-110">
-                    <CapabilityGlyph name={glyphFor[m.tone]} size={56} />
-                  </span>
-                </div>
-                <div className="px-1 pb-1">
-                  <div className="text-[18px] font-semibold tracking-[-0.02em]">{m.name}</div>
-                  <div className="text-[14px] text-ink-3">{m.role}</div>
-                </div>
-              </GlassCard>
-            </RevealItem>
-          ))}
-        </Stagger>
-      </section>
-
       {/* Contact */}
       <section id="contact" className="container-x scroll-mt-28 pb-24 pt-8">
         <Reveal className="relative isolate grid gap-8 overflow-hidden rounded-[40px] p-4 md:rounded-[48px] md:p-12 lg:grid-cols-[1fr_520px]">
           <Image src={art.pricing} alt="" fill sizes="100vw" className="-z-10 object-cover" />
-          <div className="flex flex-col items-start gap-4 p-2 md:p-0">
-            <a href="mailto:hello@bettershapes.co" className="glass rounded-full px-4 py-2 text-[15px] font-medium">
-              hello@bettershapes.co
-            </a>
-          </div>
+          <div aria-hidden />
           <div className="glass flex flex-col gap-5 rounded-[32px] p-6 md:p-10">
             <h2 className="text-[40px] font-semibold leading-none tracking-[-0.055em]">
               Let’s <span className="text-ink-3">talk.</span>

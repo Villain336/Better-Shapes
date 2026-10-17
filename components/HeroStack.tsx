@@ -3,10 +3,13 @@
 import { motion, useMotionValue, useReducedMotion, useSpring, useTransform } from "framer-motion";
 import { useEffect } from "react";
 import { Chip } from "./Chip";
+import { products } from "@/lib/products";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 /** The floating glass cards on the home hero; they drift with the pointer for depth. */
+const openSource = products.filter((p) => p.openSource !== false).length;
+
 export function HeroStack() {
   const reduce = useReducedMotion();
   const mx = useMotionValue(0);
@@ -37,8 +40,8 @@ export function HeroStack() {
     <div className="relative hidden h-[520px] lg:block" aria-hidden>
       <motion.div style={far} className="absolute right-0 top-0">
         <motion.div {...enter(0.6, 4)} className="glass animate-float w-[230px] rounded-[24px] px-6 pb-[22px] pt-5">
-          <div className="font-display text-[56px] font-semibold leading-none tracking-[-0.06em]">120+</div>
-          <div className="text-[14px] text-ink-2">Products shipped</div>
+          <div className="font-display text-[56px] font-semibold leading-none tracking-[-0.06em]">{products.length}</div>
+          <div className="text-[14px] text-ink-2">Products in our lineup</div>
         </motion.div>
       </motion.div>
 
@@ -74,8 +77,8 @@ export function HeroStack() {
           {...enter(1, -2)}
           className="glass animate-float w-[240px] rounded-[24px] px-6 pb-[22px] pt-5 [animation-delay:-5s]"
         >
-          <div className="font-display text-[56px] font-semibold leading-none tracking-[-0.06em]">48h</div>
-          <div className="text-[14px] text-ink-2">Average first delivery</div>
+          <div className="font-display text-[56px] font-semibold leading-none tracking-[-0.06em]">{openSource}</div>
+          <div className="text-[14px] text-ink-2">Of them open source</div>
         </motion.div>
       </motion.div>
     </div>
