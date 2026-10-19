@@ -5,10 +5,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import { SubmitButton } from "./Button";
 
 /**
- * Forms post to Web3Forms (https://web3forms.com). Set NEXT_PUBLIC_WEB3FORMS_KEY to the access key
- * (it is meant to be public). Without it, forms say so instead of pretending to send.
+ * Forms post to Web3Forms (https://web3forms.com). The access key is public by design (it only lets
+ * people send submissions to our inbox), so the studio's key is built in. NEXT_PUBLIC_WEB3FORMS_KEY
+ * overrides it; `||` because the deploy workflow passes an empty string when its variable is unset.
  */
-const ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? "";
+const ACCESS_KEY = process.env.NEXT_PUBLIC_WEB3FORMS_KEY || "f3f3725a-492d-406e-9a0c-b57172192ed4";
 
 type Status = "idle" | "sending" | "sent" | "error" | "offline";
 
