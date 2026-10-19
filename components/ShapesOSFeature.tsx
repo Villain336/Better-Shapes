@@ -26,7 +26,7 @@ export function ShapesOSFeature() {
           {p.tagline} Agents propose, people approve, and nothing touches money or customers without you.
         </p>
         <div className="flex flex-wrap gap-3">
-          <Button href="/products/shapesos">Join early access</Button>
+          <Button href="/products/shapesos">Join the waitlist</Button>
           <Button href="/products" variant="glass">
             All products
           </Button>

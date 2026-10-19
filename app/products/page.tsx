@@ -30,7 +30,7 @@ export default function ProductsPage() {
         accent="building on."
         sub="ShapesOS and a growing suite of open-source software for the agentic future. Free to self-host, built to be trusted."
       >
-        <Button href="/products/shapesos">Join ShapesOS early access</Button>
+        <Button href="/products/shapesos">Join the ShapesOS waitlist</Button>
         <Button href="#suite" variant="glass">
           See the suite
         </Button>

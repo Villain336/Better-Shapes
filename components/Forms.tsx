@@ -132,6 +132,22 @@ function PillForm({
   );
 }
 
+/** Stacked newsletter signup for small cards (the home hero deck). */
+export function CompactNewsletterForm({ id }: { id: string }) {
+  const { status, send } = useSubmit();
+  const sent = "You’re on the list. See you in the meadow.";
+  if (status === "sent") return <StatusLine status={status} sent={sent} />;
+  return (
+    <form onSubmit={(e) => send(e, { subject: "Newsletter signup", form: "newsletter" })} className="flex flex-col gap-2.5">
+      <Honeypot />
+      <label className="sr-only" htmlFor={id}>Email</label>
+      <input id={id} name="email" type="email" required placeholder="you@company.com" className="h-12 w-full rounded-full bg-raised px-5 text-[16px] outline-none ring-brand-blue/40 placeholder:text-ink-3 focus:ring-2" />
+      <SubmitButton>{status === "sending" ? "Sending…" : "Subscribe"}</SubmitButton>
+      <StatusLine status={status} sent={sent} />
+    </form>
+  );
+}
+
 export function NewsletterForm() {
   return (
     <PillForm

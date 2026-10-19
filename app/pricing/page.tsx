@@ -35,7 +35,7 @@ export default function PricingPage() {
               <h3 className="text-[18px] font-semibold tracking-[-0.02em]">Products &amp; Labs</h3>
               <span className="font-display text-[56px] font-semibold leading-none tracking-[-0.06em]">Soon</span>
               <p className="text-[16px] leading-[1.55] text-ink-2">
-                Our own software: ShapesOS (early access 2027) and a suite of open-source tools. Members get early access.
+                Our own software: ShapesOS (launching Dec 1, 2026) and a suite of open-source tools. Members get early access.
               </p>
               <div className="relative min-h-[160px] flex-1 overflow-hidden rounded-[24px]">
                 <Image src={art.products} alt="" fill sizes="400px" className="object-cover" />

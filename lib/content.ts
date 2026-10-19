@@ -4,6 +4,9 @@ export type Capability = "Tech" | "Design" | "Robotics" | "Marketing";
 /** Prefix for static files when the site is served from a sub-path (GitHub Pages). */
 export const asset = (path: string) => `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${path}`;
 
+/** ShapesOS launch: midnight US Eastern (EST, UTC-5) on Dec 1, 2026. */
+export const shapesOSLaunch = { at: "2026-12-01T00:00:00-05:00", label: "Dec 1, 2026" };
+
 export const art = {
   home: asset("/art/home-poppies.webp"),
   work: asset("/art/work-lavender.webp"),
@@ -92,7 +95,7 @@ export const projects: Project[] = [
     subtitle: "Our agentic business OS",
     image: asset("/products/shapesos.webp"),
     tags: ["Tech", "Design"],
-    status: "Early access 2027",
+    status: "Launching Dec 1, 2026",
     href: "/products/shapesos",
   },
   {
