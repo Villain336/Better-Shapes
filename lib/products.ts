@@ -3,7 +3,7 @@ import type { Capability, Tone } from "./content";
 export type ProductStatus = "early-access" | "in-development" | "planned" | "exploring";
 
 export const statusMeta: Record<ProductStatus, { label: string; tone: Tone }> = {
-  "early-access": { label: "Early access · 2027", tone: "blue" },
+  "early-access": { label: "Launching Dec 1, 2026", tone: "blue" },
   "in-development": { label: "In development", tone: "green" },
   planned: { label: "Planned", tone: "yellow" },
   exploring: { label: "Exploring", tone: "red" },

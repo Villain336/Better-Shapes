@@ -43,7 +43,7 @@ export default async function ProductPage({ params }: Params) {
         accent={p.tagline}
         sub={p.description}
       >
-        <Button href="#waitlist">{p.status === "early-access" ? "Join early access" : "Get notified"}</Button>
+        <Button href="#waitlist">{p.status === "early-access" ? "Join the waitlist" : "Get notified"}</Button>
         {p.repo && (
           <Button href={p.repo} variant="glass">
             View on GitHub

@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { PageHero } from "@/components/PageHero";
-import { HeroStack } from "@/components/HeroStack";
+import { HeroDeck } from "@/components/HeroDeck";
 import { Button } from "@/components/Button";
 import { Reveal, RevealItem, Stagger } from "@/components/Reveal";
 import { Blobs, CtaBand, SectionHeading } from "@/components/Sections";
@@ -24,7 +24,7 @@ export default function Home() {
         title="Good ideas."
         accent="Better shape."
         sub="We connect brand, design, AI and growth to turn your next chapter into something people feel — and trust."
-        aside={<HeroStack />}
+        aside={<HeroDeck />}
       >
         <Button href="/about#contact">Start a conversation</Button>
         <Button href="#capabilities" variant="glass">
@@ -157,7 +157,7 @@ export default function Home() {
           {[
             [String(products.length), "Products in our lineup"],
             [String(products.filter((p) => p.openSource !== false).length), "Of them open source"],
-            ["2027", "ShapesOS early access opens"],
+            ["Dec 1", "ShapesOS launch day, 2026"],
           ].map(([value, label]) => (
             <RevealItem key={label}>
               <StatCard value={value} label={label} />
