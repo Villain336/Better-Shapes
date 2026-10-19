@@ -32,11 +32,10 @@ npm run typecheck
 
 Contact, newsletter and waitlist forms post to [Web3Forms](https://web3forms.com).
 
-1. On web3forms.com, enter the inbox that should receive submissions and copy the access key (it's designed to be public).
-2. Locally: `NEXT_PUBLIC_WEB3FORMS_KEY=your-key npm run dev`.
-3. On GitHub: Settings → Secrets and variables → Actions → **Variables** → add `WEB3FORMS_KEY`.
+The studio's access key is built into `components/Forms.tsx`; Web3Forms keys are designed to be public, since they only let people send submissions to your inbox. To use a different key:
 
-Without a key the forms say they aren't connected yet instead of failing silently. Each submission includes a `form` field (`contact`, `newsletter`, `waitlist`) and, for waitlists, a `product` field.
+- Locally: `NEXT_PUBLIC_WEB3FORMS_KEY=your-key npm run dev`.
+- On GitHub: Settings → Secrets and variables → Actions → **Variables** → add `WEB3FORMS_KEY`. Each submission includes a `form` field (`contact`, `newsletter`, `waitlist`) and, for waitlists, a `product` field.
 
 ## Deploy (GitHub Pages)
 
