@@ -2,6 +2,8 @@
 
 Marketing site for Better Shapes — design, technology, robotics & marketing.
 
+**Live:** https://villain336.github.io/Better-Shapes/
+
 - **Design source:** Figma file “Better Shapes — Design System & Site” (tokens, glass components, 5 desktop pages + mobile home):
   https://www.figma.com/design/z4u3TIS0foXz7UGiGWEkJf
 - **Stack:** Next.js (App Router, static export) · Tailwind CSS v4 · Framer Motion · Lenis smooth scroll
@@ -19,7 +21,7 @@ npm run typecheck
 ## Where things live
 
 - `app/globals.css` — design tokens (mirror the Figma variables) and the `glass`, `glass-ink`, `rim-gradient` surfaces
-- `lib/content.ts` — all copy: services, projects, pricing, FAQs, posts, team (edit here)
+- `lib/content.ts` — all copy: services, our work, pricing, FAQs, upcoming posts (edit here)
 - `lib/products.ts` — the product catalog (ShapesOS, Leash, Shapes UI, Beacon and the open suite). Set `repo` on a product once its GitHub repo is public to show the link.
 - `docs/products/` — clean-room specs for each planned product
 - Type: Manrope (headlines) + Plus Jakarta Sans (body) + Geist Mono (small labels). The word "shape" is drawn letter by letter in red, blue, yellow, green and lavender (`components/Accent.tsx`).
@@ -34,7 +36,7 @@ Contact, newsletter and waitlist forms post to [Web3Forms](https://web3forms.com
 2. Locally: `NEXT_PUBLIC_WEB3FORMS_KEY=your-key npm run dev`.
 3. On GitHub: Settings → Secrets and variables → Actions → **Variables** → add `WEB3FORMS_KEY`.
 
-Without a key the forms say they aren't connected yet and show the studio email instead of failing silently. Each submission includes a `form` field (`contact`, `newsletter`, `waitlist`) and, for waitlists, a `product` field.
+Without a key the forms say they aren't connected yet instead of failing silently. Each submission includes a `form` field (`contact`, `newsletter`, `waitlist`) and, for waitlists, a `product` field.
 
 ## Deploy (GitHub Pages)
 
