@@ -1,8 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { SubmitButton } from "./Button";
+import { BRIEF_KEY, briefToMessage } from "./HeroBrief";
+import { Panel } from "./Panel";
+import { useToast } from "./Toast";
 
 /**
  * Forms post to Web3Forms (https://web3forms.com). The access key is public by design (it only lets
@@ -28,8 +31,9 @@ async function submit(fields: Record<string, string>): Promise<Status> {
   }
 }
 
-function useSubmit() {
+function useSubmit(sentTitle: string, sentBody: string) {
   const [status, setStatus] = useState<Status>("idle");
+  const { toast } = useToast();
   const send = async (e: React.FormEvent<HTMLFormElement>, extra: Record<string, string>) => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -42,7 +46,11 @@ function useSubmit() {
     setStatus("sending");
     const result = await submit({ ...fields, ...extra });
     setStatus(result);
-    if (result === "sent") form.reset();
+    // Errors stay inline next to the field; success also gets a toast because the form resets.
+    if (result === "sent") {
+      form.reset();
+      toast({ tone: "success", title: sentTitle, body: sentBody });
+    }
   };
   return { status, send };
 }
@@ -57,9 +65,9 @@ function StatusLine({ status, sent }: { status: Status; sent: string }) {
   if (status === "idle" || status === "sending") return null;
   return (
     <motion.p
-      initial={{ opacity: 0, y: 8 }}
+      initial={{ opacity: 0, y: 6 }}
       animate={{ opacity: 1, y: 0 }}
-      className={`text-[16px] font-medium ${status === "sent" ? "text-ink" : "text-brand-red"}`}
+      className={`text-[14px] font-medium ${status === "sent" ? "text-ink" : "text-brand-red"}`}
       role="status"
     >
       {messages[status](sent)}
@@ -69,90 +77,116 @@ function StatusLine({ status, sent }: { status: Status; sent: string }) {
 
 const Honeypot = () => <input type="checkbox" name="botcheck" className="hidden" tabIndex={-1} autoComplete="off" />;
 
-const field =
-  "w-full rounded-2xl bg-raised px-5 py-4 text-[16px] outline-none ring-brand-blue/40 placeholder:text-ink-3 focus:ring-2";
-const pillInput =
-  "h-12 rounded-full bg-raised px-5 text-[16px] outline-none ring-brand-blue/40 placeholder:text-ink-3 focus:ring-2 sm:w-[300px]";
+function Field({ label, id, ...rest }: { label: string; id: string } & React.InputHTMLAttributes<HTMLInputElement>) {
+  return (
+    <div className="flex flex-col gap-1.5">
+      <label htmlFor={id} className="label text-ink-3">
+        {label}
+      </label>
+      <input id={id} className="field" {...rest} />
+    </div>
+  );
+}
 
 export function ContactForm() {
-  const { status, send } = useSubmit();
+  const { status, send } = useSubmit("Message sent", "We reply within a business day.");
+  const [message, setMessage] = useState("");
+
+  // If someone came through the home-page brief, start the message for them.
+  useEffect(() => {
+    try {
+      const raw = sessionStorage.getItem(BRIEF_KEY);
+      if (!raw) return;
+      sessionStorage.removeItem(BRIEF_KEY);
+      setMessage(briefToMessage(JSON.parse(raw)));
+    } catch {
+      /* nothing to prefill */
+    }
+  }, []);
+
   return (
     <form onSubmit={(e) => send(e, { subject: "New project inquiry", form: "contact" })} className="flex flex-col gap-4">
       <Honeypot />
-      <label className="sr-only" htmlFor="name">Your name</label>
-      <input id="name" name="name" required placeholder="Your name" className={field} />
-      <label className="sr-only" htmlFor="contact-email">Email</label>
-      <input id="contact-email" name="email" type="email" required placeholder="Email" className={field} />
-      <label className="sr-only" htmlFor="message">What are you shaping?</label>
-      <textarea id="message" name="message" required rows={4} placeholder="What are you shaping?" className={`${field} resize-none`} />
-      <div className="flex flex-wrap items-center gap-4">
-        <SubmitButton>{status === "sending" ? "Sending…" : "Send message"}</SubmitButton>
-        <AnimatePresence>
-          <StatusLine status={status} sent="Thanks! We’ll reply within one business day." />
-        </AnimatePresence>
+      <div className="grid gap-4 sm:grid-cols-2">
+        <Field label="Name" id="name" name="name" required placeholder="Your name" autoComplete="name" />
+        <Field label="Email" id="contact-email" name="email" type="email" required placeholder="you@company.com" autoComplete="email" />
       </div>
+      <div className="flex flex-col gap-1.5">
+        <label htmlFor="message" className="label text-ink-3">
+          What are you shaping?
+        </label>
+        <textarea
+          id="message"
+          name="message"
+          required
+          rows={5}
+          value={message}
+          onChange={(e) => setMessage(e.target.value)}
+          placeholder="A sentence or two is plenty."
+          className="field resize-none"
+        />
+      </div>
+      <div className="flex flex-wrap items-center justify-between gap-4 pt-1">
+        <SubmitButton>{status === "sending" ? "Sending…" : "Send message"}</SubmitButton>
+        <span className="small text-ink-3">We reply within one business day.</span>
+      </div>
+      <AnimatePresence>
+        <StatusLine status={status} sent="Thanks! We’ll reply within one business day." />
+      </AnimatePresence>
     </form>
   );
 }
 
-function PillForm({
+function InlineForm({
   title,
+  body,
   button,
   sent,
   extra,
   id,
 }: {
   title: React.ReactNode;
+  body?: string;
   button: string;
   sent: string;
   extra: Record<string, string>;
   id: string;
 }) {
-  const { status, send } = useSubmit();
+  const { status, send } = useSubmit(
+    extra.form === "waitlist" ? "You’re on the list" : "Subscribed",
+    extra.form === "waitlist" ? "We’ll email you first." : "Essays, now and then. No noise.",
+  );
   return (
-    <form
-      onSubmit={(e) => send(e, extra)}
-      className="glass flex flex-col items-stretch justify-between gap-4 rounded-[32px] p-4 md:flex-row md:items-center md:rounded-full md:py-4 md:pl-10 md:pr-4"
-    >
-      <Honeypot />
-      <span className="font-display text-[22px] font-semibold tracking-[-0.045em] md:text-[24px]">{title}</span>
+    <Panel className="flex flex-col justify-between gap-5 p-5 md:flex-row md:items-center md:p-6">
+      <div className="flex flex-col gap-1">
+        <h3 className="h3">{title}</h3>
+        {body && <p className="small">{body}</p>}
+      </div>
       {status === "sent" ? (
         <StatusLine status={status} sent={sent} />
       ) : (
-        <div className="flex flex-col gap-2">
-          <div className="flex flex-col gap-2 sm:flex-row sm:items-center">
-            <label className="sr-only" htmlFor={id}>Email</label>
-            <input id={id} name="email" type="email" required placeholder="you@company.com" className={pillInput} />
+        <form onSubmit={(e) => send(e, extra)} className="flex flex-col gap-2">
+          <Honeypot />
+          <div className="flex flex-col gap-2 sm:flex-row">
+            <label className="sr-only" htmlFor={id}>
+              Email
+            </label>
+            <input id={id} name="email" type="email" required placeholder="you@company.com" className="field h-11 sm:w-[280px]" autoComplete="email" />
             <SubmitButton>{status === "sending" ? "Sending…" : button}</SubmitButton>
           </div>
           <StatusLine status={status} sent={sent} />
-        </div>
+        </form>
       )}
-    </form>
-  );
-}
-
-/** Stacked newsletter signup for small cards (the home hero deck). */
-export function CompactNewsletterForm({ id }: { id: string }) {
-  const { status, send } = useSubmit();
-  const sent = "You’re on the list. See you in the meadow.";
-  if (status === "sent") return <StatusLine status={status} sent={sent} />;
-  return (
-    <form onSubmit={(e) => send(e, { subject: "Newsletter signup", form: "newsletter" })} className="flex flex-col gap-2.5">
-      <Honeypot />
-      <label className="sr-only" htmlFor={id}>Email</label>
-      <input id={id} name="email" type="email" required placeholder="you@company.com" className="h-12 w-full rounded-full bg-raised px-5 text-[16px] outline-none ring-brand-blue/40 placeholder:text-ink-3 focus:ring-2" />
-      <SubmitButton>{status === "sending" ? "Sending…" : "Subscribe"}</SubmitButton>
-      <StatusLine status={status} sent={sent} />
-    </form>
+    </Panel>
   );
 }
 
 export function NewsletterForm() {
   return (
-    <PillForm
+    <InlineForm
       id="newsletter-email"
-      title="Get one calm, useful email a month."
+      title="One calm, useful email a month."
+      body="Launch news, what we’re building and what we’re learning. No spam."
       button="Subscribe"
       sent="You’re on the list. See you in the meadow."
       extra={{ subject: "Newsletter signup", form: "newsletter" }}
@@ -160,11 +194,12 @@ export function NewsletterForm() {
   );
 }
 
-export function WaitlistForm({ product, title }: { product: string; title?: string }) {
+export function WaitlistForm({ product, title, body }: { product: string; title?: string; body?: string }) {
   return (
-    <PillForm
+    <InlineForm
       id={`waitlist-${product.toLowerCase().replace(/\W+/g, "-")}`}
       title={title ?? `Join the ${product} waitlist.`}
+      body={body ?? "We’ll email you first, and only about this."}
       button="Join"
       sent={`You’re on the ${product} list. We’ll email you first.`}
       extra={{ subject: `Waitlist: ${product}`, form: "waitlist", product }}

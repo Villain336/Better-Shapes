@@ -6,7 +6,10 @@ export const RENDER_BG = "#E9E6E0";
 
 export const productRender = (slug: string) => asset(`/products/${slug}.webp`);
 
-/** A product's 3D render (generated in Figma, see the "Product Brands" page). */
+/**
+ * A product's 3D render. Files are 1152×720 (16:10) with the subject centred in the middle square,
+ * so a square frame crops to the subject and wide frames keep the studio background.
+ */
 export function ProductRender({
   slug,
   alt = "",
@@ -19,7 +22,7 @@ export function ProductRender({
   sizes?: string;
 }) {
   return (
-    <div className={`relative overflow-hidden ${className}`} style={{ background: RENDER_BG }}>
+    <div className={`render relative overflow-hidden ${className}`} style={{ background: RENDER_BG }}>
       <Image src={productRender(slug)} alt={alt} fill sizes={sizes} className="object-cover" />
     </div>
   );

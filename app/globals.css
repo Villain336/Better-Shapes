@@ -1,76 +1,167 @@
 @import "tailwindcss";
 
-/* Tokens mirror the Figma variables in "Better Shapes — Design System & Site" */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*
+  Better Shapes — editorial system.
+  Calm, dense, hairline-led. The paintings carry the colour; the UI stays quiet.
+  Two times of day: cream by day, a deep dusk after dark. Every colour below is a token so the whole
+  page can cross-fade between them.
+*/
 :root {
-  --cream-50: #faf8f4;
-  --cream-100: #f1efea;
-  --cream-200: #e6e2d9;
+  color-scheme: light;
+
+  --cream-50: #fbfaf7;
+  --cream-100: #f4f2ed;
+  --cream-200: #e9e6df;
   --ink-900: #141414;
-  --ink-700: #3a3936;
-  --ink-500: #6b6964;
+  --ink-700: #4a4946;
+  --ink-500: #7b7975;
+  --ink-300: #b4b1aa;
 
   --color-bg-canvas: var(--cream-100);
-  --color-bg-raised: var(--cream-50);
-  --color-text-primary: var(--ink-900);
-  --color-text-secondary: var(--ink-700);
-  --color-text-muted: var(--ink-500);
+  --color-bg-surface: var(--cream-50);
+  /* The canvas as bare channels, for scrims over paintings. */
+  --canvas-rgb: 244 242 237;
 
-  --glass-fill: rgb(255 255 255 / 0.42);
-  --glass-fill-strong: rgb(255 255 255 / 0.68);
-  --glass-stroke: rgb(255 255 255 / 0.7);
-  --glass-ink: rgb(20 20 20 / 0.82);
+  /* Text and fills that sit on top of `ink` (buttons, featured cards). */
+  --on-ink: #fbfaf7;
+  --ink-hover: #2a2a2a;
 
-  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --line: rgb(20 20 20 / 0.08);
+  --line-strong: rgb(20 20 20 / 0.16);
+
+  --glass-fill: rgb(251 250 247 / 0.78);
+  --glass-solid: rgb(251 250 247 / 0.96);
+  --glass-stroke: rgb(255 255 255 / 0.55);
+  --glass-ink: rgb(20 20 20 / 0.72);
+  /* Translucent fills for controls that sit on paintings or glass. */
+  --veil: rgb(255 255 255 / 0.5);
+  --veil-strong: rgb(255 255 255 / 0.8);
+
+  --accent: #2f55d4;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Dusk: deep indigo-charcoal with warm, low-contrast type. The paintings swap to their dusk versions. */
+.dark {
+  color-scheme: dark;
+
+  --cream-50: #1c1d25;
+  --cream-100: #15161c;
+  --cream-200: #262733;
+  --ink-900: #f1efe9;
+  --ink-700: #b8b5ad;
+  --ink-500: #85827b;
+  --ink-300: #5b5953;
+
+  --canvas-rgb: 21 22 28;
+
+  --on-ink: #15161c;
+  --ink-hover: #dedbd3;
+
+  --line: rgb(241 239 233 / 0.1);
+  --line-strong: rgb(241 239 233 / 0.22);
+
+  --glass-fill: rgb(28 29 37 / 0.72);
+  --glass-solid: rgb(28 29 37 / 0.97);
+  --glass-stroke: rgb(255 255 255 / 0.14);
+  --glass-ink: rgb(10 10 14 / 0.72);
+  --veil: rgb(28 29 37 / 0.5);
+  --veil-strong: rgb(28 29 37 / 0.85);
+
+  --accent: #93a8ff;
+}
+
+/* Added to <html> for a moment when the theme flips so every surface fades together. */
+/* Paintings keep their own, slower crossfade (see .painting-day/.painting-dusk below). */
+html.theme-transition,
+html.theme-transition *:not(.painting-day, .painting-dusk),
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition:
+    background-color 0.7s var(--ease),
+    border-color 0.7s var(--ease),
+    color 0.7s var(--ease),
+    fill 0.7s var(--ease),
+    stroke 0.7s var(--ease),
+    filter 0.7s var(--ease),
+    box-shadow 0.7s var(--ease) !important;
 }
 
 @theme inline {
   --color-canvas: var(--cream-100);
-  --color-raised: var(--cream-50);
-  --color-line: var(--cream-200);
+  --color-surface: var(--cream-50);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
   --color-ink: var(--ink-900);
   --color-ink-2: var(--ink-700);
   --color-ink-3: var(--ink-500);
+  --color-ink-4: var(--ink-300);
+  --color-on-ink: var(--on-ink);
+  --color-ink-hover: var(--ink-hover);
+  --color-veil: var(--veil);
+  --color-veil-strong: var(--veil-strong);
+  --color-glass-stroke: var(--glass-stroke);
+  --color-accent: var(--accent);
   --color-brand-red: #e0533d;
   --color-brand-blue: #2f55d4;
   --color-brand-yellow: #f2cf3a;
   --color-brand-green: #6cc48e;
-  --color-tint-red: #fbe3de;
-  --color-tint-blue: #dee5fb;
-  --color-tint-yellow: #fdf5d3;
-  --color-tint-green: #ddf2e5;
 
-  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
-  --radius-card: 32px;
-  --radius-panel: 40px;
+  --radius-tag: 6px;
+  --radius-control: 10px;
+  --radius-card: 14px;
+  --radius-panel: 18px;
+
+  --ease-out: var(--ease);
 }
 
 html {
   overflow-x: clip;
   background: var(--color-bg-canvas);
-  color: var(--color-text-primary);
+  color: var(--ink-900);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  font-feature-settings: "cv11", "ss01", "ss03";
 }
 
 body {
   background: var(--color-bg-canvas);
   font-family: var(--font-sans);
+  font-size: 15px;
+  line-height: 1.55;
   overflow-x: clip;
 }
 
 h1,
 h2,
 h3,
-blockquote {
+h4 {
   font-family: var(--font-display);
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
 }
 
 ::selection {
-  background: #2f55d4;
-  color: white;
+  background: var(--ink-900);
+  color: var(--cream-50);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+/* Inputs whose container already shows focus (the command palette's search field). */
+.no-ring:focus-visible {
+  outline: none;
 }
 
 /* Lenis */
@@ -86,86 +177,177 @@ html.lenis body {
 }
 
 @layer components {
-  .glass {
-    background: var(--glass-fill-strong);
-    border: 1px solid var(--glass-stroke);
-    backdrop-filter: blur(28px) saturate(150%);
-    -webkit-backdrop-filter: blur(28px) saturate(150%);
-    box-shadow:
-      inset 0 1px 0 rgb(255 255 255 / 0.9),
-      0 24px 60px -12px rgb(31 41 71 / 0.1);
-  }
-  .glass-soft {
-    background: var(--glass-fill);
-    border: 1px solid var(--glass-stroke);
-    backdrop-filter: blur(28px) saturate(150%);
-    -webkit-backdrop-filter: blur(28px) saturate(150%);
-    box-shadow:
-      inset 0 1px 0 rgb(255 255 255 / 0.9),
-      0 24px 60px -12px rgb(31 41 71 / 0.1);
-  }
-  .glass-ink {
-    background: var(--glass-ink);
-    backdrop-filter: blur(20px) saturate(140%);
-    -webkit-backdrop-filter: blur(20px) saturate(140%);
-    box-shadow:
-      inset 0 1px 0 rgb(255 255 255 / 0.18),
-      0 12px 28px -8px rgb(13 13 26 / 0.28);
-  }
-  /* Brand-gradient rim used on the featured pricing card */
-  .rim-gradient {
-    position: relative;
-  }
-  .rim-gradient::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    padding: 1.5px;
-    border-radius: inherit;
-    background: linear-gradient(120deg, #e0533d, #f2cf3a 35%, #6cc48e 65%, #2f55d4);
-    -webkit-mask:
-      linear-gradient(#000 0 0) content-box,
-      linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    pointer-events: none;
-  }
-  .eyebrow {
-    font-family: var(--font-mono);
-    font-size: 12px;
-    font-weight: 500;
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-  }
-  .caption {
-    font-family: var(--font-mono);
-    font-size: 11px;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-  }
-  .display {
-    font-family: var(--font-display);
-    font-weight: 600;
-    letter-spacing: -0.055em;
-    line-height: 0.92;
-  }
+  /* Layout */
   .container-x {
     width: 100%;
-    max-width: 1200px;
+    max-width: 1248px;
     margin-inline: auto;
-    padding-inline: 16px;
+    padding-inline: 20px;
   }
   @media (min-width: 768px) {
     .container-x {
       padding-inline: 32px;
     }
   }
-  @media (min-width: 1264px) {
+  @media (min-width: 1280px) {
     .container-x {
-      padding-inline: 0;
+      padding-inline: 24px;
     }
   }
+
+  /* Type */
+  .display {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.035em;
+    line-height: 1;
+  }
+  .h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(30px, 3.4vw, 44px);
+    letter-spacing: -0.03em;
+    line-height: 1.06;
+  }
+  .h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 20px;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+  }
+  .lede {
+    font-size: 17px;
+    line-height: 1.5;
+    letter-spacing: -0.005em;
+    color: var(--ink-700);
+  }
+  .body {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--ink-700);
+  }
+  .small {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink-700);
+  }
+  .label {
+    font-family: var(--font-mono);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+  .num {
+    font-family: var(--font-display);
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Surfaces */
+  .surface {
+    background: var(--color-bg-surface);
+    border: 1px solid var(--line);
+  }
+  .glass {
+    background: var(--glass-fill);
+    border: 1px solid var(--glass-stroke);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+    box-shadow: 0 24px 60px -24px rgb(0 0 0 / 0.25);
+  }
+  /* Floating layers (menus, palette, cards, toasts) need to stay legible over the paintings. */
+  .glass-solid {
+    background: var(--glass-solid);
+  }
+  .glass-ink {
+    background: var(--glass-ink);
+    color: #fbfaf7;
+    border: 1px solid rgb(255 255 255 / 0.12);
+    backdrop-filter: blur(18px) saturate(140%);
+    -webkit-backdrop-filter: blur(18px) saturate(140%);
+  }
+  .hairline-t {
+    border-top: 1px solid var(--line);
+  }
+  .hairline-b {
+    border-bottom: 1px solid var(--line);
+  }
+
+  /* Lift on hover: small, quick, intentional */
+  .lift {
+    transition:
+      transform 0.5s var(--ease),
+      box-shadow 0.5s var(--ease),
+      border-color 0.3s;
+  }
+  .lift:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 40px -20px rgb(0 0 0 / 0.22);
+    border-color: var(--line-strong);
+  }
+
+  /* Field */
+  .field {
+    width: 100%;
+    background: var(--color-bg-surface);
+    border: 1px solid var(--line);
+    border-radius: var(--radius-control);
+    padding: 11px 14px;
+    font-size: 15px;
+    line-height: 1.4;
+    color: var(--ink-900);
+    transition:
+      border-color 0.2s,
+      box-shadow 0.2s;
+  }
+  .field::placeholder {
+    color: var(--ink-500);
+  }
+  .field:focus {
+    outline: none;
+    border-color: var(--ink-900);
+    box-shadow: 0 0 0 3px var(--line);
+  }
+
+  /* Image frames */
+  .frame {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-panel);
+    background: var(--cream-200);
+  }
+  .frame img {
+    transition:
+      transform 1.2s var(--ease),
+      opacity 1.4s var(--ease);
+  }
+  .group:hover .frame img,
+  .frame:hover img {
+    transform: scale(1.025);
+  }
+}
+
+/* Day/dusk paintings: both layers are rendered; the dusk one fades in with the theme. */
+.painting-day,
+.painting-dusk {
+  transition: opacity 1.4s var(--ease);
+}
+.painting-dusk {
+  opacity: 0;
+}
+.dark .painting-dusk {
+  opacity: 1;
+}
+.dark .painting-day {
+  opacity: 0;
+}
+/* Product renders were shot on a bright studio sweep; soften them after dark. */
+.dark .render img {
+  filter: brightness(0.86) saturate(0.95);
 }
 
 @keyframes marquee {
@@ -173,39 +355,21 @@ html.lenis body {
     transform: translateX(-50%);
   }
 }
-@keyframes drift {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  50% {
-    transform: translate3d(-1.5%, -1%, 0) scale(1.03);
-  }
-}
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-10px);
-  }
-}
-
 .animate-marquee {
-  animation: marquee 40s linear infinite;
+  animation: marquee 56s linear infinite;
 }
-.animate-drift {
-  animation: drift 24s ease-in-out infinite;
-}
-.animate-float {
-  animation: float 7s ease-in-out infinite;
+.marquee-group:hover .animate-marquee {
+  animation-play-state: paused;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .animate-marquee,
-  .animate-drift,
-  .animate-float {
+  .animate-marquee {
     animation: none;
+  }
+  .frame img,
+  .lift,
+  .painting-day,
+  .painting-dusk {
+    transition: none;
   }
 }

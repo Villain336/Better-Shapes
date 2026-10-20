@@ -5,45 +5,37 @@ import { AnimatePresence, LayoutGroup, motion } from "framer-motion";
 import type { Capability } from "@/lib/content";
 import { projects } from "@/lib/content";
 import { ProjectCard } from "./Cards";
+import { SegmentedControl } from "./Primitives";
+import { WorkGalleryButton } from "./Lightbox";
 
-const filters: ("All" | Capability)[] = ["All", "Tech", "Design", "Marketing"];
+type Filter = "All" | Capability;
+const filters: Filter[] = ["All", "Tech", "Design", "Marketing"];
 
 export function WorkGrid() {
-  const [active, setActive] = useState<(typeof filters)[number]>("All");
+  const [active, setActive] = useState<Filter>("All");
   const list = active === "All" ? projects : projects.filter((p) => p.tags.includes(active));
 
   return (
     <LayoutGroup>
-      <div className="flex flex-wrap gap-2" role="tablist" aria-label="Filter work">
-        {filters.map((f) => (
-          <button
-            key={f}
-            role="tab"
-            aria-selected={active === f}
-            onClick={() => setActive(f)}
-            className={`relative cursor-pointer rounded-full px-[18px] py-2.5 text-[15px] font-medium tracking-[-0.01em] ${
-              active === f ? "text-white" : "glass text-ink"
-            }`}
-          >
-            {active === f && (
-              <motion.span
-                layoutId="work-filter"
-                className="absolute inset-0 rounded-full bg-ink"
-                transition={{ type: "spring", stiffness: 380, damping: 32 }}
-              />
-            )}
-            <span className="relative">{f}</span>
-          </button>
-        ))}
+      <div className="hairline-b flex items-center justify-between gap-4 pb-4">
+        <SegmentedControl
+          label="Filter work"
+          size="sm"
+          value={active}
+          onChange={setActive}
+          options={filters.map((f) => ({ value: f, label: f }))}
+        />
+        <div className="flex items-center gap-3">
+          <span className="label hidden text-ink-3 sm:inline">
+            {list.length} {list.length === 1 ? "project" : "projects"}
+          </span>
+          <WorkGalleryButton />
+        </div>
       </div>
-      <motion.div layout className="grid gap-6 md:grid-cols-2 lg:grid-cols-5">
+      <motion.div layout className="grid gap-5 md:grid-cols-2">
         <AnimatePresence mode="popLayout">
-          {list.map((p, i) => (
-            <ProjectCard
-              key={p.title}
-              project={p}
-              className={i % 4 === 0 || i % 4 === 3 ? "lg:col-span-3" : "lg:col-span-2"}
-            />
+          {list.map((p) => (
+            <ProjectCard key={p.title} project={p} tall />
           ))}
         </AnimatePresence>
       </motion.div>

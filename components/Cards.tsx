@@ -2,26 +2,14 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
-import { toneFor, type Capability, type Post, type Project, type Tone } from "@/lib/content";
-import { GlassCard } from "./GlassCard";
+import { AnimatePresence, motion } from "framer-motion";
+import { formatDate, toneFor, type Capability, type Post, type Project } from "@/lib/content";
+import { Panel } from "./Panel";
 import { RENDER_BG } from "./ProductRender";
-import { ArrowUpRight, CapabilityGlyph, toneColor, toneTint } from "./Shapes";
+import { ArrowRight, ArrowUpRight, CapabilityGlyph, Check } from "./Shapes";
 import { Chip } from "./Chip";
 import { Button } from "./Button";
-
-const lift = "transition-transform duration-700 ease-[var(--ease-out)] hover:-translate-y-1.5";
-
-function ArrowDot({ size = 32 }: { size?: number }) {
-  return (
-    <span
-      className="grid shrink-0 place-items-center rounded-full bg-ink text-white transition-colors duration-300 group-hover/card:bg-brand-blue"
-      style={{ width: size, height: size }}
-    >
-      <ArrowUpRight className="transition-transform duration-500 ease-[var(--ease-out)] group-hover/card:rotate-45" />
-    </span>
-  );
-}
+import { Painting } from "./Painting";
 
 export function CapabilityCard({
   name,
@@ -36,83 +24,84 @@ export function CapabilityCard({
   points?: string[];
   exploring?: boolean;
 }) {
-  const tone = toneFor[name];
+  const href = exploring ? "/labs" : "/work";
   return (
-    <GlassCard className={`flex h-full flex-col gap-5 rounded-[32px] p-6 ${lift}`}>
-      <div className="flex items-start justify-between">
-        <span
-          className="grid size-16 place-items-center rounded-[20px] transition-transform duration-700 ease-[var(--ease-out)] group-hover/card:rotate-[12deg] group-hover/card:scale-105"
-          style={{ background: toneTint[tone] }}
-        >
-          <CapabilityGlyph name={name} />
-        </span>
-        {exploring ? (
-          <Chip tone={tone}>Exploring</Chip>
-        ) : (
-          <span className="caption text-ink-3">{String(index + 1).padStart(2, "0")}</span>
+    <Link href={href} className="group block h-full">
+      <Panel lift className="flex h-full flex-col gap-5 p-5">
+        <div className="flex items-start justify-between">
+          <span className="grid size-9 place-items-center rounded-[10px] border border-line bg-canvas text-ink">
+            <CapabilityGlyph name={name} size={14} />
+          </span>
+          {exploring ? <Chip tone={toneFor[name]}>Exploring</Chip> : <span className="label text-ink-3">{String(index + 1).padStart(2, "0")}</span>}
+        </div>
+        <div className="flex flex-col gap-1.5">
+          <h3 className="h3">{name}</h3>
+          <p className="small">{blurb}</p>
+        </div>
+        {points && (
+          <ul className="hairline-t flex flex-col gap-2 pt-4">
+            {points.map((p) => (
+              <li key={p} className="flex items-center gap-2.5 text-[13px] text-ink-2">
+                <span className="h-px w-3 bg-line-strong" />
+                {p}
+              </li>
+            ))}
+          </ul>
         )}
-      </div>
-      <div className="flex flex-col gap-2">
-        <h3 className="text-[24px] font-medium tracking-[-0.04em]">{name}</h3>
-        <p className="text-[14px] leading-[1.5] text-ink-2">{blurb}</p>
-      </div>
-      {points && (
-        <ul className="flex flex-col gap-1.5">
-          {points.map((p) => (
-            <li key={p} className="flex items-center gap-2 text-[14px] text-ink-2">
-              <span className="size-1.5 rounded-full" style={{ background: toneColor[tone] }} />
-              {p}
-            </li>
-          ))}
-        </ul>
-      )}
-      <Link
-        href={exploring ? "/labs" : "/work"}
-        className="mt-auto flex items-center justify-between border-t border-white/70 pt-4 text-[15px] font-medium"
-      >
-        {exploring ? "Visit Labs" : "Explore"} <ArrowDot />
-      </Link>
-    </GlassCard>
+        <span className="mt-auto flex items-center justify-between pt-2 text-[13px] font-medium text-ink">
+          {exploring ? "Visit Labs" : "See the work"}
+          <ArrowRight className="text-ink-3 transition-transform duration-300 ease-[var(--ease-out)] group-hover:translate-x-0.5 group-hover:text-ink" />
+        </span>
+      </Panel>
+    </Link>
   );
 }
 
-export function ProjectCard({ project, className = "" }: { project: Project; className?: string }) {
+export function ProjectCard({ project, className = "", tall = false }: { project: Project; className?: string; tall?: boolean }) {
   return (
     <motion.article
       layout
-      initial={{ opacity: 0, scale: 0.96 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.96 }}
-      transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-      className={`group/card relative isolate flex min-h-[420px] flex-col justify-between overflow-hidden rounded-[32px] p-4 md:min-h-[500px] ${className}`}
-      style={{ background: RENDER_BG }}
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 10 }}
+      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
+      className={`group h-full ${className}`}
     >
-      <Image
-        src={project.image}
-        alt={`${project.title} product render`}
-        fill
-        sizes="(min-width: 1024px) 60vw, 100vw"
-        className="-z-10 object-cover transition-transform duration-[1.4s] ease-[var(--ease-out)] group-hover/card:scale-[1.06]"
-      />
-      <div className="flex flex-wrap gap-2">
-        {project.tags.map((t) => (
-          <Chip key={t} tone={toneFor[t]} glass>
-            {t}
-          </Chip>
-        ))}
-        <Chip tone="blue" glass>
-          {project.status}
-        </Chip>
-      </div>
-      <Link
-        href={project.href}
-        className="glass flex items-center justify-between gap-4 rounded-[24px] py-4 pl-5 pr-3 transition-transform duration-700 ease-[var(--ease-out)] group-hover/card:-translate-y-1"
-      >
-        <div>
-          <h3 className="text-[22px] font-medium tracking-[-0.04em] md:text-[24px]">{project.title}</h3>
-          <p className="text-[14px] text-ink-2">{project.subtitle}</p>
-        </div>
-        <ArrowDot size={44} />
+      <Link href={project.href} className="block h-full">
+        <Panel lift className="flex h-full flex-col p-1.5">
+          <div className={`frame render rounded-[10px] ${tall ? "aspect-[4/3] md:aspect-[16/10]" : "aspect-[4/3]"}`} style={{ background: RENDER_BG }}>
+            <Image
+              src={project.image}
+              alt={`${project.title} product render`}
+              fill
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              className="object-cover"
+            />
+            <div className="absolute left-3 top-3 flex gap-1.5">
+              <Chip glass tone="blue">
+                {project.status}
+              </Chip>
+            </div>
+          </div>
+          <div className="flex flex-1 flex-col gap-3 px-3.5 pb-3 pt-4">
+            <div className="flex items-start justify-between gap-4">
+              <div className="flex flex-col gap-1">
+                <h3 className="h3">{project.title}</h3>
+                <p className="small">{project.subtitle}</p>
+              </div>
+              <span className="mt-1 grid size-7 shrink-0 place-items-center rounded-full border border-line text-ink transition-colors duration-300 group-hover:border-ink group-hover:bg-ink group-hover:text-on-ink">
+                <ArrowUpRight size={12} />
+              </span>
+            </div>
+            <div className="mt-auto flex flex-wrap gap-1.5">
+              {project.tags.map((t) => (
+                <Chip key={t} tone={toneFor[t]}>
+                  {t}
+                </Chip>
+              ))}
+            </div>
+          </div>
+        </Panel>
       </Link>
     </motion.article>
   );
@@ -137,71 +126,92 @@ export function PricingCard({
   href?: string;
   period?: string;
 }) {
-  const dots: Tone[] = ["blue", "red", "yellow", "green", "blue"];
-  const body = (
-    <>
+  const muted = featured ? "text-on-ink/65" : "text-ink-2";
+  const [amount, note] = period.split(",");
+  return (
+    <div
+      className={`flex h-full flex-col gap-6 rounded-(--radius-card) p-6 md:p-7 ${
+        featured ? "bg-ink text-on-ink" : "surface"
+      }`}
+    >
       <div className="flex items-center justify-between">
-        <h3 className="text-[18px] font-semibold tracking-[-0.02em]">{name}</h3>
-        {featured && <Chip tone="yellow">Most popular</Chip>}
+        <span className={`label ${featured ? "text-on-ink/70" : "text-ink-3"}`}>{name}</span>
+        {featured && (
+          <span className="label inline-flex h-6 items-center gap-1.5 rounded-(--radius-tag) border border-on-ink/20 bg-on-ink/10 px-2 text-on-ink">
+            <span className="size-1.5 rounded-full bg-brand-yellow" />
+            Most popular
+          </span>
+        )}
       </div>
-      <div className="flex items-baseline gap-1.5">
-        <span className="font-display text-[56px] font-semibold leading-none tracking-[-0.06em]">{price}</span>
-        <span className="text-[18px] font-medium opacity-60">{period}</span>
+      <div className="flex flex-col gap-2">
+        <div className="flex items-baseline gap-1.5">
+          <span className="num relative inline-grid overflow-hidden text-[44px] md:text-[48px]">
+            <AnimatePresence initial={false} mode="popLayout">
+              <motion.span
+                key={price}
+                initial={{ y: "60%", opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: "-60%", opacity: 0 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                className="block"
+              >
+                {price}
+              </motion.span>
+            </AnimatePresence>
+          </span>
+          <span className={`text-[14px] ${muted}`}>{amount}</span>
+        </div>
+        {/* Always rendered so switching billing never shifts the card. */}
+        <span className={`label ${featured ? "text-on-ink/60" : "text-ink-3"}`}>{note ? note.trim() : "Billed monthly"}</span>
       </div>
-      <p className={`text-[16px] leading-[1.55] ${featured ? "text-white/75" : "text-ink-2"}`}>{description}</p>
-      <ul className={`flex flex-col gap-3 border-t pt-6 ${featured ? "border-white/15" : "border-line"}`}>
-        {features.map((f, i) => (
-          <li key={f} className="flex items-center gap-3 text-[16px]">
-            <span className="size-2 rounded-full" style={{ background: toneColor[dots[i % dots.length]] }} />
+      <p className={`text-[14px] leading-[1.55] ${muted}`}>{description}</p>
+      <ul className={`flex flex-col gap-2.5 border-t pt-5 ${featured ? "border-on-ink/15" : "border-line"}`}>
+        {features.map((f) => (
+          <li key={f} className="flex items-center gap-2.5 text-[14px]">
+            <Check size={13} className={featured ? "text-on-ink/70" : "text-ink-3"} />
             {f}
           </li>
         ))}
       </ul>
-      <Button href={href} variant={featured ? "glass" : "ink"} className="mt-auto w-full">
+      <Button href={href} variant={featured ? "inverse" : "ink"} className="mt-auto w-full">
         {cta}
       </Button>
-    </>
+    </div>
   );
-
-  if (featured) {
-    return (
-      <div className={`glass-ink rim-gradient flex h-full flex-col gap-6 rounded-[32px] p-8 text-white ${lift}`}>
-        {body}
-      </div>
-    );
-  }
-  return <GlassCard className={`flex h-full flex-col gap-6 rounded-[32px] p-8 ${lift}`}>{body}</GlassCard>;
 }
 
 export function PostCard({ post }: { post: Post }) {
   return (
-    <GlassCard as="article" className={`flex h-full flex-col rounded-[32px] ${lift}`}>
-      <div className="relative aspect-[380/220] overflow-hidden">
-        <Image
-          src={post.image}
-          alt=""
-          fill
-          sizes="(min-width: 1024px) 33vw, 100vw"
-          className="object-cover transition-transform duration-[1.2s] ease-[var(--ease-out)] group-hover/card:scale-105"
-        />
-      </div>
-      <div className="flex flex-1 flex-col gap-3 px-6 pb-6 pt-5">
-        <div className="flex items-center gap-2.5">
-          <Chip tone={toneFor[post.category]}>{post.category}</Chip>
-          <span className="caption text-ink-3">Coming soon</span>
+    <Link href={`/blog/${post.slug}`} className="group block h-full">
+      <Panel as="article" lift className="flex h-full flex-col p-1.5">
+        <div className="frame aspect-[16/10] rounded-[10px]">
+          <Painting src={post.image} sizes="(min-width: 1024px) 33vw, 100vw" />
         </div>
-        <h3 className="text-[24px] font-medium leading-[1.15] tracking-[-0.04em]">{post.title}</h3>
-        <p className="text-[14px] leading-[1.5] text-ink-2">{post.excerpt}</p>
-      </div>
-    </GlassCard>
+        <div className="flex flex-1 flex-col gap-3 px-3.5 pb-3.5 pt-4">
+          <div className="flex items-center gap-2">
+            <Chip tone={toneFor[post.category]}>{post.category}</Chip>
+            <span className="label text-ink-3">
+              {formatDate(post.date)} · {post.minutes} min
+            </span>
+          </div>
+          <div className="flex items-start justify-between gap-4">
+            <h3 className="h3">{post.title}</h3>
+            <span className="mt-0.5 grid size-7 shrink-0 place-items-center rounded-full border border-line text-ink transition-colors duration-300 group-hover:border-ink group-hover:bg-ink group-hover:text-on-ink">
+              <ArrowUpRight size={12} />
+            </span>
+          </div>
+          <p className="small">{post.excerpt}</p>
+        </div>
+      </Panel>
+    </Link>
   );
 }
 
 export function StatCard({ value, label, className = "" }: { value: string; label: string; className?: string }) {
   return (
-    <GlassCard className={`flex flex-col gap-1 rounded-[24px] px-6 pb-[22px] pt-5 ${className}`}>
-      <span className="font-display text-[48px] font-semibold leading-none tracking-[-0.06em] md:text-[56px]">{value}</span>
-      <span className="text-[14px] text-ink-2">{label}</span>
-    </GlassCard>
+    <Panel className={`flex flex-col gap-3 p-5 ${className}`}>
+      <span className="label text-ink-3">{label}</span>
+      <span className="num text-[36px]">{value}</span>
+    </Panel>
   );
 }

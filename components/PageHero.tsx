@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { LogoMark } from "./Logo";
 import { Accent } from "./Accent";
+import { Eyebrow } from "./Eyebrow";
+import { Painting } from "./Painting";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -16,109 +16,93 @@ type Props = {
   accent: string;
   sub: string;
   children?: React.ReactNode;
+  /** Sits to the right of the copy on large screens (the home brief, for instance). */
   aside?: React.ReactNode;
+  /** One quiet line under the buttons: proof, a date, a promise. */
+  note?: React.ReactNode;
   tall?: boolean;
-  priority?: boolean;
-  /** Use for sentence-length accents (product taglines): smaller, wrapping second line. */
+  /** For sentence-length accents (product taglines): the accent wraps onto its own smaller line. */
   smallAccent?: boolean;
 };
 
-/** Full-bleed painted landscape with parallax + slow drift, headline with a soft accent line ("shape" in brand colors). */
-export function PageHero({ image, alt, eyebrow, title, accent, sub, children, aside, tall = false, smallAccent = false }: Props) {
+const rise = (delay: number) => ({
+  initial: { opacity: 0, y: 14 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.7, ease, delay },
+});
+
+/** Full-bleed painting, a quiet wash for legibility, and a headline that settles into place. */
+export function PageHero({ image, alt, eyebrow, title, accent, sub, children, aside, note, tall = false, smallAccent = false }: Props) {
   const ref = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start start", "end start"] });
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", reduce ? "0%" : "22%"]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1.04, reduce ? 1.04 : 1.14]);
-  const copyY = useTransform(scrollYProgress, [0, 1], [0, reduce ? 0 : -80]);
-  const copyOpacity = useTransform(scrollYProgress, [0, 0.7], [1, reduce ? 1 : 0]);
-
-  const words = title.split(" ");
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", reduce ? "0%" : "12%"]);
+  const scale = useTransform(scrollYProgress, [0, 1], [1.02, reduce ? 1.02 : 1.08]);
 
   return (
-    <section
-      ref={ref}
-      className={`relative isolate overflow-hidden ${tall ? "min-h-[100svh] md:min-h-[920px]" : "min-h-[640px] md:min-h-[700px]"}`}
-    >
+    <section ref={ref} className={`relative isolate overflow-hidden ${tall ? "min-h-[min(88svh,880px)]" : "min-h-[540px] md:min-h-[620px]"}`}>
       <motion.div className="absolute inset-0 -z-20" style={{ y, scale }}>
-        <div className="animate-drift absolute inset-0">
-          <Image src={image} alt={alt} fill priority sizes="100vw" className="object-cover" />
-        </div>
+        <Painting src={image} alt={alt} priority sizes="100vw" />
       </motion.div>
-      {/* left wash for legibility + bottom fade into the cream canvas */}
+
+      {/*
+        Top scrim for the nav, left wash for the copy, bottom fade into the canvas.
+        Solid canvas colour shaped by a static alpha mask, so the wash fades with the theme
+        instead of snapping (gradient colour stops can't transition).
+      */}
+      <div aria-hidden className="absolute inset-x-0 top-0 -z-10 h-40 bg-canvas [mask-image:linear-gradient(180deg,rgb(0_0_0/0.7),transparent)]" />
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(250,248,244,0.7)_0%,rgba(250,248,244,0.15)_55%,rgba(241,239,234,1)_100%)] md:bg-[linear-gradient(90deg,rgba(250,248,244,0.82)_0%,rgba(250,248,244,0.35)_42%,rgba(250,248,244,0)_70%)]"
+        className="absolute inset-0 -z-10 bg-canvas [mask-image:linear-gradient(180deg,rgb(0_0_0/0.55)_0%,rgb(0_0_0/0.2)_50%,rgb(0_0_0/0.9)_100%)] md:[mask-image:linear-gradient(90deg,rgb(0_0_0/0.82)_0%,rgb(0_0_0/0.45)_45%,transparent_75%)]"
       />
-      <div aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-56 bg-gradient-to-b from-transparent to-canvas" />
+      <div aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-32 bg-canvas [mask-image:linear-gradient(180deg,transparent,black)]" />
 
-      <motion.div
-        className={`container-x relative flex flex-col justify-center ${tall ? "min-h-[100svh] pb-24 pt-32 md:min-h-[920px] md:pt-36" : "min-h-[640px] pb-24 pt-36 md:min-h-[700px]"}`}
-        style={{ y: copyY, opacity: copyOpacity }}
+      <div
+        className={`container-x relative flex flex-col justify-center pb-16 pt-32 md:pt-40 ${
+          tall ? "min-h-[min(88svh,880px)]" : "min-h-[540px] md:min-h-[620px]"
+        }`}
       >
-        <div className="grid items-center gap-12 lg:grid-cols-[1.5fr_1fr]">
-          <div className="flex flex-col items-start gap-6 md:gap-7">
-            <motion.span
-              className="glass eyebrow inline-flex items-center gap-2.5 rounded-full py-2 pl-3 pr-4 text-ink-2"
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease, delay: 0.1 }}
-            >
-              <LogoMark size={14} />
-              {eyebrow}
-            </motion.span>
+        <div className={`grid items-center gap-12 ${aside ? "lg:grid-cols-[minmax(0,1fr)_400px]" : ""}`}>
+          <div className="flex max-w-[720px] flex-col items-start gap-6">
+            <motion.div {...rise(0.05)}>
+              <Eyebrow>{eyebrow}</Eyebrow>
+            </motion.div>
 
-            <h1 className="display text-[clamp(52px,8.2vw,120px)] text-ink">
-              <span className="block lg:whitespace-nowrap">
-                {words.map((w, i) => (
-                  <span key={i} className="inline-block overflow-hidden pb-[0.06em] align-bottom">
-                    <motion.span
-                      className="inline-block"
-                      initial={{ y: "110%" }}
-                      animate={{ y: 0 }}
-                      transition={{ duration: 1, ease, delay: 0.15 + i * 0.08 }}
-                    >
-                      {w}
-                      {i < words.length - 1 ? " " : ""}
-                    </motion.span>
-                  </span>
-                ))}
-              </span>
-              <span className={`block overflow-hidden pb-[0.1em] ${smallAccent ? "mt-3 max-w-[640px] text-[0.4em] leading-[1.05] tracking-[-0.045em]" : ""}`}>
-                <motion.span
-                  className="inline-block"
-                  initial={{ y: "110%" }}
-                  animate={{ y: 0 }}
-                  transition={{ duration: 1.1, ease, delay: 0.25 + words.length * 0.08 }}
-                >
+            <motion.h1 {...rise(0.12)} className="display text-[clamp(40px,5.6vw,76px)] text-ink">
+              {title}{" "}
+              {smallAccent ? (
+                <span className="mt-3 block max-w-[640px] text-[0.42em] font-medium leading-[1.2] tracking-[-0.02em]">
                   <Accent text={accent} />
-                </motion.span>
-              </span>
-            </h1>
+                </span>
+              ) : (
+                <Accent text={accent} />
+              )}
+            </motion.h1>
 
-            <motion.p
-              className="max-w-[520px] text-[18px] leading-[1.5] tracking-[-0.01em] text-ink-2 md:text-[20px]"
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, ease, delay: 0.55 }}
-            >
+            <motion.p {...rise(0.22)} className="lede max-w-[520px]">
               {sub}
             </motion.p>
 
             {children && (
-              <motion.div
-                className="flex flex-wrap items-center gap-3"
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.9, ease, delay: 0.7 }}
-              >
+              <motion.div {...rise(0.3)} className="flex flex-wrap items-center gap-2.5 pt-1">
                 {children}
               </motion.div>
             )}
+
+            {note && (
+              <motion.div {...rise(0.38)} className="small text-ink-2">
+                {note}
+              </motion.div>
+            )}
           </div>
-          {aside}
+
+          {aside && (
+            <motion.div initial={{ opacity: 0, y: 18 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.8, ease, delay: 0.3 }}>
+              {aside}
+            </motion.div>
+          )}
         </div>
-      </motion.div>
+      </div>
     </section>
   );
 }

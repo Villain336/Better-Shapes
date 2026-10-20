@@ -1,24 +1,26 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { ProductCard } from "@/components/ProductCard";
-import { ShapesOSFeature } from "@/components/ShapesOSFeature";
+import { ProductFeature } from "@/components/ProductFeature";
 import { RevealItem, Stagger, Reveal } from "@/components/Reveal";
-import { Blobs, SectionHeading } from "@/components/Sections";
+import { SectionHeading } from "@/components/Sections";
 import { Button } from "@/components/Button";
 import { NewsletterForm } from "@/components/Forms";
+import { Panel } from "@/components/Panel";
+import { Eyebrow } from "@/components/Eyebrow";
+import { ProductRender } from "@/components/ProductRender";
 import { art } from "@/lib/content";
-import { products } from "@/lib/products";
+import { flagship, products, statusMeta } from "@/lib/products";
 
 export const metadata: Metadata = {
   title: "Products",
   description:
-    "ShapesOS and a growing suite of open-source tools for the agentic future: clean-room alternatives to the expensive software businesses rely on.",
+    "Five open-source products from Better Shapes: Periscope, Canary, Kiln, Ripple and Flock. Tools for agents, security, data, video and drones.",
 };
 
 export default function ProductsPage() {
-  const building = products.filter((p) => p.status === "in-development");
-  const planned = products.filter((p) => p.status === "planned" && !p.everyday);
-  const everyday = products.filter((p) => p.everyday);
+  const rest = products.filter((p) => p.slug !== flagship.slug);
+  const openSource = products.filter((p) => p.openSource !== false).length;
 
   return (
     <>
@@ -28,96 +30,78 @@ export default function ProductsPage() {
         eyebrow="Products"
         title="Tools worth"
         accent="building on."
-        sub="ShapesOS and a growing suite of open-source software for the agentic future. Free to self-host, built to be trusted."
+        sub="Six products, one idea: software you can read, run and trust. An agentic business OS, eyes for agents, decoy keys, a model platform, a streaming stack and a drone mesh OS, all open source."
+        note={`${products.length} products · ${openSource} open source`}
       >
-        <Button href="/products/shapesos">Join the ShapesOS waitlist</Button>
-        <Button href="#suite" variant="glass">
-          See the suite
+        <Button href={`/products/${flagship.slug}`}>Join the ShapesOS waitlist</Button>
+        <Button href="#lineup" variant="outline">
+          See the lineup
         </Button>
       </PageHero>
 
-      <section className="container-x pb-16">
-        <ShapesOSFeature />
+      <section className="container-x pb-24">
+        <ProductFeature product={flagship} />
       </section>
 
-      <section className="relative isolate py-16">
-        <Blobs className="opacity-70" />
-        <div className="container-x flex flex-col gap-10">
-          <SectionHeading
-            eyebrow="In development"
-            title="Building"
-            accent="right now."
-            side={
-              <p className="max-w-[360px] text-[16px] leading-[1.55] text-ink-2">
-                The foundations everything else is made from: agent guardrails, our design system and AI visibility. Plus Fig Tree for design and Snipper for video.
-              </p>
-            }
-          />
-          <Stagger className="grid gap-5 md:grid-cols-3">
-            {building.map((p) => (
-              <RevealItem key={p.slug} className="h-full">
-                <ProductCard product={p} />
-              </RevealItem>
-            ))}
-          </Stagger>
-        </div>
-      </section>
-
-      <section id="suite" className="container-x flex scroll-mt-28 flex-col gap-10 py-16">
+      <section id="lineup" className="container-x flex scroll-mt-32 flex-col gap-10 pb-24">
         <SectionHeading
-          eyebrow="The open suite"
-          title="Expensive tools,"
-          accent="open to everyone."
-          side={
-            <p className="max-w-[380px] text-[16px] leading-[1.55] text-ink-2">
-              Clean-room, open-source alternatives to software businesses pay a fortune for. Same jobs done, original
-              code, AI at the core.
-            </p>
-          }
+          eyebrow="The lineup"
+          title="Five more,"
+          accent="each with a job."
+          description="Eyes for agents, a security tool we use on ourselves, a data and model platform, a streaming stack and a Labs project that leaves the screen entirely."
         />
-        <Stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {planned.map((p) => (
+        <Stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {rest.map((p) => (
             <RevealItem key={p.slug} className="h-full">
               <ProductCard product={p} />
             </RevealItem>
           ))}
         </Stagger>
-        <Reveal className="text-[14px] leading-[1.55] text-ink-3">
-          Product names are working names. Other companies’ names are used only to describe what each tool replaces; we
-          aren’t affiliated with them.
+      </section>
+
+      <section className="container-x flex flex-col gap-10 pb-24">
+        <SectionHeading
+          eyebrow="How they fit"
+          title="Six parts,"
+          accent="one system."
+          description="Each product stands alone, but they were designed to lean on each other."
+        />
+        <Reveal>
+          <Panel className="p-2">
+            <ol className="grid sm:grid-cols-2 lg:grid-cols-3">
+              {products.map((p, i) => (
+                <li
+                  key={p.slug}
+                  className={`flex gap-4 p-4 ${i > 0 ? "hairline-t sm:[&:nth-child(-n+2)]:border-t-0 lg:[&:nth-child(-n+3)]:border-t-0" : ""} sm:[&:nth-child(2n)]:border-l sm:[&:nth-child(2n)]:border-line lg:[&:nth-child(2n)]:border-l-0 lg:[&:not(:nth-child(3n+1))]:border-l lg:[&:not(:nth-child(3n+1))]:border-line`}
+                >
+                  <ProductRender slug={p.slug} className="size-14 shrink-0 rounded-[10px]" sizes="56px" />
+                  <div className="flex flex-col gap-1.5">
+                    <div className="flex items-center gap-2">
+                      <span className="label text-ink-3">{String(i + 1).padStart(2, "0")}</span>
+                      <span className="label text-ink-3">{statusMeta[p.status].label}</span>
+                    </div>
+                    <h3 className="h3">{p.name}</h3>
+                    <p className="small">{p.fit}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </Panel>
         </Reveal>
       </section>
 
-      <section className="relative isolate py-16">
-        <Blobs className="opacity-60" />
-        <div className="container-x flex flex-col gap-10">
-          <SectionHeading
-            eyebrow="For everyone"
-            title="Everyday apps,"
-            accent="yours to keep."
-            side={
-              <p className="max-w-[380px] text-[16px] leading-[1.55] text-ink-2">
-                Open-source versions of the apps people use every day, on hardware you control. Plus Daydream, our
-                own streaming service for AI-made movies and series.
-              </p>
-            }
-          />
-          <Stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {everyday.map((p) => (
-              <RevealItem key={p.slug} className="h-full">
-                <ProductCard product={p} />
-              </RevealItem>
-            ))}
-          </Stagger>
-          <Reveal className="text-[14px] leading-[1.55] text-ink-3">
-            Playlist and watchlist imports bring over titles and order, not the audio or video. Hum and Matinee play
-            media you own, sources you subscribe to and work artists upload themselves. They never rip, record or unlock
-            anyone else’s catalog.
-          </Reveal>
-        </div>
+      <section className="container-x pb-24">
+        <Reveal className="hairline-t hairline-b grid items-start gap-8 py-12 md:grid-cols-[1fr_2fr] md:py-16">
+          <Eyebrow>A note on names</Eyebrow>
+          <p className="body max-w-[680px]">
+            Product names are working names and may change before release. Other companies’ products are mentioned
+            only to describe what a tool does; we aren’t affiliated with them. Statuses are honest: “planned” means
+            we haven’t started, and “exploring” means research with nothing released.
+          </p>
+        </Reveal>
       </section>
 
-      <section className="container-x flex flex-col gap-6 pb-24">
+      <section className="container-x pb-24">
         <Reveal>
           <NewsletterForm />
         </Reveal>

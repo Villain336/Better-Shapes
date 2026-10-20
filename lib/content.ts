@@ -4,9 +4,6 @@ export type Capability = "Tech" | "Design" | "Robotics" | "Marketing";
 /** Prefix for static files when the site is served from a sub-path (GitHub Pages). */
 export const asset = (path: string) => `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${path}`;
 
-/** ShapesOS launch: midnight US Eastern (EST, UTC-5) on Dec 1, 2026. */
-export const shapesOSLaunch = { at: "2026-12-01T00:00:00-05:00", label: "Dec 1, 2026" };
-
 export const art = {
   home: asset("/art/home-poppies.webp"),
   work: asset("/art/work-lavender.webp"),
@@ -47,8 +44,8 @@ export const capabilities: { name: Capability; blurb: string; points: string[]; 
   },
   {
     name: "Robotics",
-    blurb: "Physical automation and intelligence. A venture we’re exploring in Labs; nothing released yet.",
-    points: ["Research in Labs", "Physical AI", "Join the interest list"],
+    blurb: "Physical automation and intelligence. A venture we’re exploring in Labs with Flock, our drone mesh OS; nothing released yet.",
+    points: ["Flock: drone mesh OS", "Physical AI research", "Join the interest list"],
     exploring: true,
   },
   {
@@ -56,6 +53,22 @@ export const capabilities: { name: Capability; blurb: string; points: string[]; 
     blurb: "Growth strategy, content and campaigns that compound.",
     points: ["Positioning & launch", "Content engines", "Performance & SEO"],
   },
+];
+
+/** The kinds of requests members add to their board. Shown as a slow ticker under the hero. */
+export const requestables: { text: string; tone: Tone }[] = [
+  { text: "Brand identity", tone: "red" },
+  { text: "Marketing site", tone: "red" },
+  { text: "Product UI", tone: "red" },
+  { text: "Design system", tone: "red" },
+  { text: "Next.js app", tone: "blue" },
+  { text: "AI agent", tone: "blue" },
+  { text: "Automation", tone: "blue" },
+  { text: "Data platform", tone: "blue" },
+  { text: "Launch campaign", tone: "green" },
+  { text: "Content engine", tone: "green" },
+  { text: "SEO & performance", tone: "green" },
+  { text: "Pitch deck", tone: "green" },
 ];
 
 export const steps = [
@@ -92,44 +105,63 @@ export type Project = {
 export const projects: Project[] = [
   {
     title: "ShapesOS",
-    subtitle: "Our agentic business OS",
+    subtitle: "The open-source agentic business OS",
     image: asset("/products/shapesos.webp"),
     tags: ["Tech", "Design"],
     status: "Launching Dec 1, 2026",
     href: "/products/shapesos",
   },
   {
-    title: "Fig Tree",
-    subtitle: "An open-source design tool with its own GPU renderer",
-    image: asset("/products/fig-tree.webp"),
-    tags: ["Design", "Tech"],
+    title: "Periscope",
+    subtitle: "A viewing MCP server and API that gives agents eyes",
+    image: asset("/products/periscope.webp"),
+    tags: ["Tech", "Design"],
     status: "In development",
-    href: "/products/fig-tree",
+    href: "/products/periscope",
   },
   {
-    title: "Daydream",
-    subtitle: "AI-made movies and series, free to watch",
-    image: asset("/products/daydream.webp"),
-    tags: ["Design", "Marketing"],
+    title: "Canary",
+    subtitle: "Decoy keys that alert you the moment they’re used",
+    image: asset("/products/canary.webp"),
+    tags: ["Tech"],
+    status: "In development",
+    href: "/products/canary",
+  },
+  {
+    title: "Kiln",
+    subtitle: "Label data and train models on hardware you control",
+    image: asset("/products/kiln.webp"),
+    tags: ["Tech", "Design"],
     status: "Planned",
-    href: "/products/daydream",
+    href: "/products/kiln",
   },
   {
-    title: "Snipper",
-    subtitle: "Turns long videos into short clips worth sharing",
-    image: asset("/products/snipper.webp"),
+    title: "Ripple",
+    subtitle: "An open-source live and on-demand streaming platform",
+    image: asset("/products/ripple.webp"),
     tags: ["Marketing", "Tech"],
-    status: "In development",
-    href: "/products/snipper",
+    status: "Planned",
+    href: "/products/ripple",
+  },
+  {
+    title: "Flock",
+    subtitle: "A mesh operating system for fleets of small drones",
+    image: asset("/products/flock.webp"),
+    tags: ["Robotics", "Tech"],
+    status: "Exploring in Labs",
+    href: "/products/flock",
   },
 ];
 
 
 
+/** Quarterly billing takes 10% off; shown per month either way. */
+export type Billing = "monthly" | "quarterly";
+
 export const plans = [
   {
     name: "Standard",
-    price: "$4,995",
+    price: { monthly: "$4,995", quarterly: "$4,495" } satisfies Record<Billing, string>,
     description: "One request at a time. Pause or cancel anytime.",
     features: [
       "One request at a time",
@@ -143,7 +175,7 @@ export const plans = [
   },
   {
     name: "Pro Membership",
-    price: "$7,495",
+    price: { monthly: "$7,495", quarterly: "$6,745" } satisfies Record<Billing, string>,
     description: "Double the output. Design, tech, AI & growth in one team.",
     features: [
       "Two requests at a time",
@@ -181,7 +213,7 @@ export const faqs = [
   },
   {
     q: "Do you build robots?",
-    a: "Not yet. Robotics and physical AI are a venture we’re exploring in Labs, and we haven’t released anything. Join the interest list on the Labs page to hear first.",
+    a: "Not yet. Robotics and physical AI are a venture we’re exploring in Labs, where we’re researching Flock, a mesh operating system for small drones. Nothing has been released. Join the interest list on the Labs page to hear first.",
   },
   {
     q: "How fast will I receive my work?",
@@ -189,17 +221,26 @@ export const faqs = [
   },
 ];
 
-/** Essays we're writing. None are published yet, so the blog shows them as coming soon. */
+/** Essays. The bodies live in lib/essays.ts, keyed by slug. */
 export type Post = {
   slug: string;
   title: string;
   excerpt: string;
   category: Capability;
   image: string;
+  /** ISO date of publication. */
+  date: string;
+  /** Reading time in minutes. */
+  minutes: number;
 };
+
+export const formatDate = (iso: string) =>
+  new Date(`${iso}T12:00:00Z`).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
 
 export const featuredPost: Post = {
   slug: "calm-technology",
+  date: "2026-10-06",
+  minutes: 6,
   title: "Calm technology: why the best products feel like a walk outside",
   excerpt:
     "Attention is the scarcest resource your customers have. Here’s how we design products that respect it.",
@@ -210,6 +251,8 @@ export const featuredPost: Post = {
 export const posts: Post[] = [
   {
     slug: "calm-machines",
+    date: "2026-09-22",
+    minutes: 5,
     title: "What calm design could mean for machines",
     excerpt: "Notes from Labs: the interface lessons we’d bring to robots in homes and workplaces.",
     category: "Robotics",
@@ -217,6 +260,8 @@ export const posts: Post[] = [
   },
   {
     slug: "brand-is-a-promise",
+    date: "2026-09-08",
+    minutes: 5,
     title: "A brand is a promise you keep in public",
     excerpt: "Logos are easy. Consistency is the hard, valuable part — and it’s mostly operations.",
     category: "Design",
@@ -224,6 +269,8 @@ export const posts: Post[] = [
   },
   {
     slug: "growth-loops",
+    date: "2026-08-25",
+    minutes: 5,
     title: "Growth loops beat growth hacks",
     excerpt: "Why the compounding channels are the boring ones — and how to build them on purpose.",
     category: "Marketing",
@@ -231,6 +278,8 @@ export const posts: Post[] = [
   },
   {
     slug: "ai-copilots",
+    date: "2026-08-11",
+    minutes: 6,
     title: "Shipping an AI copilot people keep using",
     excerpt: "The patterns that turn a flashy demo into something people open every day.",
     category: "Tech",
@@ -238,6 +287,8 @@ export const posts: Post[] = [
   },
   {
     slug: "prototype-fast",
+    date: "2026-07-28",
+    minutes: 4,
     title: "Prototype in cardboard before you prototype in code",
     excerpt: "The cheapest, fastest way to find out whether your idea has a shape.",
     category: "Robotics",
@@ -245,6 +296,8 @@ export const posts: Post[] = [
   },
   {
     slug: "one-calm-team",
+    date: "2026-07-14",
+    minutes: 5,
     title: "Why we put design, code and AI in one room",
     excerpt: "Handoffs are where good ideas go to die. Here’s how we work without them.",
     category: "Tech",
