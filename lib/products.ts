@@ -82,13 +82,13 @@ export const products: Product[] = [
     glyph: "Design",
     lane: "Design system",
     status: "in-development",
-    tagline: "The calm glass interface this site is built with.",
+    tagline: "The calm interface system this site is built with.",
     description:
-      "Frosted glass cards, pill buttons, soft motion and the five-color shape mark, released as an open React and Tailwind component library with a matching Figma file.",
+      "Hairline panels, quiet buttons, a tight type scale, soft motion and the four-shape mark, released as an open React and Tailwind component library with a matching Figma file.",
     alternativeTo: "paid UI kits and templates",
     audience: "Designers and developers who want calm, trustworthy interfaces",
     features: [
-      "Glass, ink and gradient-rim surfaces",
+      "Surface, glass and ink panels with hairline borders",
       "Motion primitives: reveal, stagger, parallax hero",
       "Design tokens shared between code and Figma",
       "Accessible and reduced-motion aware by default",

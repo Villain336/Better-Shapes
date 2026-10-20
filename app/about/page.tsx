@@ -66,7 +66,7 @@ export default function AboutPage() {
 
       {/* Contact */}
       <section id="contact" className="container-x scroll-mt-24 pb-24">
-        <Reveal className="grid gap-8 lg:grid-cols-[1fr_1.3fr] lg:gap-14">
+        <Reveal className="grid items-start gap-8 lg:grid-cols-[1fr_1.3fr] lg:gap-14">
           <div className="flex flex-col gap-6">
             <Eyebrow>Contact</Eyebrow>
             <h2 className="h2">

@@ -55,7 +55,7 @@ export default async function ProductPage({ params }: Params) {
         )}
       </PageHero>
 
-      <section className="container-x grid gap-4 pb-24 lg:grid-cols-[1fr_360px]">
+      <section className="container-x grid items-start gap-4 pb-24 lg:grid-cols-[1fr_360px]">
         <Reveal>
           <Panel className="flex h-full flex-col gap-6 p-6 md:p-8">
             <h2 className="h2 text-[28px]">What it does</h2>

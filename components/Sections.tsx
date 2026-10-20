@@ -175,13 +175,13 @@ export function CtaBand({
     <section className="container-x pb-20">
       <Reveal className="frame relative isolate min-h-[420px] md:min-h-[460px]">
         <Image src={image} alt="" fill sizes="100vw" className="object-cover" />
-        <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0)_30%,rgba(0,0,0,0.55)_100%)]" />
+        <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0)_20%,rgba(0,0,0,0.3)_55%,rgba(0,0,0,0.7)_100%)]" />
         <div className="absolute inset-x-0 bottom-0 flex flex-col justify-between gap-8 p-6 md:flex-row md:items-end md:p-10">
           <div className="flex max-w-[560px] flex-col gap-4 text-white">
             <h2 className="h2">
-              {title} <span className="text-white/60">{accent}</span>
+              {title} <span className="text-white/70">{accent}</span>
             </h2>
-            <p className="text-[15px] leading-[1.55] text-white/80">{body}</p>
+            <p className="text-[15px] leading-[1.55] text-white/85">{body}</p>
           </div>
           <div className="flex shrink-0 flex-wrap gap-2.5">
             <Button href="/about#contact" variant="white">

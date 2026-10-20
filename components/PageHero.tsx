@@ -40,7 +40,7 @@ export function PageHero({ image, alt, eyebrow, title, accent, sub, children, as
   const scale = useTransform(scrollYProgress, [0, 1], [1.02, reduce ? 1.02 : 1.08]);
 
   return (
-    <section ref={ref} className={`relative isolate overflow-hidden ${tall ? "min-h-[88svh]" : "min-h-[540px] md:min-h-[620px]"}`}>
+    <section ref={ref} className={`relative isolate overflow-hidden ${tall ? "min-h-[min(88svh,880px)]" : "min-h-[540px] md:min-h-[620px]"}`}>
       <motion.div className="absolute inset-0 -z-20" style={{ y, scale }}>
         <Image src={image} alt={alt} fill priority sizes="100vw" className="object-cover" />
       </motion.div>
@@ -55,7 +55,7 @@ export function PageHero({ image, alt, eyebrow, title, accent, sub, children, as
 
       <div
         className={`container-x relative flex flex-col justify-center pb-16 pt-28 md:pt-36 ${
-          tall ? "min-h-[88svh]" : "min-h-[540px] md:min-h-[620px]"
+          tall ? "min-h-[min(88svh,880px)]" : "min-h-[540px] md:min-h-[620px]"
         }`}
       >
         <div className={`grid items-center gap-12 ${aside ? "lg:grid-cols-[minmax(0,1fr)_400px]" : ""}`}>
@@ -86,7 +86,7 @@ export function PageHero({ image, alt, eyebrow, title, accent, sub, children, as
             )}
 
             {note && (
-              <motion.div {...rise(0.38)} className="small text-ink-3">
+              <motion.div {...rise(0.38)} className="small text-ink-2">
                 {note}
               </motion.div>
             )}
