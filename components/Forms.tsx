@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { SubmitButton } from "./Button";
 import { BRIEF_KEY, briefToMessage } from "./HeroBrief";
 import { Panel } from "./Panel";
+import { useToast } from "./Toast";
 
 /**
  * Forms post to Web3Forms (https://web3forms.com). The access key is public by design (it only lets
@@ -30,8 +31,9 @@ async function submit(fields: Record<string, string>): Promise<Status> {
   }
 }
 
-function useSubmit() {
+function useSubmit(sentTitle: string, sentBody: string) {
   const [status, setStatus] = useState<Status>("idle");
+  const { toast } = useToast();
   const send = async (e: React.FormEvent<HTMLFormElement>, extra: Record<string, string>) => {
     e.preventDefault();
     const form = e.currentTarget;
@@ -44,7 +46,11 @@ function useSubmit() {
     setStatus("sending");
     const result = await submit({ ...fields, ...extra });
     setStatus(result);
-    if (result === "sent") form.reset();
+    // Errors stay inline next to the field; success also gets a toast because the form resets.
+    if (result === "sent") {
+      form.reset();
+      toast({ tone: "success", title: sentTitle, body: sentBody });
+    }
   };
   return { status, send };
 }
@@ -83,7 +89,7 @@ function Field({ label, id, ...rest }: { label: string; id: string } & React.Inp
 }
 
 export function ContactForm() {
-  const { status, send } = useSubmit();
+  const { status, send } = useSubmit("Message sent", "We reply within a business day.");
   const [message, setMessage] = useState("");
 
   // If someone came through the home-page brief, start the message for them.
@@ -146,7 +152,10 @@ function InlineForm({
   extra: Record<string, string>;
   id: string;
 }) {
-  const { status, send } = useSubmit();
+  const { status, send } = useSubmit(
+    extra.form === "waitlist" ? "You’re on the list" : "Subscribed",
+    extra.form === "waitlist" ? "We’ll email you first." : "Essays, now and then. No noise.",
+  );
   return (
     <Panel className="flex flex-col justify-between gap-5 p-5 md:flex-row md:items-center md:p-6">
       <div className="flex flex-col gap-1">

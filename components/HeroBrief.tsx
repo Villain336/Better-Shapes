@@ -16,8 +16,11 @@ export function briefToMessage(b: { needs: string[]; timeline: string }) {
   return `Hi — we're shaping ${what.charAt(0).toLowerCase() + what.slice(1)} and the timeline is: ${b.timeline.toLowerCase()}.\n\n`;
 }
 
-/** Sixty-second brief. Pick what you need, say when, carry it into the contact form. */
-export function HeroBrief() {
+/**
+ * Sixty-second brief. Pick what you need, say when, carry it into the contact form.
+ * `bare` drops the glass panel and header for hosts that already provide them (the mobile sheet).
+ */
+export function HeroBrief({ bare = false }: { bare?: boolean }) {
   const [picked, setPicked] = useState<string[]>(["Website"]);
   const [when, setWhen] = useState(timelines[1]);
 
@@ -32,8 +35,8 @@ export function HeroBrief() {
   };
 
   return (
-    <div className="glass flex flex-col gap-5 rounded-(--radius-panel) p-5 md:p-6">
-      <div className="flex items-center justify-between">
+    <div className={bare ? "flex flex-col gap-5" : "glass flex flex-col gap-5 rounded-(--radius-panel) p-5 md:p-6"}>
+      <div className={`flex items-center justify-between ${bare ? "hidden" : ""}`}>
         <span className="label inline-flex items-center gap-2 text-ink-2">
           <span className="relative flex size-1.5">
             <span className="absolute inline-flex size-full rounded-full bg-brand-green opacity-70" />

@@ -32,6 +32,7 @@
   --line-strong: rgb(20 20 20 / 0.16);
 
   --glass-fill: rgb(251 250 247 / 0.78);
+  --glass-solid: rgb(251 250 247 / 0.96);
   --glass-stroke: rgb(255 255 255 / 0.55);
   --glass-ink: rgb(20 20 20 / 0.72);
   /* Translucent fills for controls that sit on paintings or glass. */
@@ -63,6 +64,7 @@
   --line-strong: rgb(241 239 233 / 0.22);
 
   --glass-fill: rgb(28 29 37 / 0.72);
+  --glass-solid: rgb(28 29 37 / 0.97);
   --glass-stroke: rgb(255 255 255 / 0.14);
   --glass-ink: rgb(10 10 14 / 0.72);
   --veil: rgb(28 29 37 / 0.5);
@@ -156,6 +158,10 @@ p {
 :focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
+}
+/* Inputs whose container already shows focus (the command palette's search field). */
+.no-ring:focus-visible {
+  outline: none;
 }
 
 /* Lenis */
@@ -252,6 +258,10 @@ html.lenis body {
     backdrop-filter: blur(18px) saturate(140%);
     -webkit-backdrop-filter: blur(18px) saturate(140%);
     box-shadow: 0 24px 60px -24px rgb(0 0 0 / 0.25);
+  }
+  /* Floating layers (menus, palette, cards, toasts) need to stay legible over the paintings. */
+  .glass-solid {
+    background: var(--glass-solid);
   }
   .glass-ink {
     background: var(--glass-ink);

@@ -5,6 +5,10 @@ import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { ThemeProvider, themeInitScript } from "@/components/Theme";
+import { ToastProvider } from "@/components/Toast";
+import { SiteUIProvider } from "@/components/SiteUI";
+import { CommandPalette } from "@/components/CommandPalette";
+import { BriefSheet, FloatingDock } from "@/components/Mobile";
 import { asset } from "@/lib/content";
 
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", weight: ["500", "600", "700"] });
@@ -36,10 +40,17 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <ThemeProvider>
-          <SmoothScroll />
-          <Nav />
-          <main>{children}</main>
-          <Footer />
+          <SiteUIProvider>
+            <ToastProvider>
+              <SmoothScroll />
+              <Nav />
+              <main>{children}</main>
+              <Footer />
+              <CommandPalette />
+              <BriefSheet />
+              <FloatingDock />
+            </ToastProvider>
+          </SiteUIProvider>
         </ThemeProvider>
       </body>
     </html>

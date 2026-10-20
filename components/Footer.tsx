@@ -34,7 +34,7 @@ const cols = [
 export function Footer() {
   return (
     <footer className="hairline-t bg-surface">
-      <div className="container-x flex flex-col gap-14 pb-8 pt-16">
+      <div className="container-x flex flex-col gap-14 pb-24 pt-16 md:pb-8">
         <div className="grid gap-12 md:grid-cols-[1.4fr_2fr] lg:grid-cols-[1.6fr_2fr]">
           <div className="flex max-w-[320px] flex-col gap-5">
             <Link href="/" className="flex items-center gap-2.5 font-display text-[16px] font-semibold tracking-[-0.02em]">
