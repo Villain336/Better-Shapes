@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { toneFor, type Capability, type Post, type Project } from "@/lib/content";
+import { formatDate, toneFor, type Capability, type Post, type Project } from "@/lib/content";
 import { Panel } from "./Panel";
 import { RENDER_BG } from "./ProductRender";
 import { ArrowRight, ArrowUpRight, CapabilityGlyph, Check } from "./Shapes";
@@ -163,19 +163,28 @@ export function PricingCard({
 
 export function PostCard({ post }: { post: Post }) {
   return (
-    <Panel as="article" lift className="group flex h-full flex-col p-1.5">
-      <div className="frame aspect-[16/10] rounded-[10px]">
-        <Image src={post.image} alt="" fill sizes="(min-width: 1024px) 33vw, 100vw" className="object-cover" />
-      </div>
-      <div className="flex flex-1 flex-col gap-3 px-3.5 pb-3.5 pt-4">
-        <div className="flex items-center gap-2">
-          <Chip tone={toneFor[post.category]}>{post.category}</Chip>
-          <span className="label text-ink-3">Coming soon</span>
+    <Link href={`/blog/${post.slug}`} className="group block h-full">
+      <Panel as="article" lift className="flex h-full flex-col p-1.5">
+        <div className="frame aspect-[16/10] rounded-[10px]">
+          <Image src={post.image} alt="" fill sizes="(min-width: 1024px) 33vw, 100vw" className="object-cover" />
         </div>
-        <h3 className="h3">{post.title}</h3>
-        <p className="small">{post.excerpt}</p>
-      </div>
-    </Panel>
+        <div className="flex flex-1 flex-col gap-3 px-3.5 pb-3.5 pt-4">
+          <div className="flex items-center gap-2">
+            <Chip tone={toneFor[post.category]}>{post.category}</Chip>
+            <span className="label text-ink-3">
+              {formatDate(post.date)} · {post.minutes} min
+            </span>
+          </div>
+          <div className="flex items-start justify-between gap-4">
+            <h3 className="h3">{post.title}</h3>
+            <span className="mt-0.5 grid size-7 shrink-0 place-items-center rounded-full border border-line text-ink transition-colors duration-300 group-hover:border-ink group-hover:bg-ink group-hover:text-white">
+              <ArrowUpRight size={12} />
+            </span>
+          </div>
+          <p className="small">{post.excerpt}</p>
+        </div>
+      </Panel>
+    </Link>
   );
 }
 

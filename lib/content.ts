@@ -210,17 +210,26 @@ export const faqs = [
   },
 ];
 
-/** Essays we're writing. None are published yet, so the blog shows them as coming soon. */
+/** Essays. The bodies live in lib/essays.ts, keyed by slug. */
 export type Post = {
   slug: string;
   title: string;
   excerpt: string;
   category: Capability;
   image: string;
+  /** ISO date of publication. */
+  date: string;
+  /** Reading time in minutes. */
+  minutes: number;
 };
+
+export const formatDate = (iso: string) =>
+  new Date(`${iso}T12:00:00Z`).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric", timeZone: "UTC" });
 
 export const featuredPost: Post = {
   slug: "calm-technology",
+  date: "2026-10-06",
+  minutes: 6,
   title: "Calm technology: why the best products feel like a walk outside",
   excerpt:
     "Attention is the scarcest resource your customers have. Here’s how we design products that respect it.",
@@ -231,6 +240,8 @@ export const featuredPost: Post = {
 export const posts: Post[] = [
   {
     slug: "calm-machines",
+    date: "2026-09-22",
+    minutes: 5,
     title: "What calm design could mean for machines",
     excerpt: "Notes from Labs: the interface lessons we’d bring to robots in homes and workplaces.",
     category: "Robotics",
@@ -238,6 +249,8 @@ export const posts: Post[] = [
   },
   {
     slug: "brand-is-a-promise",
+    date: "2026-09-08",
+    minutes: 5,
     title: "A brand is a promise you keep in public",
     excerpt: "Logos are easy. Consistency is the hard, valuable part — and it’s mostly operations.",
     category: "Design",
@@ -245,6 +258,8 @@ export const posts: Post[] = [
   },
   {
     slug: "growth-loops",
+    date: "2026-08-25",
+    minutes: 5,
     title: "Growth loops beat growth hacks",
     excerpt: "Why the compounding channels are the boring ones — and how to build them on purpose.",
     category: "Marketing",
@@ -252,6 +267,8 @@ export const posts: Post[] = [
   },
   {
     slug: "ai-copilots",
+    date: "2026-08-11",
+    minutes: 6,
     title: "Shipping an AI copilot people keep using",
     excerpt: "The patterns that turn a flashy demo into something people open every day.",
     category: "Tech",
@@ -259,6 +276,8 @@ export const posts: Post[] = [
   },
   {
     slug: "prototype-fast",
+    date: "2026-07-28",
+    minutes: 4,
     title: "Prototype in cardboard before you prototype in code",
     excerpt: "The cheapest, fastest way to find out whether your idea has a shape.",
     category: "Robotics",
@@ -266,6 +285,8 @@ export const posts: Post[] = [
   },
   {
     slug: "one-calm-team",
+    date: "2026-07-14",
+    minutes: 5,
     title: "Why we put design, code and AI in one room",
     excerpt: "Handoffs are where good ideas go to die. Here’s how we work without them.",
     category: "Tech",
