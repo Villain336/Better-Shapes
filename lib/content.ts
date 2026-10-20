@@ -155,10 +155,13 @@ export const projects: Project[] = [
 
 
 
+/** Quarterly billing takes 10% off; shown per month either way. */
+export type Billing = "monthly" | "quarterly";
+
 export const plans = [
   {
     name: "Standard",
-    price: "$4,995",
+    price: { monthly: "$4,995", quarterly: "$4,495" } satisfies Record<Billing, string>,
     description: "One request at a time. Pause or cancel anytime.",
     features: [
       "One request at a time",
@@ -172,7 +175,7 @@ export const plans = [
   },
   {
     name: "Pro Membership",
-    price: "$7,495",
+    price: { monthly: "$7,495", quarterly: "$6,745" } satisfies Record<Billing, string>,
     description: "Double the output. Design, tech, AI & growth in one team.",
     features: [
       "Two requests at a time",

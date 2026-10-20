@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { formatDate, toneFor, type Capability, type Post, type Project } from "@/lib/content";
 import { Panel } from "./Panel";
 import { RENDER_BG } from "./ProductRender";
@@ -127,6 +127,7 @@ export function PricingCard({
   period?: string;
 }) {
   const muted = featured ? "text-on-ink/65" : "text-ink-2";
+  const [amount, note] = period.split(",");
   return (
     <div
       className={`flex h-full flex-col gap-6 rounded-(--radius-card) p-6 md:p-7 ${
@@ -142,9 +143,26 @@ export function PricingCard({
           </span>
         )}
       </div>
-      <div className="flex items-baseline gap-1.5">
-        <span className="num text-[44px] md:text-[48px]">{price}</span>
-        <span className={`text-[14px] ${muted}`}>{period}</span>
+      <div className="flex flex-col gap-2">
+        <div className="flex items-baseline gap-1.5">
+          <span className="num relative inline-grid overflow-hidden text-[44px] md:text-[48px]">
+            <AnimatePresence initial={false} mode="popLayout">
+              <motion.span
+                key={price}
+                initial={{ y: "60%", opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: "-60%", opacity: 0 }}
+                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+                className="block"
+              >
+                {price}
+              </motion.span>
+            </AnimatePresence>
+          </span>
+          <span className={`text-[14px] ${muted}`}>{amount}</span>
+        </div>
+        {/* Always rendered so switching billing never shifts the card. */}
+        <span className={`label ${featured ? "text-on-ink/60" : "text-ink-3"}`}>{note ? note.trim() : "Billed monthly"}</span>
       </div>
       <p className={`text-[14px] leading-[1.55] ${muted}`}>{description}</p>
       <ul className={`flex flex-col gap-2.5 border-t pt-5 ${featured ? "border-on-ink/15" : "border-line"}`}>

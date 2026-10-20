@@ -8,6 +8,7 @@ import { NewsletterForm } from "@/components/Forms";
 import { Reveal, RevealItem, Stagger } from "@/components/Reveal";
 import { SectionHeading } from "@/components/Sections";
 import { ArrowRight } from "@/components/Shapes";
+import { Breadcrumb } from "@/components/Primitives";
 import { featuredPost, formatDate, posts, toneFor } from "@/lib/content";
 import { essays } from "@/lib/essays";
 
@@ -61,6 +62,9 @@ export default async function PostPage({ params }: Params) {
       </PageHero>
 
       <article className="container-x pb-24">
+        <div className="relative z-10 mx-auto -mt-6 max-w-[1000px] pb-10">
+          <Breadcrumb items={[{ label: "Blog", href: "/blog" }, { label: p.category, href: "/blog" }, { label: p.title }]} />
+        </div>
         <Reveal className="mx-auto grid max-w-[1000px] gap-10 lg:grid-cols-[180px_minmax(0,1fr)]">
           <aside className="hidden lg:block">
             <div className="sticky top-28 flex flex-col items-start gap-4">

@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { Painting } from "@/components/Painting";
-import { PricingCard } from "@/components/Cards";
+import { PricingPlans } from "@/components/PricingPlans";
 import { Panel } from "@/components/Panel";
 import { Button } from "@/components/Button";
 import { Reveal, RevealItem, Stagger } from "@/components/Reveal";
 import { CtaBand, Faq, SectionHeading } from "@/components/Sections";
 import { Eyebrow } from "@/components/Eyebrow";
 import { toneColor } from "@/components/Shapes";
-import { art, benefits, faqs, plans } from "@/lib/content";
+import { art, benefits, faqs } from "@/lib/content";
 
 export const metadata: Metadata = { title: "Pricing" };
 
@@ -26,13 +26,8 @@ export default function PricingPage() {
       />
 
       <section className="container-x -mt-6 pb-24">
-        <Stagger className="grid items-stretch gap-4 lg:grid-cols-3" stagger={0.08}>
-          {plans.map((p) => (
-            <RevealItem key={p.name} className="h-full">
-              <PricingCard {...p} />
-            </RevealItem>
-          ))}
-          <RevealItem className="h-full">
+        <PricingPlans
+          aside={
             <Panel className="flex h-full flex-col gap-5 p-6 md:p-7">
               <span className="label text-ink-3">Products &amp; Labs</span>
               <span className="num text-[44px] md:text-[48px]">Free</span>
@@ -47,8 +42,8 @@ export default function PricingPage() {
                 See products
               </Button>
             </Panel>
-          </RevealItem>
-        </Stagger>
+          }
+        />
       </section>
 
       <section className="container-x flex flex-col gap-10 pb-24">

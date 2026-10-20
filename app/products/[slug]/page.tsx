@@ -8,9 +8,11 @@ import { Button } from "@/components/Button";
 import { Reveal, RevealItem, Stagger } from "@/components/Reveal";
 import { SectionHeading } from "@/components/Sections";
 import { Check } from "@/components/Shapes";
-import { ProductRender } from "@/components/ProductRender";
 import { Eyebrow } from "@/components/Eyebrow";
 import { LaunchCountdown } from "@/components/Launch";
+import { ProductMentions } from "@/components/HoverCard";
+import { Breadcrumb } from "@/components/Primitives";
+import { RenderLightbox } from "@/components/Lightbox";
 import { shapesOSLaunch } from "@/lib/products";
 import { art } from "@/lib/content";
 import { productBySlug, products, statusMeta } from "@/lib/products";
@@ -57,6 +59,10 @@ export default async function ProductPage({ params }: Params) {
         )}
       </PageHero>
 
+      <section className="container-x relative z-10 -mt-6 pb-8">
+        <Breadcrumb items={[{ label: "Products", href: "/products" }, { label: p.lane, href: "/products" }, { label: p.name }]} />
+      </section>
+
       <section id="features" className="container-x grid scroll-mt-32 items-start gap-4 pb-24 lg:grid-cols-[1fr_360px]">
         <Reveal>
           <Panel className="flex h-full flex-col gap-6 p-6 md:p-8">
@@ -73,7 +79,7 @@ export default async function ProductPage({ params }: Params) {
         </Reveal>
         <Reveal delay={0.08}>
           <Panel className="flex h-full flex-col gap-5 p-1.5">
-            <ProductRender slug={p.slug} alt={`${p.name} render: ${p.meaning}`} className="aspect-square rounded-[10px]" sizes="360px" />
+            <RenderLightbox slug={p.slug} name={p.name} meaning={p.meaning} />
             <div className="flex flex-col gap-5 px-3.5 pb-4">
               <div className="flex flex-col items-start gap-2">
                 <StatusChip status={p.status} />
@@ -97,7 +103,7 @@ export default async function ProductPage({ params }: Params) {
         <Reveal className="hairline-t hairline-b grid items-start gap-8 py-12 md:grid-cols-[1fr_2fr] md:py-16">
           <Eyebrow>How it fits</Eyebrow>
           <p className="display max-w-[760px] text-[clamp(22px,2.6vw,32px)] font-medium leading-[1.25] tracking-[-0.02em] text-ink">
-            {p.fit}
+            <ProductMentions text={p.fit} except={p.slug} />
           </p>
         </Reveal>
       </section>

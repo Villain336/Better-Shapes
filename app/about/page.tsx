@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
 import { Painting } from "@/components/Painting";
+import { CompareSlider } from "@/components/CompareSlider";
 import { Panel } from "@/components/Panel";
 import { ContactForm } from "@/components/Forms";
 import { Reveal, RevealItem, Stagger } from "@/components/Reveal";
@@ -27,8 +28,11 @@ export default function AboutPage() {
 
       {/* Story */}
       <section className="container-x grid items-start gap-8 pb-24 lg:grid-cols-[1.2fr_1fr] lg:gap-14">
-        <Reveal className="frame aspect-[4/3]">
-          <Painting src={art.sign} alt="The Better Shapes sign on a wildflower hillside" sizes="(min-width:1024px) 55vw, 100vw" />
+        <Reveal className="flex flex-col gap-3">
+          <div className="frame aspect-[16/10]">
+            <CompareSlider src={art.home} alt="Blue poppies above a mountain lake, by day and at dusk" sizes="(min-width:1024px) 55vw, 100vw" />
+          </div>
+          <span className="label text-ink-3">Drag to see the same meadow at dusk. The whole site does this.</span>
         </Reveal>
         <Reveal delay={0.08} className="flex flex-col gap-5 lg:pt-2">
           <Eyebrow>Our story</Eyebrow>
