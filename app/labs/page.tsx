@@ -5,21 +5,23 @@ import { WaitlistForm } from "@/components/Forms";
 import { Button } from "@/components/Button";
 import { Chip } from "@/components/Chip";
 import { ProductRender } from "@/components/ProductRender";
+import { ProductFeature } from "@/components/ProductFeature";
 import { Reveal, RevealItem, Stagger } from "@/components/Reveal";
 import { SectionHeading } from "@/components/Sections";
 import { toneColor } from "@/components/Shapes";
 import { art, type Tone } from "@/lib/content";
+import { productBySlug } from "@/lib/products";
 
 export const metadata: Metadata = {
   title: "Labs",
   description:
-    "Better Shapes Labs explores robotics and physical AI. It's a venture in research; nothing has been released yet.",
+    "Better Shapes Labs explores robotics and physical AI, starting with Flock, a mesh operating system for small drones. It's research; nothing has been released yet.",
 };
 
 const questions: { title: string; body: string; tone: Tone }[] = [
   {
-    title: "Agents with hands",
-    body: "What happens when the approval-first agents in ShapesOS can act in warehouses, farms and shops, not just inboxes?",
+    title: "Many, not one",
+    body: "What changes when a fleet has no mothership? Flock treats every drone as a peer that can carry the map, the plan and the failover.",
     tone: "blue",
   },
   {
@@ -29,17 +31,18 @@ const questions: { title: string; body: string; tone: Tone }[] = [
   },
   {
     title: "Open by default",
-    body: "Building on open foundations like ROS and Open-RMF rather than another closed fleet platform.",
+    body: "Building on open foundations like ROS 2, PX4 and MAVLink rather than another closed fleet platform.",
     tone: "yellow",
   },
   {
-    title: "Design to make",
-    body: "Going from an idea to a part you can print or machine, with AI-native CAD (our planned Fab).",
+    title: "Eyes before hands",
+    body: "Periscope lets agents see; Kiln trains what they see with. Labs asks what it takes to let them act safely in the world.",
     tone: "green",
   },
 ];
 
 export default function LabsPage() {
+  const flock = productBySlug("flock")!;
   return (
     <>
       <PageHero
@@ -55,6 +58,10 @@ export default function LabsPage() {
           See what’s shipping
         </Button>
       </PageHero>
+
+      <section className="container-x pb-24">
+        <ProductFeature product={flock} eyebrow="Current project" />
+      </section>
 
       <section className="container-x flex flex-col gap-10 pb-24">
         <SectionHeading
@@ -92,8 +99,8 @@ export default function LabsPage() {
             <span className="label text-ink-3">How Labs works</span>
             <p className="text-[16px] leading-[1.6] text-ink">
               Labs runs alongside the studio. We read, prototype in simulation and talk to people who run physical
-              operations. When something is real enough to put in your hands, it moves to the Products page with a
-              status and a date, the same way ShapesOS did.
+              operations. When something is real enough to put in your hands, it moves from “exploring” to a status
+              and a date on the Products page.
             </p>
           </Panel>
         </Reveal>
@@ -101,8 +108,8 @@ export default function LabsPage() {
           <Panel className="flex h-full flex-col gap-4 p-6 md:p-7">
             <span className="label text-ink-3">Partner with us</span>
             <p className="text-[16px] leading-[1.6] text-ink">
-              Running a warehouse, farm, lab or shop floor with a problem that feels automatable? We’re looking for a few
-              design partners to learn from. No commitment, no sales pitch.
+              Running a farm, an inspection crew, a warehouse or a research group with a fleet problem? We’re looking
+              for a few design partners to learn from. No commitment, no sales pitch.
             </p>
             <Button href="/about#contact" variant="outline" className="mt-auto self-start">
               Tell us about it

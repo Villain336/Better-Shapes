@@ -4,9 +4,6 @@ export type Capability = "Tech" | "Design" | "Robotics" | "Marketing";
 /** Prefix for static files when the site is served from a sub-path (GitHub Pages). */
 export const asset = (path: string) => `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}${path}`;
 
-/** ShapesOS launch: midnight US Eastern (EST, UTC-5) on Dec 1, 2026. */
-export const shapesOSLaunch = { at: "2026-12-01T00:00:00-05:00", label: "Dec 1, 2026" };
-
 export const art = {
   home: asset("/art/home-poppies.webp"),
   work: asset("/art/work-lavender.webp"),
@@ -47,8 +44,8 @@ export const capabilities: { name: Capability; blurb: string; points: string[]; 
   },
   {
     name: "Robotics",
-    blurb: "Physical automation and intelligence. A venture we’re exploring in Labs; nothing released yet.",
-    points: ["Research in Labs", "Physical AI", "Join the interest list"],
+    blurb: "Physical automation and intelligence. A venture we’re exploring in Labs with Flock, our drone mesh OS; nothing released yet.",
+    points: ["Flock: drone mesh OS", "Physical AI research", "Join the interest list"],
     exploring: true,
   },
   {
@@ -107,36 +104,44 @@ export type Project = {
 /** Work we can show today: our own products. Client work gets added here as it ships. */
 export const projects: Project[] = [
   {
-    title: "ShapesOS",
-    subtitle: "Our agentic business OS",
-    image: asset("/products/shapesos.webp"),
+    title: "Periscope",
+    subtitle: "A viewing MCP server and API that gives agents eyes",
+    image: asset("/products/periscope.webp"),
     tags: ["Tech", "Design"],
-    status: "Launching Dec 1, 2026",
-    href: "/products/shapesos",
+    status: "Early access",
+    href: "/products/periscope",
   },
   {
-    title: "Fig Tree",
-    subtitle: "An open-source design tool with its own GPU renderer",
-    image: asset("/products/fig-tree.webp"),
-    tags: ["Design", "Tech"],
+    title: "Canary",
+    subtitle: "Decoy keys that alert you the moment they’re used",
+    image: asset("/products/canary.webp"),
+    tags: ["Tech"],
     status: "In development",
-    href: "/products/fig-tree",
+    href: "/products/canary",
   },
   {
-    title: "Daydream",
-    subtitle: "AI-made movies and series, free to watch",
-    image: asset("/products/daydream.webp"),
-    tags: ["Design", "Marketing"],
+    title: "Kiln",
+    subtitle: "Label data and train models on hardware you control",
+    image: asset("/products/kiln.webp"),
+    tags: ["Tech", "Design"],
     status: "Planned",
-    href: "/products/daydream",
+    href: "/products/kiln",
   },
   {
-    title: "Snipper",
-    subtitle: "Turns long videos into short clips worth sharing",
-    image: asset("/products/snipper.webp"),
+    title: "Ripple",
+    subtitle: "An open-source live and on-demand streaming platform",
+    image: asset("/products/ripple.webp"),
     tags: ["Marketing", "Tech"],
-    status: "In development",
-    href: "/products/snipper",
+    status: "Planned",
+    href: "/products/ripple",
+  },
+  {
+    title: "Flock",
+    subtitle: "A mesh operating system for fleets of small drones",
+    image: asset("/products/flock.webp"),
+    tags: ["Robotics", "Tech"],
+    status: "Exploring in Labs",
+    href: "/products/flock",
   },
 ];
 
@@ -197,7 +202,7 @@ export const faqs = [
   },
   {
     q: "Do you build robots?",
-    a: "Not yet. Robotics and physical AI are a venture we’re exploring in Labs, and we haven’t released anything. Join the interest list on the Labs page to hear first.",
+    a: "Not yet. Robotics and physical AI are a venture we’re exploring in Labs, where we’re researching Flock, a mesh operating system for small drones. Nothing has been released. Join the interest list on the Labs page to hear first.",
   },
   {
     q: "How fast will I receive my work?",

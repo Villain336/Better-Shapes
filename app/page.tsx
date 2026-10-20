@@ -9,12 +9,13 @@ import { Panel } from "@/components/Panel";
 import { Eyebrow } from "@/components/Eyebrow";
 import { Check } from "@/components/Shapes";
 import { ProductCard } from "@/components/ProductCard";
-import { ShapesOSFeature } from "@/components/ShapesOSFeature";
-import { products } from "@/lib/products";
+import { ProductFeature } from "@/components/ProductFeature";
+import { flagship, products, statusMeta } from "@/lib/products";
 import { art, benefits, capabilities, projects, requestables, steps } from "@/lib/content";
 
 export default function Home() {
   const openSource = products.filter((p) => p.openSource !== false).length;
+  const rest = products.filter((p) => p.slug !== flagship.slug);
 
   return (
     <>
@@ -41,7 +42,7 @@ export default function Home() {
             { label: "Disciplines", value: "4", note: "Design, tech, AI and growth" },
             { label: "Average delivery", value: "72h", note: "Per request, start to finish" },
             { label: "Products in the lineup", value: String(products.length), note: `${openSource} of them open source` },
-            { label: "ShapesOS launch", value: "Dec 1", note: "2026, midnight Eastern" },
+            { label: "Flagship", value: flagship.name, note: statusMeta[flagship.status].label },
           ]}
         />
         <Marquee label="Request anything" items={requestables} />
@@ -114,16 +115,13 @@ export default function Home() {
             </Button>
           }
         />
-        <ShapesOSFeature />
-        <Stagger className="grid gap-4 md:grid-cols-3">
-          {products
-            .filter((p) => p.status === "in-development")
-            .slice(0, 3)
-            .map((p) => (
-              <RevealItem key={p.slug} className="h-full">
-                <ProductCard product={p} />
-              </RevealItem>
-            ))}
+        <ProductFeature product={flagship} />
+        <Stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {rest.map((p) => (
+            <RevealItem key={p.slug} className="h-full">
+              <ProductCard product={p} />
+            </RevealItem>
+          ))}
         </Stagger>
       </section>
 

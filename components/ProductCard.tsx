@@ -20,7 +20,7 @@ export function ProductCard({ product }: { product: Product }) {
     <Link href={`/products/${product.slug}`} className="group block h-full">
       <Panel lift className="flex h-full flex-col p-1.5">
         <div className="frame rounded-[10px]">
-          <ProductRender slug={product.slug} alt={`${product.name} product render`} className="aspect-[4/3]" />
+          <ProductRender slug={product.slug} alt={`${product.name} render: ${product.meaning}`} className="aspect-[4/3]" />
           <div className="absolute left-3 top-3">
             <StatusChip status={product.status} glass />
           </div>
@@ -35,7 +35,7 @@ export function ProductCard({ product }: { product: Product }) {
           </div>
           <p className="small">{product.tagline}</p>
           <p className="hairline-t mt-auto pt-3 text-[12.5px] leading-[1.45] text-ink-3">
-            {product.alternativeTo ? <>Open-source alternative to {product.alternativeTo}</> : product.license}
+            {product.openSource === false ? product.license : <>Open source · {product.license}</>}
           </p>
         </div>
       </Panel>

@@ -9,7 +9,7 @@ import { Reveal, RevealItem, Stagger } from "@/components/Reveal";
 import { SectionHeading } from "@/components/Sections";
 import { Check } from "@/components/Shapes";
 import { ProductRender } from "@/components/ProductRender";
-import { DaydreamExtras } from "@/components/DaydreamExtras";
+import { Eyebrow } from "@/components/Eyebrow";
 import { art } from "@/lib/content";
 import { productBySlug, products, statusMeta } from "@/lib/products";
 
@@ -27,13 +27,13 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 export default async function ProductPage({ params }: Params) {
   const p = productBySlug((await params).slug);
   if (!p) notFound();
-  const more = products.filter((x) => x.slug !== p.slug && x.status !== "early-access").slice(0, 3);
-  const heroArt = [art.products, art.home, art.work, art.pricing, art.blog, art.about];
+  const more = products.filter((x) => x.slug !== p.slug).slice(0, 4);
+  const heroArt = [art.products, art.home, art.work, art.pricing, art.labs];
 
   const facts: [string, string][] = [
     ["For", p.audience],
-    ...(p.alternativeTo ? [[p.openSource === false ? "Compare with" : "Open-source alternative to", p.alternativeTo] as [string, string]] : []),
-    ["License", p.license],
+    ["Status", statusMeta[p.status].label],
+    ["License", p.openSource === false ? p.license : `Open source · ${p.license}`],
   ];
 
   return (
@@ -47,7 +47,7 @@ export default async function ProductPage({ params }: Params) {
         accent={p.tagline}
         sub={p.description}
       >
-        <Button href="#waitlist">{p.status === "early-access" ? "Join the waitlist" : "Get notified"}</Button>
+        <Button href="#waitlist">{p.status === "early-access" ? "Get early access" : "Get notified"}</Button>
         {p.repo && (
           <Button href={p.repo} variant="outline">
             View on GitHub
@@ -71,9 +71,12 @@ export default async function ProductPage({ params }: Params) {
         </Reveal>
         <Reveal delay={0.08}>
           <Panel className="flex h-full flex-col gap-5 p-1.5">
-            <ProductRender slug={p.slug} alt={`${p.name} product render`} className="aspect-square rounded-[10px]" sizes="360px" />
+            <ProductRender slug={p.slug} alt={`${p.name} render: ${p.meaning}`} className="aspect-square rounded-[10px]" sizes="360px" />
             <div className="flex flex-col gap-5 px-3.5 pb-4">
-              <StatusChip status={p.status} />
+              <div className="flex flex-col gap-2">
+                <StatusChip status={p.status} />
+                <p className="small">{p.meaning}</p>
+              </div>
               <dl className="flex flex-col">
                 {facts.map(([k, v], i) => (
                   <div key={k} className={`flex flex-col gap-1 py-3 ${i > 0 ? "hairline-t" : "pt-0"}`}>
@@ -87,7 +90,14 @@ export default async function ProductPage({ params }: Params) {
         </Reveal>
       </section>
 
-      {p.slug === "daydream" && <DaydreamExtras />}
+      <section className="container-x pb-24">
+        <Reveal className="hairline-t hairline-b grid gap-8 py-12 md:grid-cols-[1fr_2fr] md:py-16">
+          <Eyebrow>How it fits</Eyebrow>
+          <p className="display max-w-[760px] text-[clamp(22px,2.6vw,32px)] font-medium leading-[1.25] tracking-[-0.02em] text-ink">
+            {p.fit}
+          </p>
+        </Reveal>
+      </section>
 
       <section id="waitlist" className="container-x scroll-mt-24 pb-24">
         <Reveal>
@@ -97,7 +107,7 @@ export default async function ProductPage({ params }: Params) {
 
       <section className="container-x flex flex-col gap-10 pb-24">
         <SectionHeading eyebrow="More from Better Shapes" title="Keep" accent="exploring." />
-        <Stagger className="grid gap-4 md:grid-cols-3">
+        <Stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {more.map((x) => (
             <RevealItem key={x.slug} className="h-full">
               <ProductCard product={x} />

@@ -17,7 +17,7 @@ export default function WorkPage() {
         eyebrow="Our work"
         title="Work that"
         accent="feels right."
-        sub="Right now that’s our own products: an agentic business OS, open-source design and video tools, and a streaming service for AI-made stories. Client work joins them as it ships."
+        sub="Right now that’s our own products: eyes for agents, decoy keys, a model platform, a streaming stack and a drone mesh OS. Client work joins them as it ships."
       />
 
       <section className="container-x flex flex-col gap-6 pb-24">

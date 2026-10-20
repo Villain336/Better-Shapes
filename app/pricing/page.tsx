@@ -35,9 +35,10 @@ export default function PricingPage() {
           <RevealItem className="h-full">
             <Panel className="flex h-full flex-col gap-5 p-6 md:p-7">
               <span className="label text-ink-3">Products &amp; Labs</span>
-              <span className="num text-[44px] md:text-[48px]">Soon</span>
+              <span className="num text-[44px] md:text-[48px]">Free</span>
               <p className="text-[14px] leading-[1.55] text-ink-2">
-                Our own software: ShapesOS (launching Dec 1, 2026) and a suite of open-source tools. Members get early access.
+                Our own software: Periscope, Canary, Kiln, Ripple and Flock, all open source and free to self-host.
+                Members get early access and a say in what we build next.
               </p>
               <div className="frame min-h-[160px] flex-1 rounded-[10px]">
                 <Image src={art.products} alt="" fill sizes="400px" className="object-cover" />
