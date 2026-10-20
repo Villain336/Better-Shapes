@@ -39,12 +39,38 @@ npm run typecheck
 - Type: Manrope (headlines, tight) + Inter (body and UI) + Geist Mono (11px uppercase labels). The second half of a headline
   is set in a quieter ink (`components/Accent.tsx`); the four brand colours live in the logo mark and small tone dots only.
 - Radii: 6px tags · 10px controls · 14px cards · 18px panels and image frames. One accent blue for the “— SECTION” eyebrows.
-- `components/` — `Nav` (slim bar, frosts on scroll), `Button` (one arrow, `ink` / `outline` / `ghost` / `white` / `glass`),
+- `components/` — `Nav` (slim bar, frosts on scroll; search, Products mega menu, theme toggle), `Button` (one arrow, `ink` / `outline` / `ghost` / `white` / `glass`),
   `Panel`, `Chip`, `Eyebrow`, `PageHero` (painting + staged settle-in), `HeroBrief` (the 60-second brief; it pre-fills the
   contact form), `Sections` (`SectionHeading`, `StatStrip`, `Marquee`, `Timeline`, `Faq`, `CtaBand`), `ProductFeature`
   (the flagship panel), `ProductCard`, `Cards`, `Forms`
 - Motion: reveals fade and rise 12px over 0.6s, staggered 60ms; hero parallax is 12%; hovers lift 2px. No blur, no drift, no blobs.
 - `public/art/` — AI-generated flower/sky paintings, one per page, each with a `*-dusk.webp` twin for dark mode
+
+## Interaction layer
+
+Floating UI is adapted from the Atlas “Glass · Components” library and sits on the `glass glass-solid` surface so it stays
+legible over the paintings. `components/SiteUI.tsx` is the shared state: the command palette, the mobile brief sheet and
+the mobile menu are mutually exclusive, close on navigation, and `useLayer` locks scroll (Lenis + body) and handles Escape.
+
+- `components/Primitives.tsx` — `Kbd`, `IconButton`, `Tooltip` (hover/focus, ink pill), `SegmentedControl` (sliding
+  ink pill, `role="radiogroup"`), `Breadcrumb`
+- `components/CommandPalette.tsx` — ⌘K / Ctrl+K. Pages, actions (theme, book a call, quick brief, waitlist), products
+  and essays; title matches rank above subtitle and keyword matches. `PaletteTrigger` is the search button in the nav.
+- `components/MegaMenu.tsx` — the Products dropdown on desktop: the lineup on the left, the ShapesOS launch (live
+  countdown + waitlist) on the right. Opens on hover or focus from the nav item.
+- `components/HoverCard.tsx` — `ProductMentions` turns product names in running copy into links with a render preview
+  on hover (used in each product page’s “How it fits”).
+- `components/Lightbox.tsx` — full-screen viewer with keyboard, drag and a thumbnail strip. `WorkGalleryButton` opens
+  the work grid as a gallery; `RenderLightbox` is the expandable render on product pages.
+- `components/CompareSlider.tsx` — day/dusk wipe for any painting (About uses `art.home`, whose twins line up pixel for
+  pixel). Pointer drag plus arrow keys on the handle.
+- `components/Toast.tsx` — `useToast().toast({ title, body, tone })`, bottom-right (above the dock on phones). Forms
+  fire one on success; errors stay inline.
+- `components/Mobile.tsx` — `BottomSheet` (drag to dismiss), `BriefSheet` (the quick brief, bare, on phones) and
+  `FloatingDock` (Search · Brief · Let’s talk; hides while scrolling down or when any layer is open). The mobile menu in
+  `Nav.tsx` lists destinations with icons and descriptions.
+- `components/PricingPlans.tsx` — Monthly / Quarterly switch (prices live in `lib/content.ts` as `price.monthly` /
+  `price.quarterly`); the amount rolls over in place.
 
 ## Day and dusk (theme)
 
