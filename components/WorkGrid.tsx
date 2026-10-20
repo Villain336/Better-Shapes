@@ -14,36 +14,37 @@ export function WorkGrid() {
 
   return (
     <LayoutGroup>
-      <div className="flex flex-wrap gap-2" role="tablist" aria-label="Filter work">
-        {filters.map((f) => (
-          <button
-            key={f}
-            role="tab"
-            aria-selected={active === f}
-            onClick={() => setActive(f)}
-            className={`relative cursor-pointer rounded-full px-[18px] py-2.5 text-[15px] font-medium tracking-[-0.01em] ${
-              active === f ? "text-white" : "glass text-ink"
-            }`}
-          >
-            {active === f && (
-              <motion.span
-                layoutId="work-filter"
-                className="absolute inset-0 rounded-full bg-ink"
-                transition={{ type: "spring", stiffness: 380, damping: 32 }}
-              />
-            )}
-            <span className="relative">{f}</span>
-          </button>
-        ))}
+      <div className="hairline-b flex items-center justify-between gap-4 pb-4">
+        <div className="flex gap-0.5 rounded-[10px] border border-line bg-surface p-0.5" role="tablist" aria-label="Filter work">
+          {filters.map((f) => (
+            <button
+              key={f}
+              role="tab"
+              aria-selected={active === f}
+              onClick={() => setActive(f)}
+              className={`relative h-8 cursor-pointer rounded-[8px] px-3 text-[13px] font-medium transition-colors duration-300 ${
+                active === f ? "text-white" : "text-ink-2 hover:text-ink"
+              }`}
+            >
+              {active === f && (
+                <motion.span
+                  layoutId="work-filter"
+                  className="absolute inset-0 rounded-[8px] bg-ink"
+                  transition={{ type: "spring", stiffness: 420, damping: 36 }}
+                />
+              )}
+              <span className="relative">{f}</span>
+            </button>
+          ))}
+        </div>
+        <span className="label text-ink-3">
+          {list.length} {list.length === 1 ? "project" : "projects"}
+        </span>
       </div>
-      <motion.div layout className="grid gap-6 md:grid-cols-2 lg:grid-cols-5">
+      <motion.div layout className="grid gap-5 md:grid-cols-2">
         <AnimatePresence mode="popLayout">
-          {list.map((p, i) => (
-            <ProjectCard
-              key={p.title}
-              project={p}
-              className={i % 4 === 0 || i % 4 === 3 ? "lg:col-span-3" : "lg:col-span-2"}
-            />
+          {list.map((p) => (
+            <ProjectCard key={p.title} project={p} tall />
           ))}
         </AnimatePresence>
       </motion.div>

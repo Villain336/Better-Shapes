@@ -58,6 +58,22 @@ export const capabilities: { name: Capability; blurb: string; points: string[]; 
   },
 ];
 
+/** The kinds of requests members add to their board. Shown as a slow ticker under the hero. */
+export const requestables: { text: string; tone: Tone }[] = [
+  { text: "Brand identity", tone: "red" },
+  { text: "Marketing site", tone: "red" },
+  { text: "Product UI", tone: "red" },
+  { text: "Design system", tone: "red" },
+  { text: "Next.js app", tone: "blue" },
+  { text: "AI agent", tone: "blue" },
+  { text: "Automation", tone: "blue" },
+  { text: "Data platform", tone: "blue" },
+  { text: "Launch campaign", tone: "green" },
+  { text: "Content engine", tone: "green" },
+  { text: "SEO & performance", tone: "green" },
+  { text: "Pitch deck", tone: "green" },
+];
+
 export const steps = [
   {
     n: "01",

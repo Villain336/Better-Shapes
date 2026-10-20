@@ -1,13 +1,13 @@
 import type { Metadata, Viewport } from "next";
-import { Geist_Mono, Manrope, Plus_Jakarta_Sans } from "next/font/google";
+import { Geist_Mono, Inter, Manrope } from "next/font/google";
 import "./globals.css";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { SmoothScroll } from "@/components/SmoothScroll";
 import { asset } from "@/lib/content";
 
-const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", weight: ["400", "500", "600", "700"] });
-const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-jakarta", weight: ["400", "500", "600"] });
+const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", weight: ["500", "600", "700"] });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter", weight: ["400", "500", "600"] });
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono", weight: ["500"] });
 
 export const metadata: Metadata = {
@@ -20,11 +20,11 @@ export const metadata: Metadata = {
   icons: { icon: asset("/favicon.svg") },
 };
 
-export const viewport: Viewport = { themeColor: "#f1efea" };
+export const viewport: Viewport = { themeColor: "#f4f2ed" };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${manrope.variable} ${jakarta.variable} ${geistMono.variable}`}>
+    <html lang="en" className={`${manrope.variable} ${inter.variable} ${geistMono.variable}`}>
       <body>
         <SmoothScroll />
         <Nav />

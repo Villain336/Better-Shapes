@@ -1,55 +1,63 @@
 import Link from "next/link";
-import { ArrowUpRight } from "./Shapes";
+import { ArrowRight } from "./Shapes";
 
-type Variant = "ink" | "glass" | "ghost";
+type Variant = "ink" | "outline" | "ghost" | "white" | "glass";
+type Size = "sm" | "md";
 
 const base =
-  "group/btn inline-flex items-center justify-between gap-4 rounded-full py-1.5 pl-5 pr-1.5 text-[15px] font-medium tracking-[-0.01em] whitespace-nowrap transition-[transform,background-color,box-shadow] duration-500 ease-[var(--ease-out)] hover:-translate-y-0.5 active:translate-y-0 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-blue";
+  "group/btn inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-[10px] font-medium tracking-[-0.005em] transition-[background-color,border-color,color,transform] duration-300 ease-[var(--ease-out)] active:scale-[0.985]";
 
-const styles: Record<Variant, { root: string; dot: string }> = {
-  ink: {
-    root: "glass-ink text-white",
-    dot: "bg-raised text-ink group-hover/btn:bg-brand-yellow",
-  },
-  glass: {
-    root: "glass text-ink",
-    dot: "bg-ink text-white group-hover/btn:bg-brand-blue",
-  },
-  ghost: {
-    root: "text-ink hover:bg-white/40",
-    dot: "border border-ink text-ink group-hover/btn:border-brand-red group-hover/btn:bg-brand-red group-hover/btn:text-white",
-  },
+const sizes: Record<Size, string> = {
+  sm: "h-9 px-3.5 text-[13px]",
+  md: "h-11 px-4.5 text-[14px]",
+};
+
+const variants: Record<Variant, string> = {
+  ink: "bg-ink text-white hover:bg-[#2a2a2a]",
+  outline: "border border-line-strong bg-transparent text-ink hover:border-ink hover:bg-surface",
+  ghost: "px-2! text-ink hover:text-ink-2",
+  white: "bg-white text-ink hover:bg-surface",
+  glass: "border border-white/30 bg-white/10 text-white backdrop-blur-md hover:bg-white/20",
 };
 
 type Props = {
   href: string;
   children: React.ReactNode;
   variant?: Variant;
+  size?: Size;
+  arrow?: boolean;
   className?: string;
 };
 
-/** Pill button from the Figma "Button" component: label + arrow dot that fills and turns on hover. */
-export function Button({ href, children, variant = "ink", className = "" }: Props) {
-  const s = styles[variant];
-  return (
-    <Link href={href} className={`${base} ${s.root} ${className}`}>
+/** The one button. Text, optional arrow that nudges on hover, four quiet variants. */
+export function Button({ href, children, variant = "ink", size = "md", arrow = true, className = "" }: Props) {
+  const external = href.startsWith("http");
+  const cls = `${base} ${sizes[size]} ${variants[variant]} ${className}`;
+  const inner = (
+    <>
       <span>{children}</span>
-      <span
-        className={`grid size-9 place-items-center rounded-full transition-colors duration-300 ${s.dot}`}
-      >
-        <ArrowUpRight className="transition-transform duration-500 ease-[var(--ease-out)] group-hover/btn:rotate-45" />
-      </span>
+      {arrow && <ArrowRight className="transition-transform duration-300 ease-[var(--ease-out)] group-hover/btn:translate-x-0.5" />}
+    </>
+  );
+  if (external) {
+    return (
+      <a href={href} className={cls} target="_blank" rel="noreferrer">
+        {inner}
+      </a>
+    );
+  }
+  return (
+    <Link href={href} className={cls}>
+      {inner}
     </Link>
   );
 }
 
-export function SubmitButton({ children }: { children: React.ReactNode }) {
+export function SubmitButton({ children, variant = "ink", className = "" }: { children: React.ReactNode; variant?: Variant; className?: string }) {
   return (
-    <button type="submit" className={`${base} ${styles.ink.root} cursor-pointer`}>
+    <button type="submit" className={`${base} ${sizes.md} ${variants[variant]} ${className}`}>
       <span>{children}</span>
-      <span className={`grid size-9 place-items-center rounded-full transition-colors duration-300 ${styles.ink.dot}`}>
-        <ArrowUpRight className="transition-transform duration-500 ease-[var(--ease-out)] group-hover/btn:rotate-45" />
-      </span>
+      <ArrowRight className="transition-transform duration-300 ease-[var(--ease-out)] group-hover/btn:translate-x-0.5" />
     </button>
   );
 }

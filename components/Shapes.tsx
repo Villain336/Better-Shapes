@@ -7,19 +7,12 @@ export const toneColor: Record<Tone, string> = {
   green: "#6cc48e",
 };
 
-export const toneTint: Record<Tone, string> = {
-  red: "#fbe3de",
-  blue: "#dee5fb",
-  yellow: "#fdf5d3",
-  green: "#ddf2e5",
-};
-
 type GlyphProps = { size?: number; color?: string; className?: string };
 
 export function Quarter({ size = 24, color = toneColor.red, className }: GlyphProps) {
   return (
     <svg viewBox="0 0 24 24" width={size} height={size} className={className} aria-hidden>
-      <path d="M0 0H24V0A24 24 0 0 1 0 24Z" fill={color} transform="scale(1 1)" />
+      <path d="M0 0H24V0A24 24 0 0 1 0 24Z" fill={color} />
     </svg>
   );
 }
@@ -48,30 +41,50 @@ export function LBlock({ size = 24, color = toneColor.green, className }: GlyphP
   );
 }
 
-/** Each capability is represented by one of the four logo shapes. */
-export function CapabilityGlyph({ name, size = 34 }: { name: Capability; size?: number }) {
+/** Each capability is represented by one of the four logo shapes, drawn in ink unless a colour is passed. */
+export function CapabilityGlyph({ name, size = 18, color = "currentColor" }: { name: Capability; size?: number; color?: string }) {
   switch (name) {
     case "Tech":
-      return <Triangle size={size} />;
+      return <Triangle size={size} color={color} />;
     case "Design":
-      return <Quarter size={size} />;
+      return <Quarter size={size} color={color} />;
     case "Robotics":
-      return <Circle size={size} />;
+      return <Circle size={size} color={color} />;
     case "Marketing":
-      return <LBlock size={size} />;
+      return <LBlock size={size} color={color} />;
   }
 }
 
-export function ArrowUpRight({ className }: { className?: string }) {
+type IconProps = { className?: string; size?: number };
+
+export function ArrowRight({ className, size = 14 }: IconProps) {
   return (
-    <svg viewBox="0 0 16 16" width="16" height="16" fill="none" className={className} aria-hidden>
-      <path
-        d="M4 12 12 4M5.5 4H12v6.5"
-        stroke="currentColor"
-        strokeWidth="1.6"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
+    <svg viewBox="0 0 16 16" width={size} height={size} fill="none" className={className} aria-hidden>
+      <path d="M2.5 8h11M9 3.5 13.5 8 9 12.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+export function ArrowUpRight({ className, size = 14 }: IconProps) {
+  return (
+    <svg viewBox="0 0 16 16" width={size} height={size} fill="none" className={className} aria-hidden>
+      <path d="M4 12 12 4M5.5 4H12v6.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  );
+}
+
+export function Plus({ className, size = 14 }: IconProps) {
+  return (
+    <svg viewBox="0 0 16 16" width={size} height={size} fill="none" className={className} aria-hidden>
+      <path d="M8 2.5v11M2.5 8h11" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+export function Check({ className, size = 14 }: IconProps) {
+  return (
+    <svg viewBox="0 0 16 16" width={size} height={size} fill="none" className={className} aria-hidden>
+      <path d="M3 8.5 6.5 12 13 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
 }

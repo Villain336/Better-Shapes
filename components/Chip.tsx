@@ -1,13 +1,23 @@
 import type { Tone } from "@/lib/content";
-import { toneColor, toneTint } from "./Shapes";
+import { toneColor } from "./Shapes";
 
-export function Chip({ tone, children, glass = false }: { tone: Tone; children: React.ReactNode; glass?: boolean }) {
+type Props = {
+  children: React.ReactNode;
+  tone?: Tone;
+  /** For tags that sit on imagery. */
+  glass?: boolean;
+  className?: string;
+};
+
+/** Small mono tag with a hairline border and an optional tone dot. */
+export function Chip({ tone, children, glass = false, className = "" }: Props) {
   return (
     <span
-      className={`caption inline-flex items-center gap-2 rounded-full py-[7px] pl-3 pr-3.5 text-ink ${glass ? "glass" : ""}`}
-      style={glass ? undefined : { background: toneTint[tone] }}
+      className={`label inline-flex h-6 items-center gap-1.5 rounded-(--radius-tag) border px-2 ${
+        glass ? "border-white/40 bg-white/70 text-ink backdrop-blur-md" : "border-line bg-surface text-ink-2"
+      } ${className}`}
     >
-      <span className="size-[7px] rounded-full" style={{ background: toneColor[tone] }} />
+      {tone && <span className="size-1.5 rounded-full" style={{ background: toneColor[tone] }} />}
       {children}
     </span>
   );

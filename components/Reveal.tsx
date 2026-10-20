@@ -5,8 +5,8 @@ import { motion, useReducedMotion, type Variants } from "framer-motion";
 const ease = [0.22, 1, 0.36, 1] as const;
 
 const item: Variants = {
-  hidden: { opacity: 0, y: 28, filter: "blur(8px)" },
-  show: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.9, ease }, transitionEnd: { filter: "none" } },
+  hidden: { opacity: 0, y: 12 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease } },
 };
 
 type Props = {
@@ -16,7 +16,7 @@ type Props = {
   as?: "div" | "section" | "li" | "article";
 };
 
-/** Fades, rises and un-blurs its content when scrolled into view. */
+/** Fades and settles its content into place when scrolled into view. Once, quietly. */
 export function Reveal({ children, className, delay = 0, as = "div" }: Props) {
   const reduce = useReducedMotion();
   const Tag = motion[as];
@@ -26,11 +26,8 @@ export function Reveal({ children, className, delay = 0, as = "div" }: Props) {
       className={className}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, margin: "-80px" }}
-      variants={{
-        hidden: item.hidden,
-        show: { ...(item.show as object), transition: { duration: 0.9, ease, delay } },
-      }}
+      viewport={{ once: true, margin: "-60px" }}
+      variants={{ hidden: item.hidden, show: { opacity: 1, y: 0, transition: { duration: 0.6, ease, delay } } }}
     >
       {children}
     </Tag>
@@ -38,7 +35,7 @@ export function Reveal({ children, className, delay = 0, as = "div" }: Props) {
 }
 
 /** Staggers direct <RevealItem> children. */
-export function Stagger({ children, className, stagger = 0.08 }: { children: React.ReactNode; className?: string; stagger?: number }) {
+export function Stagger({ children, className, stagger = 0.06 }: { children: React.ReactNode; className?: string; stagger?: number }) {
   const reduce = useReducedMotion();
   if (reduce) return <div className={className}>{children}</div>;
   return (
@@ -46,7 +43,7 @@ export function Stagger({ children, className, stagger = 0.08 }: { children: Rea
       className={className}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, margin: "-60px" }}
       variants={{ hidden: {}, show: { transition: { staggerChildren: stagger } } }}
     >
       {children}

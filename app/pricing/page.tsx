@@ -2,10 +2,11 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { PageHero } from "@/components/PageHero";
 import { PricingCard } from "@/components/Cards";
-import { GlassCard } from "@/components/GlassCard";
+import { Panel } from "@/components/Panel";
 import { Button } from "@/components/Button";
 import { Reveal, RevealItem, Stagger } from "@/components/Reveal";
-import { Blobs, CtaBand, Faq, SectionHeading } from "@/components/Sections";
+import { CtaBand, Faq, SectionHeading } from "@/components/Sections";
+import { Eyebrow } from "@/components/Eyebrow";
 import { toneColor } from "@/components/Shapes";
 import { art, benefits, faqs, plans } from "@/lib/content";
 
@@ -21,54 +22,59 @@ export default function PricingPage() {
         title="One subscription."
         accent="Endless shapes."
         sub="Pause or cancel anytime. A senior team for design, technology, AI and growth — for one flat monthly fee."
+        note="No contracts · No proposals · Every file is yours"
       />
 
-      <section className="container-x -mt-10 pb-20">
-        <Stagger className="grid items-stretch gap-6 lg:grid-cols-3" stagger={0.12}>
+      <section className="container-x -mt-6 pb-24">
+        <Stagger className="grid items-stretch gap-4 lg:grid-cols-3" stagger={0.08}>
           {plans.map((p) => (
             <RevealItem key={p.name} className="h-full">
               <PricingCard {...p} />
             </RevealItem>
           ))}
           <RevealItem className="h-full">
-            <GlassCard className="flex h-full flex-col gap-5 rounded-[32px] p-8 transition-transform duration-700 ease-[var(--ease-out)] hover:-translate-y-1.5">
-              <h3 className="text-[18px] font-semibold tracking-[-0.02em]">Products &amp; Labs</h3>
-              <span className="font-display text-[56px] font-semibold leading-none tracking-[-0.06em]">Soon</span>
-              <p className="text-[16px] leading-[1.55] text-ink-2">
+            <Panel className="flex h-full flex-col gap-5 p-6 md:p-7">
+              <span className="label text-ink-3">Products &amp; Labs</span>
+              <span className="num text-[44px] md:text-[48px]">Soon</span>
+              <p className="text-[14px] leading-[1.55] text-ink-2">
                 Our own software: ShapesOS (launching Dec 1, 2026) and a suite of open-source tools. Members get early access.
               </p>
-              <div className="relative min-h-[160px] flex-1 overflow-hidden rounded-[24px]">
+              <div className="frame min-h-[160px] flex-1 rounded-[10px]">
                 <Image src={art.products} alt="" fill sizes="400px" className="object-cover" />
               </div>
-              <Button href="/products" variant="ghost" className="self-start">
+              <Button href="/products" variant="outline" className="w-full">
                 See products
               </Button>
-            </GlassCard>
+            </Panel>
           </RevealItem>
         </Stagger>
       </section>
 
-      <section className="relative isolate py-16">
-        <Blobs className="opacity-70" />
-        <div className="container-x flex flex-col gap-10">
-          <SectionHeading eyebrow="Why members stay" title="Membership" accent="benefits." />
-          <Stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {benefits.map((b) => (
-              <RevealItem key={b.title}>
-                <GlassCard className="flex h-full flex-col gap-3 rounded-[28px] p-6">
-                  <span className="size-3 rounded-full" style={{ background: toneColor[b.tone] }} />
-                  <h3 className="text-[18px] font-semibold tracking-[-0.02em]">{b.title}</h3>
-                  <p className="text-[14px] leading-[1.5] text-ink-2">{b.body}</p>
-                </GlassCard>
-              </RevealItem>
-            ))}
-          </Stagger>
-        </div>
+      <section className="container-x flex flex-col gap-10 pb-24">
+        <SectionHeading eyebrow="Why members stay" title="Membership" accent="benefits." />
+        <Stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {benefits.map((b) => (
+            <RevealItem key={b.title}>
+              <Panel className="flex h-full flex-col gap-3 p-5">
+                <span className="size-2 rounded-full" style={{ background: toneColor[b.tone] }} />
+                <h3 className="h3 text-[17px]">{b.title}</h3>
+                <p className="small">{b.body}</p>
+              </Panel>
+            </RevealItem>
+          ))}
+        </Stagger>
       </section>
 
-      <section className="container-x flex flex-col gap-10 py-16 md:py-24">
-        <SectionHeading eyebrow="FAQ" title="Questions," accent="answered." />
-        <Reveal>
+      <section className="container-x grid gap-10 pb-24 lg:grid-cols-[1fr_2fr]">
+        <Reveal className="flex flex-col gap-4 lg:sticky lg:top-28 lg:self-start">
+          <Eyebrow>FAQ</Eyebrow>
+          <h2 className="h2">Straight answers.</h2>
+          <p className="body">Can’t find yours? Ask us anything — we reply within one business day.</p>
+          <Button href="/about#contact" variant="outline" className="mt-2 self-start">
+            Ask a question
+          </Button>
+        </Reveal>
+        <Reveal delay={0.08}>
           <Faq items={faqs} />
         </Reveal>
       </section>

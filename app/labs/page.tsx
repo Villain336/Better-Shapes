@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import { PageHero } from "@/components/PageHero";
-import { GlassCard } from "@/components/GlassCard";
+import { Panel } from "@/components/Panel";
 import { WaitlistForm } from "@/components/Forms";
 import { Button } from "@/components/Button";
 import { Chip } from "@/components/Chip";
 import { ProductRender } from "@/components/ProductRender";
 import { Reveal, RevealItem, Stagger } from "@/components/Reveal";
-import { Blobs, SectionHeading } from "@/components/Sections";
+import { SectionHeading } from "@/components/Sections";
 import { toneColor } from "@/components/Shapes";
 import { art, type Tone } from "@/lib/content";
 
@@ -51,67 +51,69 @@ export default function LabsPage() {
         sub="Labs is where we explore robotics and physical AI: automation and intelligence that leave the screen. It’s research for now. We haven’t released anything, and we’ll say so plainly until we do."
       >
         <Button href="#interest">Join the interest list</Button>
-        <Button href="/products" variant="glass">
+        <Button href="/products" variant="outline">
           See what’s shipping
         </Button>
       </PageHero>
 
-      <section className="relative isolate py-16">
-        <Blobs className="opacity-70" />
-        <div className="container-x flex flex-col gap-10">
-          <SectionHeading
-            eyebrow="What we’re exploring"
-            title="Four questions"
-            accent="we can’t stop asking."
-            side={
-              <div className="flex items-center gap-3">
-                <ProductRender slug="field" className="size-14 rounded-[16px]" sizes="56px" />
-                <Chip tone="red">Nothing released yet</Chip>
-              </div>
-            }
-          />
-          <Stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {questions.map((q) => (
-              <RevealItem key={q.title} className="h-full">
-                <GlassCard className="flex h-full flex-col gap-3 rounded-[28px] px-6 pb-7 pt-6">
-                  <span className="size-3.5 rounded-full" style={{ background: toneColor[q.tone] }} />
-                  <h3 className="text-[22px] font-semibold tracking-[-0.04em]">{q.title}</h3>
-                  <p className="text-[14px] leading-[1.55] text-ink-2">{q.body}</p>
-                </GlassCard>
-              </RevealItem>
-            ))}
-          </Stagger>
-        </div>
+      <section className="container-x flex flex-col gap-10 pb-24">
+        <SectionHeading
+          eyebrow="What we’re exploring"
+          title="Four questions"
+          accent="we can’t stop asking."
+          side={
+            <div className="flex items-center gap-3">
+              <ProductRender slug="field" className="size-12 rounded-[10px]" sizes="48px" />
+              <Chip tone="red">Nothing released yet</Chip>
+            </div>
+          }
+        />
+        <Stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {questions.map((q, i) => (
+            <RevealItem key={q.title} className="h-full">
+              <Panel className="flex h-full flex-col gap-4 p-5">
+                <div className="flex items-center justify-between">
+                  <span className="size-2 rounded-full" style={{ background: toneColor[q.tone] }} />
+                  <span className="label text-ink-3">{String(i + 1).padStart(2, "0")}</span>
+                </div>
+                <div className="flex flex-col gap-1.5">
+                  <h3 className="h3">{q.title}</h3>
+                  <p className="small">{q.body}</p>
+                </div>
+              </Panel>
+            </RevealItem>
+          ))}
+        </Stagger>
       </section>
 
-      <section className="container-x grid gap-6 py-16 lg:grid-cols-2">
+      <section className="container-x grid gap-4 pb-24 lg:grid-cols-2">
         <Reveal>
-          <GlassCard className="flex h-full flex-col gap-4 rounded-[32px] p-8">
-            <span className="caption text-ink-3">How Labs works</span>
-            <p className="text-[18px] leading-[1.6] text-ink">
+          <Panel className="flex h-full flex-col gap-4 p-6 md:p-7">
+            <span className="label text-ink-3">How Labs works</span>
+            <p className="text-[16px] leading-[1.6] text-ink">
               Labs runs alongside the studio. We read, prototype in simulation and talk to people who run physical
               operations. When something is real enough to put in your hands, it moves to the Products page with a
               status and a date, the same way ShapesOS did.
             </p>
-          </GlassCard>
+          </Panel>
         </Reveal>
-        <Reveal delay={0.1}>
-          <GlassCard className="flex h-full flex-col gap-4 rounded-[32px] p-8">
-            <span className="caption text-ink-3">Partner with us</span>
-            <p className="text-[18px] leading-[1.6] text-ink">
-              Running a warehouse, farm, lab or shop floor with a problem that feels automatable? We’re looking for a
-              few design partners to learn from. No commitment, no sales pitch.
+        <Reveal delay={0.08}>
+          <Panel className="flex h-full flex-col gap-4 p-6 md:p-7">
+            <span className="label text-ink-3">Partner with us</span>
+            <p className="text-[16px] leading-[1.6] text-ink">
+              Running a warehouse, farm, lab or shop floor with a problem that feels automatable? We’re looking for a few
+              design partners to learn from. No commitment, no sales pitch.
             </p>
-            <Button href="/about#contact" variant="ghost" className="mt-auto self-start">
+            <Button href="/about#contact" variant="outline" className="mt-auto self-start">
               Tell us about it
             </Button>
-          </GlassCard>
+          </Panel>
         </Reveal>
       </section>
 
-      <section id="interest" className="container-x scroll-mt-28 pb-24 pt-8">
+      <section id="interest" className="container-x scroll-mt-24 pb-24">
         <Reveal>
-          <WaitlistForm product="Labs" title="Hear first when Labs ships something." />
+          <WaitlistForm product="Labs" title="Hear first when Labs ships something." body="Research notes now and then; a proper announcement when there’s something real." />
         </Reveal>
       </section>
     </>

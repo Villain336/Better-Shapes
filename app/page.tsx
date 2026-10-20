@@ -1,19 +1,21 @@
 import Image from "next/image";
 import { PageHero } from "@/components/PageHero";
-import { HeroDeck } from "@/components/HeroDeck";
+import { HeroBrief } from "@/components/HeroBrief";
 import { Button } from "@/components/Button";
 import { Reveal, RevealItem, Stagger } from "@/components/Reveal";
-import { Blobs, CtaBand, SectionHeading } from "@/components/Sections";
-import { CapabilityCard, ProjectCard, StatCard } from "@/components/Cards";
-import { GlassCard } from "@/components/GlassCard";
-import { LogoMark } from "@/components/Logo";
-import { toneColor } from "@/components/Shapes";
+import { CtaBand, Marquee, SectionHeading, StatStrip, Timeline } from "@/components/Sections";
+import { CapabilityCard, ProjectCard } from "@/components/Cards";
+import { Panel } from "@/components/Panel";
+import { Eyebrow } from "@/components/Eyebrow";
+import { Check } from "@/components/Shapes";
 import { ProductCard } from "@/components/ProductCard";
 import { ShapesOSFeature } from "@/components/ShapesOSFeature";
 import { products } from "@/lib/products";
-import { art, capabilities, projects, steps } from "@/lib/content";
+import { art, benefits, capabilities, projects, requestables, steps } from "@/lib/content";
 
 export default function Home() {
+  const openSource = products.filter((p) => p.openSource !== false).length;
+
   return (
     <>
       <PageHero
@@ -24,67 +26,99 @@ export default function Home() {
         title="Good ideas."
         accent="Better shape."
         sub="We connect brand, design, AI and growth to turn your next chapter into something people feel — and trust."
-        aside={<HeroDeck />}
+        aside={<HeroBrief />}
+        note="Free 30-minute shaping session · Pause or cancel anytime"
       >
         <Button href="/about#contact">Start a conversation</Button>
-        <Button href="#capabilities" variant="glass">
-          Explore capabilities
+        <Button href="#how" variant="outline">
+          How it works
         </Button>
       </PageHero>
 
-      {/* Steps ticker */}
-      <section className="container-x pb-16">
-        <div className="caption flex flex-wrap gap-x-10 gap-y-2 text-ink-2">
-          {["01 / Strategy", "02 / Design", "03 / Build", "04 / Grow"].map((s) => (
-            <span key={s}>{s}</span>
-          ))}
-        </div>
+      <section className="container-x flex flex-col gap-10 pb-20">
+        <StatStrip
+          items={[
+            { label: "Disciplines", value: "4", note: "Design, tech, AI and growth" },
+            { label: "Average delivery", value: "72h", note: "Per request, start to finish" },
+            { label: "Products in the lineup", value: String(products.length), note: `${openSource} of them open source` },
+            { label: "ShapesOS launch", value: "Dec 1", note: "2026, midnight Eastern" },
+          ]}
+        />
+        <Marquee label="Request anything" items={requestables} />
       </section>
 
       {/* Capabilities */}
-      <section id="capabilities" className="relative isolate scroll-mt-24 py-16 md:py-24">
-        <Blobs />
-        <div className="container-x flex flex-col gap-14">
-          <SectionHeading
-            eyebrow="What we do"
-            title="Four disciplines."
-            accent="One calm team."
-            side={
-              <p className="max-w-[340px] text-[16px] leading-[1.55] text-ink-2">
-                Strategy, craft and engineering under one roof — so nothing gets lost in the handoff.
-              </p>
-            }
-          />
-          <Stagger className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {capabilities.map((c, i) => (
-              <RevealItem key={c.name} className="h-full">
-                <CapabilityCard name={c.name} blurb={c.blurb} index={i} exploring={c.exploring} />
-              </RevealItem>
-            ))}
-          </Stagger>
-          <Reveal className="flex items-center gap-3 text-[16px] text-ink-2">
-            <LogoMark size={18} />
-            Every engagement starts with a free 30-minute shaping session.
+      <section id="capabilities" className="container-x flex scroll-mt-24 flex-col gap-10 pb-24">
+        <SectionHeading
+          eyebrow="What we do"
+          title="Four disciplines."
+          accent="One calm team."
+          description="Strategy, craft and engineering under one roof, so nothing gets lost in the handoff."
+        />
+        <Stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {capabilities.map((c, i) => (
+            <RevealItem key={c.name} className="h-full">
+              <CapabilityCard name={c.name} blurb={c.blurb} index={i} points={c.points} exploring={c.exploring} />
+            </RevealItem>
+          ))}
+        </Stagger>
+      </section>
+
+      {/* How it works */}
+      <section id="how" className="container-x flex scroll-mt-24 flex-col gap-12 pb-24">
+        <SectionHeading
+          eyebrow="How it works"
+          title="Subscribe, request,"
+          accent="receive."
+          description="A membership instead of a proposal. Add requests to your board; we work through them one at a time."
+          side={
+            <Button href="/pricing" variant="outline">
+              See memberships
+            </Button>
+          }
+        />
+        <Timeline steps={steps} />
+        <div className="grid gap-5 lg:grid-cols-[1.25fr_1fr]">
+          <Reveal className="frame aspect-[4/3] lg:aspect-auto lg:min-h-[420px]">
+            <Image src={art.sign} alt="The Better Shapes stone sign in a meadow" fill sizes="(min-width:1024px) 55vw, 100vw" className="object-cover" />
+          </Reveal>
+          <Reveal delay={0.08}>
+            <Panel className="flex h-full flex-col gap-6 p-6 md:p-7">
+              <Eyebrow>Why members stay</Eyebrow>
+              <ul className="flex flex-col">
+                {benefits.map((b, i) => (
+                  <li key={b.title} className={`flex gap-3.5 py-3.5 ${i > 0 ? "hairline-t" : "pt-0"}`}>
+                    <Check size={14} className="mt-1 shrink-0 text-ink-3" />
+                    <div className="flex flex-col gap-0.5">
+                      <span className="text-[14px] font-medium text-ink">{b.title}</span>
+                      <span className="small">{b.body}</span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </Panel>
           </Reveal>
         </div>
       </section>
 
       {/* Products */}
-      <section className="container-x flex flex-col gap-10 py-12 md:py-16">
+      <section className="container-x flex flex-col gap-8 pb-24">
         <SectionHeading
           eyebrow="Products"
           title="We build our own"
           accent="tools too."
+          description="Our products are the proof of how we work. Almost everything we make is open source."
           side={
-            <Button href="/products" variant="ghost">
+            <Button href="/products" variant="outline">
               All products
             </Button>
           }
         />
         <ShapesOSFeature />
-        <Stagger className="grid gap-5 md:grid-cols-3">
+        <Stagger className="grid gap-4 md:grid-cols-3">
           {products
             .filter((p) => p.status === "in-development")
+            .slice(0, 3)
             .map((p) => (
               <RevealItem key={p.slug} className="h-full">
                 <ProductCard product={p} />
@@ -93,77 +127,41 @@ export default function Home() {
         </Stagger>
       </section>
 
-      {/* How it works */}
-      <section className="container-x py-12 md:py-16">
-        <Reveal className="relative isolate flex min-h-[640px] flex-col justify-between overflow-hidden rounded-[40px] p-5 md:p-12">
-          <Image src={art.sign} alt="The Better Shapes stone sign in a meadow" fill sizes="100vw" className="-z-20 object-cover" />
-          <div className="absolute inset-0 -z-10 bg-gradient-to-b from-transparent via-transparent to-black/50" />
-          <span className="glass eyebrow self-start rounded-full px-3.5 py-2 text-ink">How it works</span>
-          <Stagger className="grid gap-4 md:grid-cols-3 md:gap-5" stagger={0.12}>
-            {steps.map((s) => (
-              <RevealItem key={s.n}>
-                <GlassCard className="flex h-full flex-col gap-3 rounded-[28px] px-6 pb-6 pt-5">
-                  <span className="caption flex items-center gap-2.5 text-ink-3">
-                    <span className="size-2.5 rounded-full" style={{ background: toneColor[s.tone] }} />
-                    {s.n}
-                  </span>
-                  <h3 className="text-[36px] font-medium tracking-[-0.05em] md:text-[40px]">{s.title}</h3>
-                  <p className="text-[16px] leading-[1.55] text-ink-2">{s.body}</p>
-                </GlassCard>
-              </RevealItem>
-            ))}
-          </Stagger>
-        </Reveal>
-      </section>
-
-      {/* Featured work */}
-      <section className="container-x flex flex-col gap-12 py-16 md:py-24">
+      {/* Work */}
+      <section className="container-x flex flex-col gap-8 pb-24">
         <SectionHeading
           eyebrow="Our work"
           title="Shaped"
           accent="in-house."
           side={
-            <Button href="/work" variant="ghost">
+            <Button href="/work" variant="outline">
               View all work
             </Button>
           }
         />
-        <div className="grid gap-6 lg:grid-cols-[1.5fr_1fr]">
+        <div className="grid gap-5 md:grid-cols-2">
           <Reveal>
-            <ProjectCard project={projects[0]} />
+            <ProjectCard project={projects[0]} tall />
           </Reveal>
-          <Reveal delay={0.1}>
-            <ProjectCard project={projects[1]} />
+          <Reveal delay={0.08}>
+            <ProjectCard project={projects[1]} tall />
           </Reveal>
         </div>
       </section>
 
-      {/* Building in the open */}
-      <section className="container-x grid gap-6 py-16 md:py-24 lg:grid-cols-[1.6fr_1fr]">
-        <Reveal className="relative isolate flex items-end overflow-hidden rounded-[40px] p-5 md:p-12">
-          <Image src={art.pricing} alt="" fill sizes="(min-width:1024px) 60vw, 100vw" className="-z-10 object-cover" />
-          <GlassCard className="flex max-w-[540px] flex-col items-start gap-5 rounded-[32px] p-8">
-            <h2 className="text-[32px] font-semibold leading-[1.05] tracking-[-0.05em] md:text-[40px]">
-              We build in the open.
-            </h2>
-            <p className="text-[16px] leading-[1.55] text-ink-2">
-              Our own products are the proof of how we work. Almost everything we make is open source, so you can read
-              the code, run it yourself and hold us to it.
+      {/* Open by default */}
+      <section className="container-x pb-24">
+        <Reveal className="hairline-t hairline-b grid gap-8 py-14 md:grid-cols-[1fr_2fr] md:py-20">
+          <Eyebrow>Open by default</Eyebrow>
+          <div className="flex flex-col items-start gap-7">
+            <p className="display max-w-[760px] text-[clamp(26px,3.2vw,40px)] font-medium leading-[1.15] tracking-[-0.025em] text-ink">
+              Almost everything we make is open source, so you can read the code, run it yourself and hold us to it.
             </p>
-            <Button href="/products">See the lineup</Button>
-          </GlassCard>
+            <Button href="/products" variant="outline">
+              See the lineup
+            </Button>
+          </div>
         </Reveal>
-        <Stagger className="flex flex-col gap-6">
-          {[
-            [String(products.length), "Products in our lineup"],
-            [String(products.filter((p) => p.openSource !== false).length), "Of them open source"],
-            ["Dec 1", "ShapesOS launch day, 2026"],
-          ].map(([value, label]) => (
-            <RevealItem key={label}>
-              <StatCard value={value} label={label} />
-            </RevealItem>
-          ))}
-        </Stagger>
       </section>
 
       <CtaBand image={art.about} />
