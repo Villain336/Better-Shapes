@@ -73,7 +73,7 @@ export default async function ProductPage({ params }: Params) {
           <Panel className="flex h-full flex-col gap-5 p-1.5">
             <ProductRender slug={p.slug} alt={`${p.name} render: ${p.meaning}`} className="aspect-square rounded-[10px]" sizes="360px" />
             <div className="flex flex-col gap-5 px-3.5 pb-4">
-              <div className="flex flex-col gap-2">
+              <div className="flex flex-col items-start gap-2">
                 <StatusChip status={p.status} />
                 <p className="small">{p.meaning}</p>
               </div>
@@ -91,7 +91,7 @@ export default async function ProductPage({ params }: Params) {
       </section>
 
       <section className="container-x pb-24">
-        <Reveal className="hairline-t hairline-b grid gap-8 py-12 md:grid-cols-[1fr_2fr] md:py-16">
+        <Reveal className="hairline-t hairline-b grid items-start gap-8 py-12 md:grid-cols-[1fr_2fr] md:py-16">
           <Eyebrow>How it fits</Eyebrow>
           <p className="display max-w-[760px] text-[clamp(22px,2.6vw,32px)] font-medium leading-[1.25] tracking-[-0.02em] text-ink">
             {p.fit}

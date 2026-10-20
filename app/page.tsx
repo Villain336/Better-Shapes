@@ -149,7 +149,7 @@ export default function Home() {
 
       {/* Open by default */}
       <section className="container-x pb-24">
-        <Reveal className="hairline-t hairline-b grid gap-8 py-14 md:grid-cols-[1fr_2fr] md:py-20">
+        <Reveal className="hairline-t hairline-b grid items-start gap-8 py-14 md:grid-cols-[1fr_2fr] md:py-20">
           <Eyebrow>Open by default</Eyebrow>
           <div className="flex flex-col items-start gap-7">
             <p className="display max-w-[760px] text-[clamp(26px,3.2vw,40px)] font-medium leading-[1.15] tracking-[-0.025em] text-ink">

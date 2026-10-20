@@ -63,7 +63,7 @@ export default async function PostPage({ params }: Params) {
       <article className="container-x pb-24">
         <Reveal className="mx-auto grid max-w-[1000px] gap-10 lg:grid-cols-[180px_minmax(0,1fr)]">
           <aside className="hidden lg:block">
-            <div className="sticky top-28 flex flex-col gap-4">
+            <div className="sticky top-28 flex flex-col items-start gap-4">
               <Chip tone={toneFor[p.category]}>{p.category}</Chip>
               <dl className="flex flex-col gap-3">
                 <div className="flex flex-col gap-0.5">

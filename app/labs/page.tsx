@@ -60,7 +60,7 @@ export default function LabsPage() {
       </PageHero>
 
       <section className="container-x pb-24">
-        <ProductFeature product={flock} eyebrow="Current project" />
+        <ProductFeature product={flock} eyebrow="Current project" image={art.labs} />
       </section>
 
       <section className="container-x flex flex-col gap-10 pb-24">

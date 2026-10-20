@@ -9,7 +9,16 @@ import { ProductRender } from "./ProductRender";
 import { Eyebrow } from "./Eyebrow";
 
 /** The flagship panel used on Home and /products: copy on the left, the render over a painting on the right. */
-export function ProductFeature({ product: p, eyebrow = "Flagship" }: { product: Product; eyebrow?: string }) {
+export function ProductFeature({
+  product: p,
+  eyebrow = "Flagship",
+  image = art.products,
+}: {
+  product: Product;
+  eyebrow?: string;
+  /** The painting behind the render. */
+  image?: string;
+}) {
   return (
     <Reveal className="surface grid overflow-hidden rounded-(--radius-panel) lg:grid-cols-[1fr_1.1fr]">
       <div className="flex flex-col items-start gap-6 p-6 md:p-10">
@@ -37,7 +46,7 @@ export function ProductFeature({ product: p, eyebrow = "Flagship" }: { product: 
         </div>
       </div>
       <div className="relative isolate min-h-[360px] overflow-hidden lg:min-h-0">
-        <Image src={art.products} alt="" fill sizes="(min-width:1024px) 55vw, 100vw" className="object-cover" />
+        <Image src={image} alt="" fill sizes="(min-width:1024px) 55vw, 100vw" className="object-cover" />
         <div className="absolute inset-0 flex items-center justify-center p-8 md:p-12">
           <ProductRender
             slug={p.slug}

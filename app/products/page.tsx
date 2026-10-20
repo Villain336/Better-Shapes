@@ -91,7 +91,7 @@ export default function ProductsPage() {
       </section>
 
       <section className="container-x pb-24">
-        <Reveal className="hairline-t hairline-b grid gap-8 py-12 md:grid-cols-[1fr_2fr] md:py-16">
+        <Reveal className="hairline-t hairline-b grid items-start gap-8 py-12 md:grid-cols-[1fr_2fr] md:py-16">
           <Eyebrow>A note on names</Eyebrow>
           <p className="body max-w-[680px]">
             Product names are working names and may change before release. Other companies’ products are mentioned
