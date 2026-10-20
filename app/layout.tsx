@@ -4,6 +4,7 @@ import "./globals.css";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { SmoothScroll } from "@/components/SmoothScroll";
+import { ThemeProvider, themeInitScript } from "@/components/Theme";
 import { asset } from "@/lib/content";
 
 const manrope = Manrope({ subsets: ["latin"], variable: "--font-manrope", weight: ["500", "600", "700"] });
@@ -20,16 +21,26 @@ export const metadata: Metadata = {
   icons: { icon: asset("/favicon.svg") },
 };
 
-export const viewport: Viewport = { themeColor: "#f4f2ed" };
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f4f2ed" },
+    { media: "(prefers-color-scheme: dark)", color: "#15161c" },
+  ],
+};
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${manrope.variable} ${inter.variable} ${geistMono.variable}`}>
+    <html lang="en" className={`${manrope.variable} ${inter.variable} ${geistMono.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
       <body>
-        <SmoothScroll />
-        <Nav />
-        <main>{children}</main>
-        <Footer />
+        <ThemeProvider>
+          <SmoothScroll />
+          <Nav />
+          <main>{children}</main>
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

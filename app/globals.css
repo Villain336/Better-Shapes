@@ -1,10 +1,16 @@
 @import "tailwindcss";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 /*
   Better Shapes — editorial system.
   Calm, dense, hairline-led. The paintings carry the colour; the UI stays quiet.
+  Two times of day: cream by day, a deep dusk after dark. Every colour below is a token so the whole
+  page can cross-fade between them.
 */
 :root {
+  color-scheme: light;
+
   --cream-50: #fbfaf7;
   --cream-100: #f4f2ed;
   --cream-200: #e9e6df;
@@ -15,6 +21,12 @@
 
   --color-bg-canvas: var(--cream-100);
   --color-bg-surface: var(--cream-50);
+  /* The canvas as bare channels, for scrims over paintings. */
+  --canvas-rgb: 244 242 237;
+
+  /* Text and fills that sit on top of `ink` (buttons, featured cards). */
+  --on-ink: #fbfaf7;
+  --ink-hover: #2a2a2a;
 
   --line: rgb(20 20 20 / 0.08);
   --line-strong: rgb(20 20 20 / 0.16);
@@ -22,8 +34,57 @@
   --glass-fill: rgb(251 250 247 / 0.78);
   --glass-stroke: rgb(255 255 255 / 0.55);
   --glass-ink: rgb(20 20 20 / 0.72);
+  /* Translucent fills for controls that sit on paintings or glass. */
+  --veil: rgb(255 255 255 / 0.5);
+  --veil-strong: rgb(255 255 255 / 0.8);
 
+  --accent: #2f55d4;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Dusk: deep indigo-charcoal with warm, low-contrast type. The paintings swap to their dusk versions. */
+.dark {
+  color-scheme: dark;
+
+  --cream-50: #1c1d25;
+  --cream-100: #15161c;
+  --cream-200: #262733;
+  --ink-900: #f1efe9;
+  --ink-700: #b8b5ad;
+  --ink-500: #85827b;
+  --ink-300: #5b5953;
+
+  --canvas-rgb: 21 22 28;
+
+  --on-ink: #15161c;
+  --ink-hover: #dedbd3;
+
+  --line: rgb(241 239 233 / 0.1);
+  --line-strong: rgb(241 239 233 / 0.22);
+
+  --glass-fill: rgb(28 29 37 / 0.72);
+  --glass-stroke: rgb(255 255 255 / 0.14);
+  --glass-ink: rgb(10 10 14 / 0.72);
+  --veil: rgb(28 29 37 / 0.5);
+  --veil-strong: rgb(28 29 37 / 0.85);
+
+  --accent: #93a8ff;
+}
+
+/* Added to <html> for a moment when the theme flips so every surface fades together. */
+/* Paintings keep their own, slower crossfade (see .painting-day/.painting-dusk below). */
+html.theme-transition,
+html.theme-transition *:not(.painting-day, .painting-dusk),
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition:
+    background-color 0.7s var(--ease),
+    border-color 0.7s var(--ease),
+    color 0.7s var(--ease),
+    fill 0.7s var(--ease),
+    stroke 0.7s var(--ease),
+    filter 0.7s var(--ease),
+    box-shadow 0.7s var(--ease) !important;
 }
 
 @theme inline {
@@ -35,7 +96,12 @@
   --color-ink-2: var(--ink-700);
   --color-ink-3: var(--ink-500);
   --color-ink-4: var(--ink-300);
-  --color-accent: #2f55d4;
+  --color-on-ink: var(--on-ink);
+  --color-ink-hover: var(--ink-hover);
+  --color-veil: var(--veil);
+  --color-veil-strong: var(--veil-strong);
+  --color-glass-stroke: var(--glass-stroke);
+  --color-accent: var(--accent);
   --color-brand-red: #e0533d;
   --color-brand-blue: #2f55d4;
   --color-brand-yellow: #f2cf3a;
@@ -189,7 +255,7 @@ html.lenis body {
   }
   .glass-ink {
     background: var(--glass-ink);
-    color: white;
+    color: #fbfaf7;
     border: 1px solid rgb(255 255 255 / 0.12);
     backdrop-filter: blur(18px) saturate(140%);
     -webkit-backdrop-filter: blur(18px) saturate(140%);
@@ -210,7 +276,7 @@ html.lenis body {
   }
   .lift:hover {
     transform: translateY(-2px);
-    box-shadow: 0 16px 40px -20px rgb(20 20 20 / 0.18);
+    box-shadow: 0 16px 40px -20px rgb(0 0 0 / 0.22);
     border-color: var(--line-strong);
   }
 
@@ -234,7 +300,7 @@ html.lenis body {
   .field:focus {
     outline: none;
     border-color: var(--ink-900);
-    box-shadow: 0 0 0 3px rgb(20 20 20 / 0.06);
+    box-shadow: 0 0 0 3px var(--line);
   }
 
   /* Image frames */
@@ -245,12 +311,33 @@ html.lenis body {
     background: var(--cream-200);
   }
   .frame img {
-    transition: transform 1.2s var(--ease);
+    transition:
+      transform 1.2s var(--ease),
+      opacity 1.4s var(--ease);
   }
   .group:hover .frame img,
   .frame:hover img {
     transform: scale(1.025);
   }
+}
+
+/* Day/dusk paintings: both layers are rendered; the dusk one fades in with the theme. */
+.painting-day,
+.painting-dusk {
+  transition: opacity 1.4s var(--ease);
+}
+.painting-dusk {
+  opacity: 0;
+}
+.dark .painting-dusk {
+  opacity: 1;
+}
+.dark .painting-day {
+  opacity: 0;
+}
+/* Product renders were shot on a bright studio sweep; soften them after dark. */
+.dark .render img {
+  filter: brightness(0.86) saturate(0.95);
 }
 
 @keyframes marquee {
@@ -270,7 +357,9 @@ html.lenis body {
     animation: none;
   }
   .frame img,
-  .lift {
+  .lift,
+  .painting-day,
+  .painting-dusk {
     transition: none;
   }
 }

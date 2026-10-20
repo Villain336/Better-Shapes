@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { art } from "@/lib/content";
 import type { Product } from "@/lib/products";
 import { Button } from "./Button";
@@ -7,6 +6,7 @@ import { StatusChip } from "./ProductCard";
 import { Check } from "./Shapes";
 import { ProductRender } from "./ProductRender";
 import { Eyebrow } from "./Eyebrow";
+import { Painting } from "./Painting";
 
 /** The flagship panel used on Home and /products: copy on the left, the render over a painting on the right. */
 export function ProductFeature({
@@ -39,14 +39,14 @@ export function ProductFeature({
           ))}
         </ul>
         <div className="mt-auto flex flex-wrap gap-2.5 pt-2">
-          <Button href={`/products/${p.slug}`}>{p.status === "early-access" ? "Get early access" : "Learn more"}</Button>
+          <Button href={`/products/${p.slug}`}>{p.status === "early-access" ? "Join the waitlist" : "Learn more"}</Button>
           <Button href="/products" variant="outline">
             All products
           </Button>
         </div>
       </div>
       <div className="relative isolate min-h-[360px] overflow-hidden lg:min-h-0">
-        <Image src={image} alt="" fill sizes="(min-width:1024px) 55vw, 100vw" className="object-cover" />
+        <Painting src={image} sizes="(min-width:1024px) 55vw, 100vw" />
         <div className="absolute inset-0 flex items-center justify-center p-8 md:p-12">
           <ProductRender
             slug={p.slug}

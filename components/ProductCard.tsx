@@ -29,7 +29,7 @@ export function ProductCard({ product }: { product: Product }) {
           <span className="label text-ink-3">{product.lane}</span>
           <div className="flex items-start justify-between gap-4">
             <h3 className="h3">{product.name}</h3>
-            <span className="mt-0.5 grid size-7 shrink-0 place-items-center rounded-full border border-line text-ink transition-colors duration-300 group-hover:border-ink group-hover:bg-ink group-hover:text-white">
+            <span className="mt-0.5 grid size-7 shrink-0 place-items-center rounded-full border border-line text-ink transition-colors duration-300 group-hover:border-ink group-hover:bg-ink group-hover:text-on-ink">
               <ArrowUpRight size={12} />
             </span>
           </div>

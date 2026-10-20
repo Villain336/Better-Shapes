@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/image";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Accent } from "./Accent";
 import { Eyebrow } from "./Eyebrow";
+import { Painting } from "./Painting";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -42,19 +42,23 @@ export function PageHero({ image, alt, eyebrow, title, accent, sub, children, as
   return (
     <section ref={ref} className={`relative isolate overflow-hidden ${tall ? "min-h-[min(88svh,880px)]" : "min-h-[540px] md:min-h-[620px]"}`}>
       <motion.div className="absolute inset-0 -z-20" style={{ y, scale }}>
-        <Image src={image} alt={alt} fill priority sizes="100vw" className="object-cover" />
+        <Painting src={image} alt={alt} priority sizes="100vw" />
       </motion.div>
 
-      {/* top scrim for the nav, left wash for the copy, bottom fade into the canvas */}
-      <div aria-hidden className="absolute inset-x-0 top-0 -z-10 h-40 bg-gradient-to-b from-canvas/70 to-transparent" />
+      {/*
+        Top scrim for the nav, left wash for the copy, bottom fade into the canvas.
+        Solid canvas colour shaped by a static alpha mask, so the wash fades with the theme
+        instead of snapping (gradient colour stops can't transition).
+      */}
+      <div aria-hidden className="absolute inset-x-0 top-0 -z-10 h-40 bg-canvas [mask-image:linear-gradient(180deg,rgb(0_0_0/0.7),transparent)]" />
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 bg-[linear-gradient(180deg,rgba(244,242,237,0.55)_0%,rgba(244,242,237,0.2)_50%,rgba(244,242,237,0.9)_100%)] md:bg-[linear-gradient(90deg,rgba(244,242,237,0.82)_0%,rgba(244,242,237,0.45)_45%,rgba(244,242,237,0)_75%)]"
+        className="absolute inset-0 -z-10 bg-canvas [mask-image:linear-gradient(180deg,rgb(0_0_0/0.55)_0%,rgb(0_0_0/0.2)_50%,rgb(0_0_0/0.9)_100%)] md:[mask-image:linear-gradient(90deg,rgb(0_0_0/0.82)_0%,rgb(0_0_0/0.45)_45%,transparent_75%)]"
       />
-      <div aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-32 bg-gradient-to-b from-transparent to-canvas" />
+      <div aria-hidden className="absolute inset-x-0 bottom-0 -z-10 h-32 bg-canvas [mask-image:linear-gradient(180deg,transparent,black)]" />
 
       <div
-        className={`container-x relative flex flex-col justify-center pb-16 pt-28 md:pt-36 ${
+        className={`container-x relative flex flex-col justify-center pb-16 pt-32 md:pt-40 ${
           tall ? "min-h-[min(88svh,880px)]" : "min-h-[540px] md:min-h-[620px]"
         }`}
       >

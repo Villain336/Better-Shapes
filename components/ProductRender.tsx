@@ -22,7 +22,7 @@ export function ProductRender({
   sizes?: string;
 }) {
   return (
-    <div className={`relative overflow-hidden ${className}`} style={{ background: RENDER_BG }}>
+    <div className={`render relative overflow-hidden ${className}`} style={{ background: RENDER_BG }}>
       <Image src={productRender(slug)} alt={alt} fill sizes={sizes} className="object-cover" />
     </div>
   );

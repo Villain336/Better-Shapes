@@ -26,9 +26,12 @@ npm run typecheck
   the surfaces: `surface` (hairline card), `glass` (only on top of paintings), `frame` (image container), `lift` (hover)
 - `lib/content.ts` — all copy: services, our work, pricing, FAQs, post metadata, the request ticker (edit here)
 - `lib/essays.ts` — essay bodies keyed by post slug (`## ` lines are subheads, `> ` lines are pull quotes)
-- `lib/products.ts` — the five products: Periscope (viewing MCP + API for agents, the flagship), Canary (decoy key
-  injector), Kiln (data labeling + model training), Ripple (open-source streaming) and Flock (drone mesh OS, in Labs).
-  `products[0]` is the flagship shown on Home. Set `repo` once a GitHub repo is public to show the link.
+- `lib/products.ts` — the six products: ShapesOS (the agentic business OS, the flagship, launching Dec 1, 2026),
+  Periscope (viewing MCP + API for agents), Canary (decoy key injector), Kiln (data labeling + model training), Ripple
+  (open-source streaming) and Flock (drone mesh OS, in Labs). `products[0]` is the flagship shown on Home. Set `repo`
+  once a GitHub repo is public to show the link. `shapesOSLaunch` holds the launch moment; `components/Launch.tsx`
+  turns it into the strip above the nav, the Home announcement band and the product-page countdown (all live, and
+  they flip to “is live” copy once the date passes).
 - `public/products/` — product renders, 1152×720 with the object centred in the middle square so both square and
   wide frames work. Frosted glass + brushed titanium on a warm studio background; generate new ones with the existing
   renders as style references.
@@ -41,7 +44,18 @@ npm run typecheck
   contact form), `Sections` (`SectionHeading`, `StatStrip`, `Marquee`, `Timeline`, `Faq`, `CtaBand`), `ProductFeature`
   (the flagship panel), `ProductCard`, `Cards`, `Forms`
 - Motion: reveals fade and rise 12px over 0.6s, staggered 60ms; hero parallax is 12%; hovers lift 2px. No blur, no drift, no blobs.
-- `public/art/` — AI-generated flower/sky paintings, one per page
+- `public/art/` — AI-generated flower/sky paintings, one per page, each with a `*-dusk.webp` twin for dark mode
+
+## Day and dusk (theme)
+
+Dark mode is a dusk version of the same scenery, not a grey inversion. `components/Theme.tsx` owns it: a `.dark`
+class on `<html>`, remembered in `localStorage` (`better-shapes:theme`), falling back to the system preference; an
+inline script in `app/layout.tsx` applies it before first paint. Tokens for both times of day live at the top of
+`app/globals.css` (use `on-ink`, `veil`, `glass-stroke` rather than hard-coded white). Flipping the switch adds
+`html.theme-transition` for 0.7s so every colour eases at once, while `components/Painting.tsx` renders the day and
+dusk images stacked and cross-fades them over 1.4s. Hero scrims are a solid canvas colour under a static alpha mask so
+they fade with the theme too. When adding a painting, generate its dusk twin from the day image and name it
+`<name>-dusk.webp`.
 
 ## Forms (Web3Forms)
 

@@ -1,11 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import type { Tone } from "@/lib/content";
 import { Reveal } from "./Reveal";
 import { Button } from "./Button";
+import { Painting } from "./Painting";
 import { Accent } from "./Accent";
 import { Eyebrow } from "./Eyebrow";
 import { Panel } from "./Panel";
@@ -123,7 +123,7 @@ export function Faq({ items }: { items: { q: string; a: string }[] }) {
               <span className="text-[15px] font-medium tracking-[-0.005em] text-ink">{item.q}</span>
               <span
                 className={`grid size-7 shrink-0 place-items-center rounded-full border transition-colors duration-300 ${
-                  isOpen ? "border-ink bg-ink text-white" : "border-line-strong text-ink"
+                  isOpen ? "border-ink bg-ink text-on-ink" : "border-line-strong text-ink"
                 }`}
               >
                 <svg viewBox="0 0 12 12" width="11" height="11" aria-hidden>
@@ -174,7 +174,7 @@ export function CtaBand({
   return (
     <section className="container-x pb-20">
       <Reveal className="frame relative isolate min-h-[420px] md:min-h-[460px]">
-        <Image src={image} alt="" fill sizes="100vw" className="object-cover" />
+        <Painting src={image} sizes="100vw" />
         <div aria-hidden className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0)_20%,rgba(0,0,0,0.3)_55%,rgba(0,0,0,0.7)_100%)]" />
         <div className="absolute inset-x-0 bottom-0 flex flex-col justify-between gap-8 p-6 md:flex-row md:items-end md:p-10">
           <div className="flex max-w-[560px] flex-col gap-4 text-white">

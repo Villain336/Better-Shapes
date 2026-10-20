@@ -23,7 +23,7 @@ export function WorkGrid() {
               aria-selected={active === f}
               onClick={() => setActive(f)}
               className={`relative h-8 cursor-pointer rounded-[8px] px-3 text-[13px] font-medium transition-colors duration-300 ${
-                active === f ? "text-white" : "text-ink-2 hover:text-ink"
+                active === f ? "text-on-ink" : "text-ink-2 hover:text-ink"
               }`}
             >
               {active === f && (

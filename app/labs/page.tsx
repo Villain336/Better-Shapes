@@ -118,7 +118,7 @@ export default function LabsPage() {
         </Reveal>
       </section>
 
-      <section id="interest" className="container-x scroll-mt-24 pb-24">
+      <section id="interest" className="container-x scroll-mt-32 pb-24">
         <Reveal>
           <WaitlistForm product="Labs" title="Hear first when Labs ships something." body="Research notes now and then; a proper announcement when there’s something real." />
         </Reveal>

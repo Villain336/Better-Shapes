@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "./Shapes";
 
-type Variant = "ink" | "outline" | "ghost" | "white" | "glass";
+type Variant = "ink" | "inverse" | "outline" | "ghost" | "white" | "glass";
 type Size = "sm" | "md";
 
 const base =
@@ -13,10 +13,11 @@ const sizes: Record<Size, string> = {
 };
 
 const variants: Record<Variant, string> = {
-  ink: "bg-ink text-white hover:bg-[#2a2a2a]",
-  outline: "border border-line-strong bg-white/45 text-ink backdrop-blur-sm hover:border-ink hover:bg-white/80",
+  ink: "bg-ink text-on-ink hover:bg-ink-hover",
+  inverse: "bg-on-ink text-ink hover:bg-on-ink/90",
+  outline: "border border-line-strong bg-veil text-ink backdrop-blur-sm hover:border-ink hover:bg-veil-strong",
   ghost: "px-2! text-ink hover:text-ink-2",
-  white: "bg-white text-ink hover:bg-surface",
+  white: "bg-white text-[#141414] hover:bg-[#f4f2ed]",
   glass: "border border-white/30 bg-white/10 text-white backdrop-blur-md hover:bg-white/20",
 };
 

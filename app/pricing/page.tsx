@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { PageHero } from "@/components/PageHero";
+import { Painting } from "@/components/Painting";
 import { PricingCard } from "@/components/Cards";
 import { Panel } from "@/components/Panel";
 import { Button } from "@/components/Button";
@@ -37,11 +37,11 @@ export default function PricingPage() {
               <span className="label text-ink-3">Products &amp; Labs</span>
               <span className="num text-[44px] md:text-[48px]">Free</span>
               <p className="text-[14px] leading-[1.55] text-ink-2">
-                Our own software: Periscope, Canary, Kiln, Ripple and Flock, all open source and free to self-host.
+                Our own software: ShapesOS (launching Dec 1, 2026), Periscope, Canary, Kiln, Ripple and Flock, all open source and free to self-host.
                 Members get early access and a say in what we build next.
               </p>
               <div className="frame min-h-[160px] flex-1 rounded-[10px]">
-                <Image src={art.products} alt="" fill sizes="400px" className="object-cover" />
+                <Painting src={art.products} sizes="400px" />
               </div>
               <Button href="/products" variant="outline" className="w-full">
                 See products

@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { PageHero } from "@/components/PageHero";
+import { Painting } from "@/components/Painting";
 import { Panel } from "@/components/Panel";
 import { ContactForm } from "@/components/Forms";
 import { Reveal, RevealItem, Stagger } from "@/components/Reveal";
@@ -28,7 +28,7 @@ export default function AboutPage() {
       {/* Story */}
       <section className="container-x grid items-start gap-8 pb-24 lg:grid-cols-[1.2fr_1fr] lg:gap-14">
         <Reveal className="frame aspect-[4/3]">
-          <Image src={art.sign} alt="The Better Shapes sign on a wildflower hillside" fill sizes="(min-width:1024px) 55vw, 100vw" className="object-cover" />
+          <Painting src={art.sign} alt="The Better Shapes sign on a wildflower hillside" sizes="(min-width:1024px) 55vw, 100vw" />
         </Reveal>
         <Reveal delay={0.08} className="flex flex-col gap-5 lg:pt-2">
           <Eyebrow>Our story</Eyebrow>
@@ -65,7 +65,7 @@ export default function AboutPage() {
       </section>
 
       {/* Contact */}
-      <section id="contact" className="container-x scroll-mt-24 pb-24">
+      <section id="contact" className="container-x scroll-mt-32 pb-24">
         <Reveal className="grid items-start gap-8 lg:grid-cols-[1fr_1.3fr] lg:gap-14">
           <div className="flex flex-col gap-6">
             <Eyebrow>Contact</Eyebrow>
@@ -82,7 +82,7 @@ export default function AboutPage() {
               ))}
             </ul>
             <div className="frame hidden aspect-[16/9] lg:block">
-              <Image src={art.pricing} alt="" fill sizes="400px" className="object-cover" />
+              <Painting src={art.pricing} sizes="400px" />
             </div>
           </div>
           <Panel className="p-6 md:p-8">

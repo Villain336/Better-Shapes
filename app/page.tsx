@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { PageHero } from "@/components/PageHero";
+import { Painting } from "@/components/Painting";
 import { HeroBrief } from "@/components/HeroBrief";
 import { Button } from "@/components/Button";
 import { Reveal, RevealItem, Stagger } from "@/components/Reveal";
@@ -10,7 +10,8 @@ import { Eyebrow } from "@/components/Eyebrow";
 import { Check } from "@/components/Shapes";
 import { ProductCard } from "@/components/ProductCard";
 import { ProductFeature } from "@/components/ProductFeature";
-import { flagship, products, statusMeta } from "@/lib/products";
+import { LaunchBand } from "@/components/Launch";
+import { flagship, products } from "@/lib/products";
 import { art, benefits, capabilities, projects, requestables, steps } from "@/lib/content";
 
 export default function Home() {
@@ -36,20 +37,22 @@ export default function Home() {
         </Button>
       </PageHero>
 
+      <LaunchBand />
+
       <section className="container-x flex flex-col gap-10 pb-20">
         <StatStrip
           items={[
             { label: "Disciplines", value: "4", note: "Design, tech, AI and growth" },
             { label: "Average delivery", value: "72h", note: "Per request, start to finish" },
             { label: "Products in the lineup", value: String(products.length), note: `${openSource} of them open source` },
-            { label: "Flagship", value: flagship.name, note: statusMeta[flagship.status].label },
+            { label: "ShapesOS launch", value: "Dec 1", note: "2026, midnight Eastern" },
           ]}
         />
         <Marquee label="Request anything" items={requestables} />
       </section>
 
       {/* Capabilities */}
-      <section id="capabilities" className="container-x flex scroll-mt-24 flex-col gap-10 pb-24">
+      <section id="capabilities" className="container-x flex scroll-mt-32 flex-col gap-10 pb-24">
         <SectionHeading
           eyebrow="What we do"
           title="Four disciplines."
@@ -66,7 +69,7 @@ export default function Home() {
       </section>
 
       {/* How it works */}
-      <section id="how" className="container-x flex scroll-mt-24 flex-col gap-12 pb-24">
+      <section id="how" className="container-x flex scroll-mt-32 flex-col gap-12 pb-24">
         <SectionHeading
           eyebrow="How it works"
           title="Subscribe, request,"
@@ -81,7 +84,7 @@ export default function Home() {
         <Timeline steps={steps} />
         <div className="grid gap-5 lg:grid-cols-[1.25fr_1fr]">
           <Reveal className="frame aspect-[4/3] lg:aspect-auto lg:min-h-[420px]">
-            <Image src={art.sign} alt="The Better Shapes stone sign in a meadow" fill sizes="(min-width:1024px) 55vw, 100vw" className="object-cover" />
+            <Painting src={art.sign} alt="The Better Shapes stone sign in a meadow" sizes="(min-width:1024px) 55vw, 100vw" />
           </Reveal>
           <Reveal delay={0.08}>
             <Panel className="flex h-full flex-col gap-6 p-6 md:p-7">
@@ -117,7 +120,7 @@ export default function Home() {
         />
         <ProductFeature product={flagship} />
         <Stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {rest.map((p) => (
+          {rest.slice(0, 4).map((p) => (
             <RevealItem key={p.slug} className="h-full">
               <ProductCard product={p} />
             </RevealItem>

@@ -9,6 +9,7 @@ import { RENDER_BG } from "./ProductRender";
 import { ArrowRight, ArrowUpRight, CapabilityGlyph, Check } from "./Shapes";
 import { Chip } from "./Chip";
 import { Button } from "./Button";
+import { Painting } from "./Painting";
 
 export function CapabilityCard({
   name,
@@ -68,7 +69,7 @@ export function ProjectCard({ project, className = "", tall = false }: { project
     >
       <Link href={project.href} className="block h-full">
         <Panel lift className="flex h-full flex-col p-1.5">
-          <div className={`frame rounded-[10px] ${tall ? "aspect-[4/3] md:aspect-[16/10]" : "aspect-[4/3]"}`} style={{ background: RENDER_BG }}>
+          <div className={`frame render rounded-[10px] ${tall ? "aspect-[4/3] md:aspect-[16/10]" : "aspect-[4/3]"}`} style={{ background: RENDER_BG }}>
             <Image
               src={project.image}
               alt={`${project.title} product render`}
@@ -88,7 +89,7 @@ export function ProjectCard({ project, className = "", tall = false }: { project
                 <h3 className="h3">{project.title}</h3>
                 <p className="small">{project.subtitle}</p>
               </div>
-              <span className="mt-1 grid size-7 shrink-0 place-items-center rounded-full border border-line text-ink transition-colors duration-300 group-hover:border-ink group-hover:bg-ink group-hover:text-white">
+              <span className="mt-1 grid size-7 shrink-0 place-items-center rounded-full border border-line text-ink transition-colors duration-300 group-hover:border-ink group-hover:bg-ink group-hover:text-on-ink">
                 <ArrowUpRight size={12} />
               </span>
             </div>
@@ -125,17 +126,17 @@ export function PricingCard({
   href?: string;
   period?: string;
 }) {
-  const muted = featured ? "text-white/65" : "text-ink-2";
+  const muted = featured ? "text-on-ink/65" : "text-ink-2";
   return (
     <div
       className={`flex h-full flex-col gap-6 rounded-(--radius-card) p-6 md:p-7 ${
-        featured ? "bg-ink text-white" : "surface"
+        featured ? "bg-ink text-on-ink" : "surface"
       }`}
     >
       <div className="flex items-center justify-between">
-        <span className={`label ${featured ? "text-white/70" : "text-ink-3"}`}>{name}</span>
+        <span className={`label ${featured ? "text-on-ink/70" : "text-ink-3"}`}>{name}</span>
         {featured && (
-          <span className="label inline-flex h-6 items-center gap-1.5 rounded-(--radius-tag) border border-white/20 bg-white/10 px-2 text-white">
+          <span className="label inline-flex h-6 items-center gap-1.5 rounded-(--radius-tag) border border-on-ink/20 bg-on-ink/10 px-2 text-on-ink">
             <span className="size-1.5 rounded-full bg-brand-yellow" />
             Most popular
           </span>
@@ -146,15 +147,15 @@ export function PricingCard({
         <span className={`text-[14px] ${muted}`}>{period}</span>
       </div>
       <p className={`text-[14px] leading-[1.55] ${muted}`}>{description}</p>
-      <ul className={`flex flex-col gap-2.5 border-t pt-5 ${featured ? "border-white/15" : "border-line"}`}>
+      <ul className={`flex flex-col gap-2.5 border-t pt-5 ${featured ? "border-on-ink/15" : "border-line"}`}>
         {features.map((f) => (
           <li key={f} className="flex items-center gap-2.5 text-[14px]">
-            <Check size={13} className={featured ? "text-white/70" : "text-ink-3"} />
+            <Check size={13} className={featured ? "text-on-ink/70" : "text-ink-3"} />
             {f}
           </li>
         ))}
       </ul>
-      <Button href={href} variant={featured ? "white" : "ink"} className="mt-auto w-full">
+      <Button href={href} variant={featured ? "inverse" : "ink"} className="mt-auto w-full">
         {cta}
       </Button>
     </div>
@@ -166,7 +167,7 @@ export function PostCard({ post }: { post: Post }) {
     <Link href={`/blog/${post.slug}`} className="group block h-full">
       <Panel as="article" lift className="flex h-full flex-col p-1.5">
         <div className="frame aspect-[16/10] rounded-[10px]">
-          <Image src={post.image} alt="" fill sizes="(min-width: 1024px) 33vw, 100vw" className="object-cover" />
+          <Painting src={post.image} sizes="(min-width: 1024px) 33vw, 100vw" />
         </div>
         <div className="flex flex-1 flex-col gap-3 px-3.5 pb-3.5 pt-4">
           <div className="flex items-center gap-2">
@@ -177,7 +178,7 @@ export function PostCard({ post }: { post: Post }) {
           </div>
           <div className="flex items-start justify-between gap-4">
             <h3 className="h3">{post.title}</h3>
-            <span className="mt-0.5 grid size-7 shrink-0 place-items-center rounded-full border border-line text-ink transition-colors duration-300 group-hover:border-ink group-hover:bg-ink group-hover:text-white">
+            <span className="mt-0.5 grid size-7 shrink-0 place-items-center rounded-full border border-line text-ink transition-colors duration-300 group-hover:border-ink group-hover:bg-ink group-hover:text-on-ink">
               <ArrowUpRight size={12} />
             </span>
           </div>

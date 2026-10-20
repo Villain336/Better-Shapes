@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
 import { PageHero } from "@/components/PageHero";
+import { Painting } from "@/components/Painting";
 import { PostCard } from "@/components/Cards";
 import { Chip } from "@/components/Chip";
 import { Button } from "@/components/Button";
@@ -32,7 +32,7 @@ export default function BlogPage() {
       <section className="container-x flex flex-col gap-16 pb-24">
         <Reveal className="grid items-center gap-8 lg:grid-cols-[1.35fr_1fr] lg:gap-12">
           <Link href={`/blog/${featuredPost.slug}`} className="group frame aspect-[16/10]">
-            <Image src={featuredPost.image} alt="" fill sizes="(min-width:1024px) 60vw, 100vw" className="object-cover" />
+            <Painting src={featuredPost.image} sizes="(min-width:1024px) 60vw, 100vw" />
           </Link>
           <div className="flex flex-col items-start gap-5">
             <div className="flex items-center gap-2">
@@ -49,7 +49,7 @@ export default function BlogPage() {
           </div>
         </Reveal>
 
-        <div id="posts" className="scroll-mt-24">
+        <div id="posts" className="scroll-mt-32">
           <Stagger className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {posts.map((p) => (
               <RevealItem key={p.slug} className="h-full">
@@ -59,7 +59,7 @@ export default function BlogPage() {
           </Stagger>
         </div>
 
-        <div id="newsletter" className="scroll-mt-24">
+        <div id="newsletter" className="scroll-mt-32">
           <Reveal>
             <NewsletterForm />
           </Reveal>

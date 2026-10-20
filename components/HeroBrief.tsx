@@ -59,7 +59,7 @@ export function HeroBrief() {
               aria-pressed={on}
               onClick={() => toggle(n)}
               className={`inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-[8px] border px-2.5 text-[13px] font-medium transition-colors duration-200 ${
-                on ? "border-ink bg-ink text-white" : "border-line bg-white/60 text-ink hover:border-line-strong"
+                on ? "border-ink bg-ink text-on-ink" : "border-line bg-veil text-ink hover:border-line-strong"
               }`}
             >
               {on && <Check size={12} />}
@@ -71,7 +71,7 @@ export function HeroBrief() {
 
       <div className="flex flex-col gap-2">
         <span className="label text-ink-3">Timeline</span>
-        <div className="grid grid-cols-3 rounded-[10px] border border-line bg-white/50 p-0.5" role="radiogroup" aria-label="Timeline">
+        <div className="grid grid-cols-3 rounded-[10px] border border-line bg-veil p-0.5" role="radiogroup" aria-label="Timeline">
           {timelines.map((t) => {
             const on = when === t;
             return (
@@ -82,7 +82,7 @@ export function HeroBrief() {
                 aria-checked={on}
                 onClick={() => setWhen(t)}
                 className={`h-8 cursor-pointer rounded-[8px] text-[12.5px] font-medium transition-colors duration-200 ${
-                  on ? "bg-ink text-white" : "text-ink-2 hover:text-ink"
+                  on ? "bg-ink text-on-ink" : "text-ink-2 hover:text-ink"
                 }`}
               >
                 {t}
@@ -99,7 +99,7 @@ export function HeroBrief() {
         <Link
           href="/about#contact"
           onClick={remember}
-          className="group/btn inline-flex h-10 items-center gap-2 rounded-[10px] bg-ink px-4 text-[14px] font-medium text-white transition-colors hover:bg-[#2a2a2a]"
+          className="group/btn inline-flex h-10 items-center gap-2 rounded-[10px] bg-ink px-4 text-[14px] font-medium text-on-ink transition-colors hover:bg-ink-hover"
         >
           Continue
           <ArrowRight className="transition-transform duration-300 ease-[var(--ease-out)] group-hover/btn:translate-x-0.5" />
