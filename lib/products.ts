@@ -3,7 +3,7 @@ import type { Capability, Tone } from "./content";
 export type ProductStatus = "early-access" | "in-development" | "planned" | "exploring";
 
 export const statusMeta: Record<ProductStatus, { label: string; tone: Tone }> = {
-  "early-access": { label: "Early access", tone: "blue" },
+  "early-access": { label: "Launching Dec 1, 2026", tone: "blue" },
   "in-development": { label: "In development", tone: "green" },
   planned: { label: "Planned", tone: "yellow" },
   exploring: { label: "Exploring in Labs", tone: "red" },
@@ -34,12 +34,33 @@ export type Product = {
 
 export const products: Product[] = [
   {
+    slug: "shapesos",
+    meaning: "Four glass layers around one titanium core: every part of the business on one system.",
+    name: "ShapesOS",
+    glyph: "Tech",
+    lane: "Agentic business OS",
+    status: "early-access",
+    tagline: "Grow, design and operate a business from one workspace.",
+    description:
+      "The open-source agentic business OS. Agents propose, people approve: every action that touches money, customers or the outside world goes through an approval. Self-host it free with your own keys, or use the hosted version. Launching December 1, 2026.",
+    audience: "Founders, small teams and agencies running a whole business",
+    features: [
+      "Grow: CRM, nurture, SEO, social, ads and attribution",
+      "Design: Studio canvas, clips, voice and CAD viewer",
+      "Operate: docs, files, e-sign, legal, funding and invoicing",
+      "Agents: one approvals inbox, missions, playbooks and an MCP server",
+      "Self-host in under 10 minutes, no API keys needed to start",
+    ],
+    license: "AGPL-3.0 (open core)",
+    fit: "ShapesOS is the workspace the others plug into: Periscope gives its agents eyes, Canary guards its secrets, Kiln trains its models, Ripple streams from it and Flock will fly for it.",
+  },
+  {
     slug: "periscope",
     meaning: "A titanium periscope with one frosted blue lens: a way for agents to see.",
     name: "Periscope",
     glyph: "Tech",
     lane: "Agent infrastructure",
-    status: "early-access",
+    status: "in-development",
     tagline: "Eyes for agents. A viewing MCP server and API.",
     description:
       "Periscope gives any agent a way to look: render a web page, document, dashboard or live app session into screenshots, accessibility trees and plain-language observations, over MCP or a REST API. People can watch the same view the agent sees, so nothing happens in the dark.",
@@ -52,7 +73,7 @@ export const products: Product[] = [
       "Per-key rate limits, allow-lists and an audit log of every view",
     ],
     license: "MIT",
-    fit: "Periscope is the sensing layer the rest of the lineup assumes exists: Kiln uses it to collect screens for labeling, and Flock streams its map through it.",
+    fit: "Periscope is the sensing layer the rest of the lineup assumes exists: ShapesOS agents look through it, Kiln uses it to collect screens for labeling, and Flock streams its map through it.",
   },
   {
     slug: "canary",
@@ -144,3 +165,6 @@ export const productBySlug = (slug: string) => products.find((p) => p.slug === s
 
 /** The product featured on Home and at the top of /products. */
 export const flagship = products[0];
+
+/** ShapesOS launch: midnight US Eastern (EST, UTC-5) on Dec 1, 2026. */
+export const shapesOSLaunch = { at: "2026-12-01T00:00:00-05:00", label: "Dec 1, 2026", slug: "shapesos" };

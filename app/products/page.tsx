@@ -30,10 +30,10 @@ export default function ProductsPage() {
         eyebrow="Products"
         title="Tools worth"
         accent="building on."
-        sub="Five products, one idea: software you can read, run and trust. Eyes for agents, decoy keys, a model platform, a streaming stack and a drone mesh OS, all open source."
+        sub="Six products, one idea: software you can read, run and trust. An agentic business OS, eyes for agents, decoy keys, a model platform, a streaming stack and a drone mesh OS, all open source."
         note={`${products.length} products · ${openSource} open source`}
       >
-        <Button href={`/products/${flagship.slug}`}>Get early access to {flagship.name}</Button>
+        <Button href={`/products/${flagship.slug}`}>Join the ShapesOS waitlist</Button>
         <Button href="#lineup" variant="outline">
           See the lineup
         </Button>
@@ -43,14 +43,14 @@ export default function ProductsPage() {
         <ProductFeature product={flagship} />
       </section>
 
-      <section id="lineup" className="container-x flex scroll-mt-24 flex-col gap-10 pb-24">
+      <section id="lineup" className="container-x flex scroll-mt-32 flex-col gap-10 pb-24">
         <SectionHeading
           eyebrow="The lineup"
-          title="Four more,"
+          title="Five more,"
           accent="each with a job."
-          description="A security tool we use on ourselves, a data and model platform, a streaming stack and a Labs project that leaves the screen entirely."
+          description="Eyes for agents, a security tool we use on ourselves, a data and model platform, a streaming stack and a Labs project that leaves the screen entirely."
         />
-        <Stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <Stagger className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {rest.map((p) => (
             <RevealItem key={p.slug} className="h-full">
               <ProductCard product={p} />
@@ -62,17 +62,17 @@ export default function ProductsPage() {
       <section className="container-x flex flex-col gap-10 pb-24">
         <SectionHeading
           eyebrow="How they fit"
-          title="Five parts,"
+          title="Six parts,"
           accent="one system."
           description="Each product stands alone, but they were designed to lean on each other."
         />
         <Reveal>
           <Panel className="p-2">
-            <ol className="grid lg:grid-cols-5">
+            <ol className="grid sm:grid-cols-2 lg:grid-cols-3">
               {products.map((p, i) => (
                 <li
                   key={p.slug}
-                  className={`flex gap-4 p-4 lg:flex-col lg:gap-5 ${i > 0 ? "hairline-t lg:border-t-0 lg:border-l lg:border-line" : ""}`}
+                  className={`flex gap-4 p-4 ${i > 0 ? "hairline-t sm:[&:nth-child(-n+2)]:border-t-0 lg:[&:nth-child(-n+3)]:border-t-0" : ""} sm:[&:nth-child(2n)]:border-l sm:[&:nth-child(2n)]:border-line lg:[&:nth-child(2n)]:border-l-0 lg:[&:not(:nth-child(3n+1))]:border-l lg:[&:not(:nth-child(3n+1))]:border-line`}
                 >
                   <ProductRender slug={p.slug} className="size-14 shrink-0 rounded-[10px]" sizes="56px" />
                   <div className="flex flex-col gap-1.5">

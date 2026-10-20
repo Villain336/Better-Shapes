@@ -10,6 +10,8 @@ import { SectionHeading } from "@/components/Sections";
 import { Check } from "@/components/Shapes";
 import { ProductRender } from "@/components/ProductRender";
 import { Eyebrow } from "@/components/Eyebrow";
+import { LaunchCountdown } from "@/components/Launch";
+import { shapesOSLaunch } from "@/lib/products";
 import { art } from "@/lib/content";
 import { productBySlug, products, statusMeta } from "@/lib/products";
 
@@ -47,7 +49,7 @@ export default async function ProductPage({ params }: Params) {
         accent={p.tagline}
         sub={p.description}
       >
-        <Button href="#waitlist">{p.status === "early-access" ? "Get early access" : "Get notified"}</Button>
+        <Button href="#waitlist">{p.status === "early-access" ? "Join the waitlist" : "Get notified"}</Button>
         {p.repo && (
           <Button href={p.repo} variant="outline">
             View on GitHub
@@ -55,7 +57,7 @@ export default async function ProductPage({ params }: Params) {
         )}
       </PageHero>
 
-      <section className="container-x grid items-start gap-4 pb-24 lg:grid-cols-[1fr_360px]">
+      <section id="features" className="container-x grid scroll-mt-32 items-start gap-4 pb-24 lg:grid-cols-[1fr_360px]">
         <Reveal>
           <Panel className="flex h-full flex-col gap-6 p-6 md:p-8">
             <h2 className="h2 text-[28px]">What it does</h2>
@@ -77,6 +79,7 @@ export default async function ProductPage({ params }: Params) {
                 <StatusChip status={p.status} />
                 <p className="small">{p.meaning}</p>
               </div>
+              {p.slug === shapesOSLaunch.slug && <LaunchCountdown />}
               <dl className="flex flex-col">
                 {facts.map(([k, v], i) => (
                   <div key={k} className={`flex flex-col gap-1 py-3 ${i > 0 ? "hairline-t" : "pt-0"}`}>
@@ -99,7 +102,7 @@ export default async function ProductPage({ params }: Params) {
         </Reveal>
       </section>
 
-      <section id="waitlist" className="container-x scroll-mt-24 pb-24">
+      <section id="waitlist" className="container-x scroll-mt-32 pb-24">
         <Reveal>
           <WaitlistForm product={p.name} />
         </Reveal>

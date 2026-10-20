@@ -104,11 +104,19 @@ export type Project = {
 /** Work we can show today: our own products. Client work gets added here as it ships. */
 export const projects: Project[] = [
   {
+    title: "ShapesOS",
+    subtitle: "The open-source agentic business OS",
+    image: asset("/products/shapesos.webp"),
+    tags: ["Tech", "Design"],
+    status: "Launching Dec 1, 2026",
+    href: "/products/shapesos",
+  },
+  {
     title: "Periscope",
     subtitle: "A viewing MCP server and API that gives agents eyes",
     image: asset("/products/periscope.webp"),
     tags: ["Tech", "Design"],
-    status: "Early access",
+    status: "In development",
     href: "/products/periscope",
   },
   {
