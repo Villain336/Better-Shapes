@@ -1,8 +1,8 @@
 import Image from "next/image";
 import { asset } from "@/lib/content";
 
-/** Background the 3D renders were shot on, so tiles blend seamlessly. */
-export const RENDER_BG = "#E9E6E0";
+/** Background behind product renders while loading. */
+export const RENDER_BG = "#15161C";
 
 export const productRender = (slug: string) => asset(`/products/${slug}.webp`);
 

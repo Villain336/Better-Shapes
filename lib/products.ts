@@ -35,7 +35,7 @@ export type Product = {
 export const products: Product[] = [
   {
     slug: "shapesos",
-    meaning: "Four glass layers around one titanium core: every part of the business on one system.",
+    meaning: "Grow, Design, Operate and Agents routing every action into one Approvals Inbox.",
     name: "ShapesOS",
     glyph: "Tech",
     lane: "Agentic business OS",
@@ -56,7 +56,7 @@ export const products: Product[] = [
   },
   {
     slug: "periscope",
-    meaning: "A titanium periscope with one frosted blue lens: a way for agents to see.",
+    meaning: "A cybernetic periscope scanning live interfaces into structured accessibility trees while an operator watches the same feed.",
     name: "Periscope",
     glyph: "Tech",
     lane: "Agent infrastructure",
@@ -77,7 +77,7 @@ export const products: Product[] = [
   },
   {
     slug: "canary",
-    meaning: "A frosted yellow canary perched on a titanium key: a decoy that sings when touched.",
+    meaning: "A poisoned golden decoy key short-circuiting and destroying rogue hacker bots the moment they touch it.",
     name: "Canary",
     glyph: "Tech",
     lane: "Security",
@@ -98,7 +98,7 @@ export const products: Product[] = [
   },
   {
     slug: "kiln",
-    meaning: "A frosted terracotta kiln glowing from inside, resting on tiles of labeled data.",
+    meaning: "A small lab team conjuring a neural core out of labeled data on their own hardware.",
     name: "Kiln",
     glyph: "Tech",
     lane: "Data & model platform",
@@ -119,7 +119,7 @@ export const products: Product[] = [
   },
   {
     slug: "ripple",
-    meaning: "A frosted green play button on a titanium disc, with rings rippling outward.",
+    meaning: "One creator linked through a self-hosted Better Shapes Ripple screen to millions of viewers across the city.",
     name: "Ripple",
     glyph: "Marketing",
     lane: "Live & on-demand video",
@@ -140,7 +140,7 @@ export const products: Product[] = [
   },
   {
     slug: "flock",
-    meaning: "Three small craft with glass rotors, tied together by light: a mesh, not a mothership.",
+    meaning: "Drones, hexapods, humanoids and relay nodes with Better Shapes branding linked over a peer-to-peer mesh.",
     name: "Flock",
     glyph: "Robotics",
     lane: "Drone mesh OS",
