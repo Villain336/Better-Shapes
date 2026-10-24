@@ -32,9 +32,10 @@ npm run typecheck
   once a GitHub repo is public to show the link. `shapesOSLaunch` holds the launch moment; `components/Launch.tsx`
   turns it into the strip above the nav, the Home announcement band and the product-page countdown (all live, and
   they flip to “is live” copy once the date passes).
-- `components/ProductRender.tsx` — live ASCII motion canvas for each product (ShapesOS, Periscope, Canary, Kiln, Ripple,
-  Flock), scaling from 28px command-palette icons up to full-screen lightbox views, pausing off-screen and respecting
-  `prefers-reduced-motion`. Static 1152×720 snapshots also live in `public/products/`.
+- `components/ProductRender.tsx` — live ordered-dither ASCII halftone motion shader (`4×4` Bayer matrix + pixel-art
+  ASCII glyph density tiers `· : + × # █` on a `#0B0514` deep navy-black void with hot magenta/crimson midtones,
+  electric cyan rim lighting, and ice-white highlights) that transforms each product's scene in `public/products/`
+  with real-time motion waves, pausing off-screen and respecting `prefers-reduced-motion`.
 - `docs/products/` — clean-room specs from the earlier lineup; kept for reference, not shown on the site
 - Type: Manrope (headlines, tight) + Inter (body and UI) + Geist Mono (11px uppercase labels). The second half of a headline
   is set in a quieter ink (`components/Accent.tsx`); the four brand colours live in the logo mark and small tone dots only.
