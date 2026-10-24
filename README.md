@@ -32,7 +32,9 @@ npm run typecheck
   once a GitHub repo is public to show the link. `shapesOSLaunch` holds the launch moment; `components/Launch.tsx`
   turns it into the strip above the nav, the Home announcement band and the product-page countdown (all live, and
   they flip to “is live” copy once the date passes).
-- `public/products/` — product renders, 1152×720 in a cinematic GTA V-inspired realistic style depicting each product in action.
+- `components/ProductRender.tsx` — live ASCII motion canvas for each product (ShapesOS, Periscope, Canary, Kiln, Ripple,
+  Flock), scaling from 28px command-palette icons up to full-screen lightbox views, pausing off-screen and respecting
+  `prefers-reduced-motion`. Static 1152×720 snapshots also live in `public/products/`.
 - `docs/products/` — clean-room specs from the earlier lineup; kept for reference, not shown on the site
 - Type: Manrope (headlines, tight) + Inter (body and UI) + Geist Mono (11px uppercase labels). The second half of a headline
   is set in a quieter ink (`components/Accent.tsx`); the four brand colours live in the logo mark and small tone dots only.

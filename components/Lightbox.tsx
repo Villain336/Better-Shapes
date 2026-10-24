@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { products, statusMeta } from "@/lib/products";
 import { projects } from "@/lib/content";
 import { Chip } from "./Chip";
-import { ProductRender, productRender, RENDER_BG } from "./ProductRender";
+import { ProductRender, productRender, productSlugFromSrc, RENDER_BG } from "./ProductRender";
 import { ChevronRight, Close, Expand, Grid } from "./Shapes";
 import { useLayer } from "./SiteUI";
 import { Tooltip } from "./Primitives";
@@ -126,7 +126,11 @@ export function Lightbox({
                   className="render absolute inset-0 overflow-hidden rounded-(--radius-panel) border border-line"
                   style={{ background: RENDER_BG }}
                 >
-                  <Image src={item.src} alt={item.alt} fill sizes="(min-width:1100px) 1040px, 100vw" className="object-cover" priority draggable={false} />
+                  {productSlugFromSrc(item.src) ? (
+                    <ProductRender slug={productSlugFromSrc(item.src)!} alt={item.alt} className="h-full w-full" />
+                  ) : (
+                    <Image src={item.src} alt={item.alt} fill sizes="(min-width:1100px) 1040px, 100vw" className="object-cover" priority draggable={false} />
+                  )}
                 </motion.div>
               </AnimatePresence>
             </div>
@@ -157,7 +161,11 @@ export function Lightbox({
                     }`}
                     style={{ background: RENDER_BG }}
                   >
-                    <Image src={it.src} alt="" fill sizes="88px" className="object-cover" />
+                    {productSlugFromSrc(it.src) ? (
+                      <ProductRender slug={productSlugFromSrc(it.src)!} className="h-full w-full" />
+                    ) : (
+                      <Image src={it.src} alt="" fill sizes="88px" className="object-cover" />
+                    )}
                   </button>
                 ))}
               </div>
