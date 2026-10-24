@@ -5,7 +5,7 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { formatDate, toneFor, type Capability, type Post, type Project } from "@/lib/content";
 import { Panel } from "./Panel";
-import { RENDER_BG } from "./ProductRender";
+import { ProductRender, productSlugFromSrc, RENDER_BG } from "./ProductRender";
 import { ArrowRight, ArrowUpRight, CapabilityGlyph, Check } from "./Shapes";
 import { Chip } from "./Chip";
 import { Button } from "./Button";
@@ -58,6 +58,7 @@ export function CapabilityCard({
 }
 
 export function ProjectCard({ project, className = "", tall = false }: { project: Project; className?: string; tall?: boolean }) {
+  const productSlug = productSlugFromSrc(project.image);
   return (
     <motion.article
       layout
@@ -70,13 +71,21 @@ export function ProjectCard({ project, className = "", tall = false }: { project
       <Link href={project.href} className="block h-full">
         <Panel lift className="flex h-full flex-col p-1.5">
           <div className={`frame render rounded-[10px] ${tall ? "aspect-[4/3] md:aspect-[16/10]" : "aspect-[4/3]"}`} style={{ background: RENDER_BG }}>
-            <Image
-              src={project.image}
-              alt={`${project.title} product render`}
-              fill
-              sizes="(min-width: 1024px) 50vw, 100vw"
-              className="object-cover"
-            />
+            {productSlug ? (
+              <ProductRender
+                slug={productSlug}
+                alt={`${project.title} ASCII motion render`}
+                className="h-full w-full"
+              />
+            ) : (
+              <Image
+                src={project.image}
+                alt={`${project.title} product render`}
+                fill
+                sizes="(min-width: 1024px) 50vw, 100vw"
+                className="object-cover"
+              />
+            )}
             <div className="absolute left-3 top-3 flex gap-1.5">
               <Chip glass tone="blue">
                 {project.status}
