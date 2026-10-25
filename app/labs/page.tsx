@@ -70,7 +70,7 @@ export default function LabsPage() {
           accent="we can’t stop asking."
           side={
             <div className="flex items-center gap-3">
-              <ProductRender slug="field" className="size-12 rounded-[10px]" sizes="48px" />
+              <ProductRender slug="flock" className="size-12 rounded-[10px]" sizes="48px" />
               <Chip tone="red">Nothing released yet</Chip>
             </div>
           }

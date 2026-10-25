@@ -32,10 +32,10 @@ npm run typecheck
   once a GitHub repo is public to show the link. `shapesOSLaunch` holds the launch moment; `components/Launch.tsx`
   turns it into the strip above the nav, the Home announcement band and the product-page countdown (all live, and
   they flip to “is live” copy once the date passes).
-- `components/ProductRender.tsx` — live ordered-dither ASCII halftone motion shader (`4×4` Bayer matrix + pixel-art
-  ASCII glyph density tiers `· : + × # █` on a `#0B0514` deep navy-black void with hot magenta/crimson midtones,
-  electric cyan rim lighting, and ice-white highlights) that transforms each product's scene in `public/products/`
-  with real-time motion waves, pausing off-screen and respecting `prefers-reduced-motion`.
+- `components/ProductRender.tsx` + `lib/dither.ts` — renders each minimal source image in `public/products/` (one
+  subject, pure black background) as a dot-matrix dither: a small square dot per cell on a darker gap, magenta or cyan
+  ramp picked from the source colour, ice-white highlights on a navy void. Motion is limited to a short develop-in and
+  a slow staggered grain; it pauses off-screen and is static under `prefers-reduced-motion`.
 - `docs/products/` — clean-room specs from the earlier lineup; kept for reference, not shown on the site
 - Type: Manrope (headlines, tight) + Inter (body and UI) + Geist Mono (11px uppercase labels). The second half of a headline
   is set in a quieter ink (`components/Accent.tsx`); the four brand colours live in the logo mark and small tone dots only.
